@@ -1,4 +1,4 @@
-﻿---
+---
 level: 🔰 初級（カテゴリ導入）
 prereq: -
 prev: 01_agent-orchestration/04_crewai.md
@@ -11,7 +11,7 @@ next: 02_rag/01_llamaindex.md
 
 ベクトル検索とLLMを組み合わせて、社内文書やナレッジからの質問応答を実現。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -21,7 +21,7 @@ flowchart LR
 	B --> E[運用監視]
 ```
 
-## 学習フロー（Mermaid）
+## 学習フロー
 
 ```mermaid
 flowchart TD

@@ -23,7 +23,7 @@ Langfuse は LLM アプリのトレース、評価、コスト監視を行う観
 - 実行単位の評価記録
 - モデル利用コスト把握
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -33,7 +33,7 @@ flowchart LR
 		B --> E[コスト可視化]
 ```
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

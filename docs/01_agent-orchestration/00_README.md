@@ -1,4 +1,4 @@
-﻿---
+---
 level: 🔰 初級（カテゴリ導入）
 prereq: -
 prev: 00_README.md
@@ -11,7 +11,7 @@ next: 01_agent-orchestration/01_langchain.md
 
 複数のエージェントが協調してタスクを実行するフレームワークと、LLMアプリ開発の基盤ライブラリ。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -21,7 +21,7 @@ flowchart LR
 	B --> E[AutoGen/CrewAI]
 ```
 
-## 学習フロー（Mermaid）
+## 学習フロー
 
 ```mermaid
 flowchart TD
@@ -45,6 +45,13 @@ flowchart TD
 1. LangChain (基本)
 2. LangGraph (ステップ処理)
 3. AutoGen / CrewAI (複数エージェント)
+
+## 教材リンク
+
+- [01_langchain.md](./01_langchain.md)
+- [02_langgraph.md](./02_langgraph.md)
+- [03_autogen.md](./03_autogen.md)
+- [04_crewai.md](./04_crewai.md)
 
 ## 完了条件
 

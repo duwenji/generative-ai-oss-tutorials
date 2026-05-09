@@ -18,7 +18,7 @@ next: 04_ui/05_chatbot-ui.md
 ## 概要
 LibreChat は複数モデルを扱えるセルフホスト型チャットUIです。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -27,7 +27,7 @@ flowchart LR
 	B --> D[会話UI運用]
 ```
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

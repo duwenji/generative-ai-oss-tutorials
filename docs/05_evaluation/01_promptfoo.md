@@ -20,7 +20,7 @@ next: 05_evaluation/02_ragas.md
 promptfoo は、プロンプトとモデル出力を定量比較する CLI です。
 変更前後の品質差分を検知できるため、継続改善に向いています。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -30,7 +30,7 @@ flowchart LR
   B --> E[比較レポート]
 ```
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

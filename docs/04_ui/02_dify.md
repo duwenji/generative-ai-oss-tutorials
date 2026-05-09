@@ -72,7 +72,7 @@ docker-compose up -d
 ```
 初期セットアップが自動実行されます。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -82,7 +82,7 @@ flowchart LR
 		B --> E[API公開]
 ```
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

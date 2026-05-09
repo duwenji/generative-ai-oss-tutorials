@@ -1,4 +1,4 @@
-﻿---
+---
 level: 🔰 初級（カテゴリ導入）
 prereq: -
 prev: 08_protocols/03_backend-integration.md
@@ -11,7 +11,7 @@ next: 09_code-generation/01_aider.md
 
 コード生成、編集支援、IDE統合のOSSを学ぶ教材です。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -21,7 +21,7 @@ flowchart LR
 	B --> E[Tabby/OpenHands]
 ```
 
-## 学習フロー（Mermaid）
+## 学習フロー
 
 ```mermaid
 flowchart TD

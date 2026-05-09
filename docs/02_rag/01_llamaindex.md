@@ -77,7 +77,7 @@ next: 02_rag/02_haystack.md
 pip install llama-index langchain-openai python-dotenv
 ```
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -91,7 +91,7 @@ flowchart LR
 
 LlamaIndex は、ドキュメント取り込みから索引化、検索、回答生成までを RAG の流れとしてまとめるための中心ライブラリです。
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

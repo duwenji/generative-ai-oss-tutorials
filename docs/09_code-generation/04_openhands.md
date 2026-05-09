@@ -22,7 +22,7 @@ OpenHands は Issue ベースの実装タスクを自律実行する開発エー
 - コード編集提案
 - 実行ログ付きで検証
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -32,7 +32,7 @@ flowchart LR
 		B --> E[実行ログ検証]
 ```
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

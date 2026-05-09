@@ -18,7 +18,7 @@ next: 03_inference/00_README.md
 ## 概要
 Danswer は社内横断検索と生成回答を提供するエンタープライズ向けOSSです。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -30,7 +30,7 @@ flowchart LR
 
 Danswer は、Confluence/Slack/Drive など複数システムを横断した企業内検索に適した構成です。
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

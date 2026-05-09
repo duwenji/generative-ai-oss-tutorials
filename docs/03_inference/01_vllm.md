@@ -68,7 +68,7 @@ flowchart LR
     B --> E[高スループット配信]
 ```
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart TD

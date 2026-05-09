@@ -18,7 +18,7 @@ next: 04_ui/06_lobechat.md
 ## 概要
 Chatbot UI はシンプルな ChatGPT 風UIを構築するための軽量OSSです。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -27,7 +27,7 @@ flowchart LR
 	B --> D[ローカル開発]
 ```
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

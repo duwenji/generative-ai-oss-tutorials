@@ -23,7 +23,7 @@ AUTOMATIC1111 は Stable Diffusion Web UI の定番実装です。UIでの試行
 - 拡張機能導入
 - REST API 呼び出し
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -33,7 +33,7 @@ flowchart LR
 	B --> E[拡張導入]
 ```
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

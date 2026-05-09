@@ -1,4 +1,4 @@
-﻿---
+---
 level: 🔰 初級（カテゴリ導入）
 prereq: -
 prev: 06_multimodal/07_coqui-tts.md
@@ -11,7 +11,7 @@ next: 07_visualization/01_vega-lite.md
 
 LLMの出力や分析結果を視覚化するための教材です。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -22,7 +22,7 @@ flowchart LR
 	D --> F[高機能チャート]
 ```
 
-## 学習フロー（Mermaid）
+## 学習フロー
 
 ```mermaid
 flowchart TD
@@ -34,10 +34,17 @@ flowchart TD
 ```
 
 ## 含まれるOSS
-- Vega-Lite: 宣言的可視化仕様
-- ECharts: 高機能チャートライブラリ
+
+- **Vega-Lite**: 宣言的可視化仕様
+- **ECharts**: 高機能チャートライブラリ
+
+## 学習順序
+
+1. Vega-Lite（宣言的な可視化仕様を理解）
+2. ECharts（実運用向けチャート構築）
 
 ## 教材リンク
+
 - [01_vega-lite.md](./01_vega-lite.md)
 - [01_vega-lite-js](./01_vega-lite-js/)
 - [02_echarts.md](./02_echarts.md)

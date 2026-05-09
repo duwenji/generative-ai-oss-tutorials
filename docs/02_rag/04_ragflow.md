@@ -18,7 +18,7 @@ next: 02_rag/05_privategpt.md
 ## 概要
 RAGFlow は文書取り込み、検索、回答生成を運用向けに統合した RAG プラットフォームです。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -30,7 +30,7 @@ flowchart LR
 
 RAGFlow は、RAGパイプラインをアプリとして運用するための統合基盤です。
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

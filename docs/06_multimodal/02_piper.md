@@ -23,7 +23,7 @@ Piper は軽量なTTS（Text-to-Speech）エンジンです。ローカルで高
 - 低遅延なローカル音声生成
 - オフライン運用
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -33,7 +33,7 @@ flowchart LR
 	B --> E[CLI生成]
 ```
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

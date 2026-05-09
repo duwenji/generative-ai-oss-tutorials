@@ -18,7 +18,7 @@ next: 02_rag/07_danswer.md
 ## 概要
 Quivr は個人・チーム向けナレッジアシスタントを構築するOSSです。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -30,7 +30,7 @@ flowchart LR
 
 Quivr は、複数データソースをつないだチーム用ナレッジアシスタントを比較的短時間で立ち上げる用途に向いています。
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

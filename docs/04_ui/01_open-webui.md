@@ -72,7 +72,7 @@ docker-compose up -d
 ```
 ブラウザで http://localhost:8080 にアクセス。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -82,7 +82,7 @@ flowchart LR
 	B --> E[チャット運用]
 ```
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

@@ -18,7 +18,7 @@ next: 02_rag/04_ragflow.md
 ## 概要
 txtai は埋め込み検索と生成ワークフローをまとめて扱える軽量フレームワークです。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -30,7 +30,7 @@ flowchart LR
 
 txtai は最小コードで意味検索を始めたい場合に適した軽量フレームワークです。
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

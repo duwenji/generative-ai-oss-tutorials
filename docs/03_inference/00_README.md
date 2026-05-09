@@ -1,4 +1,4 @@
-﻿---
+---
 level: 🔰 初級（カテゴリ導入）
 prereq: -
 prev: 02_rag/07_danswer.md
@@ -11,7 +11,7 @@ next: 03_inference/01_vllm.md
 
 高速で効率的なLLM推論を実現するサーバ・フレームワーク。本番API構築向け。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -21,7 +21,7 @@ flowchart LR
 	B --> E[TGI/llama.cpp]
 ```
 
-## 学習フロー（Mermaid）
+## 学習フロー
 
 ```mermaid
 flowchart TD

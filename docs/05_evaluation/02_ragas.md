@@ -23,7 +23,7 @@ Ragas は RAG の回答品質を定量評価するライブラリです。faithf
 - RAG指標の測定
 - スコア比較
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -33,7 +33,7 @@ flowchart LR
 	B --> E[改善前後比較]
 ```
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

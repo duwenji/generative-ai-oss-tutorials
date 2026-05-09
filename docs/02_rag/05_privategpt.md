@@ -18,7 +18,7 @@ next: 02_rag/06_quivr.md
 ## 概要
 privateGPT はローカル文書に対するプライベートQAを実現するOSSです。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -30,7 +30,7 @@ flowchart LR
 
 privateGPT は、データを外部に出さずに文書QAを実現したいケースに向いています。
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

@@ -20,7 +20,7 @@ next: 07_visualization/02_echarts.md
 Vega-Lite は、可視化を宣言的JSONで記述するライブラリです。
 LLMが仕様生成しやすく、可視化パイプラインの自動化と相性が良いのが特徴です。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -30,7 +30,7 @@ flowchart LR
   B --> E[ブラウザ描画]
 ```
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

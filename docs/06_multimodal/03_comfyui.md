@@ -23,7 +23,7 @@ ComfyUI はノードベースで Stable Diffusion ワークフローを構築で
 - ControlNet や LoRA 連携
 - API経由での自動実行
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -33,7 +33,7 @@ flowchart LR
 	B --> E[出力保存]
 ```
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

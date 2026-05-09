@@ -23,7 +23,7 @@ Aider は CLI で既存コードを直接編集できるコーディングアシ
 - テスト実行と修正ループ
 - Git差分を意識した変更
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -33,7 +33,7 @@ flowchart LR
 	B --> E[Git差分レビュー]
 ```
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

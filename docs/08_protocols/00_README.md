@@ -1,4 +1,4 @@
-﻿---
+---
 level: 🔰 初級（カテゴリ導入）
 prereq: -
 prev: 07_visualization/02_echarts.md
@@ -11,7 +11,7 @@ next: 08_protocols/01_mcp.md
 
 AIアプリと外部ツールを安全に統合するための標準を学ぶ教材です。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -21,7 +21,7 @@ flowchart LR
 	D --> E[Backend Integration]
 ```
 
-## 学習フロー（Mermaid）
+## 学習フロー
 
 ```mermaid
 flowchart TD
@@ -33,10 +33,18 @@ flowchart TD
 ```
 
 ## 含まれるOSS
-- MCP: Model Context Protocol
-- MCP Servers: MCP対応サーバ実装群
+
+- **MCP**: Model Context Protocol
+- **MCP Servers**: MCP対応サーバ実装群
+
+## 学習順序
+
+1. MCP（プロトコル基礎）
+2. MCP Servers（サーバ実装パターン）
+3. Backend Integration（業務システム連携）
 
 ## 教材リンク
+
 - [01_mcp.md](./01_mcp.md)
 - [01_mcp-python](./01_mcp-python/)
 - [02_mcp-servers.md](./02_mcp-servers.md)

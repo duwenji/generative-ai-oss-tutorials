@@ -18,7 +18,7 @@ next: 05_evaluation/00_README.md
 ## 概要
 AnythingLLM は文書QAまで含めたオールインワン型チャットUIです。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ flowchart LR
 		B --> E[ローカル運用]
 ```
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

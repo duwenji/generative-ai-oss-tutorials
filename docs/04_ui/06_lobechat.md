@@ -18,7 +18,7 @@ next: 04_ui/07_anythingllm.md
 ## 概要
 LobeChat はモダンなUIと拡張性を持つチャットクライアントです。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -27,7 +27,7 @@ flowchart LR
 	B --> D[ローカル実行]
 ```
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

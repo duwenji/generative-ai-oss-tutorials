@@ -1,4 +1,4 @@
-﻿---
+---
 level: 🔰 初級（カテゴリ導入）
 prereq: -
 prev: 03_inference/04_llama-cpp.md
@@ -11,7 +11,7 @@ next: 04_ui/01_open-webui.md
 
 ユーザー向けのLLMチャットUIやノーコード/ローコード開発プラットフォーム。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -21,7 +21,7 @@ flowchart LR
 	B --> E[RAG統合]
 ```
 
-## 学習フロー（Mermaid）
+## 学習フロー
 
 ```mermaid
 flowchart TD

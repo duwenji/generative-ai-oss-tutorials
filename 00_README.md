@@ -1,7 +1,7 @@
 ---
 level: 📚 全体ガイド
 prereq: -
-next: 01_agent-orchestration/00_README.md
+next: docs/01_agent-orchestration/00_README.md
 ---
 
 # 生成AI活用OSS 実践ガイド
@@ -20,15 +20,15 @@ next: 01_agent-orchestration/00_README.md
 
 | # | カテゴリ | 難易度 | 学習入口 |
 |---|---|---|---|
-| 1 | エージェント・オーケストレーション | 🔰 初〜中 | [01_agent-orchestration/00_README.md](./01_agent-orchestration/00_README.md) |
-| 2 | RAG・ナレッジ検索 | 🔰 初〜中 | [02_rag/00_README.md](./02_rag/00_README.md) |
-| 3 | 推論実行基盤 | 🔧 中 | [03_inference/00_README.md](./03_inference/00_README.md) |
-| 4 | UI・チャットアプリ基盤 | 🔰 初 | [04_ui/00_README.md](./04_ui/00_README.md) |
-| 5 | 評価・ガードレール・監視 | 📖 中 | [05_evaluation/00_README.md](./05_evaluation/00_README.md) |
-| 6 | マルチモーダル | 📖 中 | [06_multimodal/00_README.md](./06_multimodal/00_README.md) |
-| 7 | 可視化 | 🔰 初 | [07_visualization/00_README.md](./07_visualization/00_README.md) |
-| 8 | プロトコル・標準 | 📖 中〜上 | [08_protocols/00_README.md](./08_protocols/00_README.md) |
-| 9 | コード生成支援 | 🔰 初 | [09_code-generation/00_README.md](./09_code-generation/00_README.md) |
+| 1 | エージェント・オーケストレーション | 🔰 初〜中 | [docs/01_agent-orchestration/00_README.md](./docs/01_agent-orchestration/00_README.md) |
+| 2 | RAG・ナレッジ検索 | 🔰 初〜中 | [docs/02_rag/00_README.md](./docs/02_rag/00_README.md) |
+| 3 | 推論実行基盤 | 🔧 中 | [docs/03_inference/00_README.md](./docs/03_inference/00_README.md) |
+| 4 | UI・チャットアプリ基盤 | 🔰 初 | [docs/04_ui/00_README.md](./docs/04_ui/00_README.md) |
+| 5 | 評価・ガードレール・監視 | 📖 中 | [docs/05_evaluation/00_README.md](./docs/05_evaluation/00_README.md) |
+| 6 | マルチモーダル | 📖 中 | [docs/06_multimodal/00_README.md](./docs/06_multimodal/00_README.md) |
+| 7 | 可視化 | 🔰 初 | [docs/07_visualization/00_README.md](./docs/07_visualization/00_README.md) |
+| 8 | プロトコル・標準 | 📖 中〜上 | [docs/08_protocols/00_README.md](./docs/08_protocols/00_README.md) |
+| 9 | コード生成支援 | 🔰 初 | [docs/09_code-generation/00_README.md](./docs/09_code-generation/00_README.md) |
 
 ## 推奨学習ルート
 
@@ -69,6 +69,13 @@ python 01_mcp-client-skeleton.py
 
 詳細ルールは [00_STYLE_GUIDE.md](./00_STYLE_GUIDE.md) を参照してください。
 
+## 関連ドキュメント
+
+- 入口ページ: [README.md](./README.md)
+- 全体索引: [MASTER-INDEX.md](./MASTER-INDEX.md)
+- クイック参照: [QUICK-REFERENCE.md](./QUICK-REFERENCE.md)
+- 学習拡張計画: [ROADMAP.md](./ROADMAP.md)
+
 ---
 
-[次へ →](01_agent-orchestration/00_README.md)
+[次へ →](docs/01_agent-orchestration/00_README.md)

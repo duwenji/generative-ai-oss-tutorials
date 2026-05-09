@@ -27,7 +27,7 @@ Haystack は検索と生成を組み合わせた RAG パイプラインを構築
 - Python 3.10+
 - OpenAI API キー（またはローカルモデル）
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -41,7 +41,7 @@ flowchart LR
 
 Haystack は、検索パイプラインを部品（Store/Retriever/Pipeline）として組み立てる設計に強いフレームワークです。
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

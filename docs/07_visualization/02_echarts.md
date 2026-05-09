@@ -23,7 +23,7 @@ ECharts は高機能で拡張性の高い可視化ライブラリです。ダッ
 - インタラクティブなズーム・ツールチップ
 - 大量データ描画
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -33,7 +33,7 @@ flowchart LR
 		B --> E[インタラクション]
 ```
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

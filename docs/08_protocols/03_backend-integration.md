@@ -27,7 +27,7 @@ next: 09_code-generation/00_README.md
 - tools/call リクエストをJSON-RPC形式で作成
 - yfinance / fetch を想定した呼び出し設計
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -37,7 +37,7 @@ flowchart LR
 	D --> E[agent連携設計]
 ```
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

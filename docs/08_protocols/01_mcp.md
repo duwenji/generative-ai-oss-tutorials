@@ -23,7 +23,7 @@ MCP（Model Context Protocol）は、LLM と外部ツールを標準化された
 - コンテキスト供給の統一
 - クライアント/サーバ分離
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -33,7 +33,7 @@ flowchart LR
 	B --> E[サーバ分離運用]
 ```
 
-## 実行フロー（Mermaid）
+## 実行フロー
 
 ```mermaid
 flowchart TD

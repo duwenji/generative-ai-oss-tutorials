@@ -1,4 +1,4 @@
-﻿---
+---
 level: 🔰 初級（カテゴリ導入）
 prereq: -
 prev: 04_ui/07_anythingllm.md
@@ -11,7 +11,7 @@ next: 05_evaluation/01_promptfoo.md
 
 LLMアプリの出力品質を測定し、安全性・信頼性を確保。
 
-## 位置づけ（Mermaid）
+## 位置づけ
 
 ```mermaid
 flowchart LR
@@ -21,7 +21,7 @@ flowchart LR
 	B --> E[Langfuse/Guardrails]
 ```
 
-## 学習フロー（Mermaid）
+## 学習フロー
 
 ```mermaid
 flowchart TD
