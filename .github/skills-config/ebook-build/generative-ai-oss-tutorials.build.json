@@ -1,0 +1,25 @@
+{
+  "sourceRoot": "./docs",
+  "outputDir": "./ebook-output",
+  "projectName": "generative-ai-oss-tutorials",
+  "formats": [
+    "epub",
+    "pdf",
+    "kdp-markdown"
+  ],
+  "metadataFile": "./.github/skills-config/ebook-build/generative-ai-oss-tutorials.metadata.yaml",
+  "kdpMetadataFile": "./.github/skills-config/ebook-build/generative-ai-oss-tutorials.kdp.yaml",
+  "chapterDirPattern": "^\\d{2}-",
+  "chapterFilePattern": "^(00-README|\\d{2}-.*)\\.md$",
+  "coverFile": "00-COVER.md",
+  "coverTemplateMode": "auto",
+  "coverTemplate": "classic",
+  "requireManuscriptApproval": false,
+  "approvalTokenFile": "./ebook-output/generative-ai-oss-tutorials.manuscript.approved",
+  "generateManuscriptReviewReport": false,
+  "manuscriptReviewReviewer": "automated-baseline",
+  "manuscriptReviewDecision": "Approve",
+  "mermaidMode": "required",
+  "mermaidFormat": "svg",
+  "failOnMermaidError": true
+}

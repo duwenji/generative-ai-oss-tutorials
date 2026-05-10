@@ -1,0 +1,22 @@
+title: 生成AI活用OSS 実践ガイド
+subtitle: オープンソースで学ぶ生成AIスタックの全体像
+creator: 杜 文吉
+language: ja-JP
+rights: Copyright (c) 杜 文吉
+date: 2026-05-10
+toc: true
+toc-depth: 2
+publisher: Duwenji Lab
+identifier: generative-ai-oss-tutorials
+description: >
+  生成AI関連OSSをカテゴリ横断で学ぶための実践ガイド。エージェント、RAG、推論、UI、評価、
+  マルチモーダル、可視化、プロトコル、コード生成を最小手順で確認できる。
+keywords:
+  - generative ai
+  - open source
+  - rag
+  - llm
+  - developer tools
+subject:
+  - software engineering
+  - artificial intelligence
