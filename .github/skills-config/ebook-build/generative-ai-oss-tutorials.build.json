@@ -21,5 +21,7 @@
   "manuscriptReviewDecision": "Approve",
   "mermaidMode": "required",
   "mermaidFormat": "svg",
-  "failOnMermaidError": true
+  "failOnMermaidError": true,
+  "mermaidConfigFile": "./.github/skills-config/ebook-build/mermaid.epub.config.json",
+  "mermaidPuppeteerConfigFile": "./.github/skills-config/ebook-build/mermaid.puppeteer.config.json"
 }
