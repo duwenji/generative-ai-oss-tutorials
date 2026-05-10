@@ -72,6 +72,7 @@ flowchart TD
 
 ```bash
 python 01_basic-workflow.py
+python 01_basic-workflow-llm.py
 python 02_state-management.py
 ```
 
@@ -130,6 +131,92 @@ def generate_answer(state: GraphState) -> GraphState:
 		msg = "一般質問として処理します。具体的な前提を入れると精度が上がります。"
 
 	state["answer"] = msg
+	return state
+
+
+def build_graph():
+	graph = StateGraph(GraphState)
+	graph.add_node("classify", classify_intent)
+	graph.add_node("respond", generate_answer)
+
+	graph.set_entry_point("classify")
+	graph.add_edge("classify", "respond")
+	graph.add_edge("respond", END)
+
+	return graph.compile()
+
+
+if __name__ == "__main__":
+	app = build_graph()
+
+	samples = [
+		"投資初心者は何から始めるべき？",
+		"明日の天気は？",
+		"生成AIの学習順を教えて",
+	]
+
+	for s in samples:
+		result = app.invoke({"user_input": s, "intent": "", "answer": ""})
+		print("\nQ:", s)
+		print("Intent:", result["intent"])
+		print("A:", result["answer"])
+```
+
+### Python: 01_basic-workflow-llm.py
+
+- 役割: classify と respond の両ノードで LLM を呼び出す最小構成
+- 前提: OpenAI API キーを環境変数 `OPENAI_API_KEY` に設定済み
+- 入力: user_input
+- 出力: intent, answer
+- 実行: `python 01_basic-workflow-llm.py`
+
+```python
+"""
+LangGraph Basic Workflow with LLM
+
+ノード内でLLMを呼び、intent判定と応答生成を行う最小例。
+OpenAI API を使用します。
+"""
+
+from typing import Literal, TypedDict
+from langgraph.graph import END, StateGraph
+from langchain_openai import ChatOpenAI
+
+
+class GraphState(TypedDict):
+	user_input: str
+	intent: str
+	answer: str
+
+
+# モデルは用途に応じて変更可能（例: gpt-4.1-mini, gpt-4o-mini）
+llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+
+
+def classify_intent(state: GraphState) -> GraphState:
+	prompt = (
+		"次のユーザー入力を finance / weather / general のいずれか1語だけで分類してください。\n"
+		f"入力: {state['user_input']}"
+	)
+	out = llm.invoke(prompt).content.strip().lower()
+
+	allowed = {"finance", "weather", "general"}
+	intent: Literal["finance", "weather", "general"]
+	intent = out if out in allowed else "general"
+
+	state["intent"] = intent
+	return state
+
+
+def generate_answer(state: GraphState) -> GraphState:
+	prompt = (
+		"あなたは簡潔な日本語アシスタントです。\n"
+		f"intent: {state['intent']}\n"
+		f"user_input: {state['user_input']}\n"
+		"2文以内で回答してください。"
+	)
+
+	state["answer"] = llm.invoke(prompt).content.strip()
 	return state
 
 
@@ -317,7 +404,10 @@ for (const s of samples) {
 ```bash
 cd 02_langgraph-python
 pip install -r 00_requirements.txt
+set OPENAI_API_KEY=your_api_key   # macOS/Linux は export OPENAI_API_KEY=your_api_key
+pip install langchain-openai
 python 01_basic-workflow.py
+python 01_basic-workflow-llm.py
 python 02_state-management.py
 ```
 
