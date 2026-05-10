@@ -108,7 +108,14 @@ $body1 = @{
   stream = $false
 } | ConvertTo-Json -Depth 3
 
-Invoke-RestMethod -Uri "http://localhost:11434/api/generate" -Method Post -ContentType "application/json" -Body $body1
+$request1 = @{
+  Uri = "http://localhost:11434/api/generate"
+  Method = "Post"
+  ContentType = "application/json"
+  Body = $body1
+}
+
+Invoke-RestMethod @request1
 
 $body2 = @{
   model = "qwen2.5:3b"
@@ -119,7 +126,14 @@ $body2 = @{
   stream = $false
 } | ConvertTo-Json -Depth 5
 
-Invoke-RestMethod -Uri "http://localhost:11434/api/chat" -Method Post -ContentType "application/json" -Body $body2
+$request2 = @{
+  Uri = "http://localhost:11434/api/chat"
+  Method = "Post"
+  ContentType = "application/json"
+  Body = $body2
+}
+
+Invoke-RestMethod @request2
 ```
 
 ## サンプル
@@ -129,7 +143,8 @@ Invoke-RestMethod -Uri "http://localhost:11434/api/chat" -Method Post -ContentTy
 ```bash
 docker-compose up -d
 docker exec -it ollama ollama pull qwen2.5:3b
-curl http://localhost:11434/api/generate -d '{"model":"qwen2.5:3b","prompt":"生成AIを2行で説明して"}'
+curl http://localhost:11434/api/generate \
+  -d '{"model":"qwen2.5:3b","prompt":"生成AIを2行で説明して"}'
 ```
 
 ### 検証

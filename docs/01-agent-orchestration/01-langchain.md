@@ -477,7 +477,9 @@ async function main() {
   const agent = createAgent({
     model: "gpt-4o-mini",
     tools,
-    systemPrompt: "You are a helpful financial assistant. Use tools when needed.",
+    systemPrompt:
+      "You are a helpful financial assistant. " +
+      "Use tools when needed.",
   });
 
   // ========== 実行 ==========

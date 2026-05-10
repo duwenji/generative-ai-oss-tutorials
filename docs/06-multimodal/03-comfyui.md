@@ -132,9 +132,15 @@ def build_minimal_workflow(prompt: str) -> dict:
 			"inputs": {"width": 512, "height": 512, "batch_size": 1},
 		},
 		"6": {"class_type": "CLIPTextEncode", "inputs": {"text": prompt, "clip": ["4", 1]}},
-		"7": {"class_type": "CLIPTextEncode", "inputs": {"text": "low quality", "clip": ["4", 1]}},
+		"7": {
+			"class_type": "CLIPTextEncode",
+			"inputs": {"text": "low quality", "clip": ["4", 1]},
+		},
 		"8": {"class_type": "VAEDecode", "inputs": {"samples": ["3", 0], "vae": ["4", 2]}},
-		"9": {"class_type": "SaveImage", "inputs": {"filename_prefix": "tutorial", "images": ["8", 0]}},
+		"9": {
+			"class_type": "SaveImage",
+			"inputs": {"filename_prefix": "tutorial", "images": ["8", 0]},
+		},
 	}
 
 

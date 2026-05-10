@@ -94,7 +94,10 @@ docker-compose up -d
 curl http://localhost:8080/health
 
 ## 推論テスト
-curl http://localhost:8080/generate -X POST -H "Content-Type: application/json" -d '{"inputs":"RAGの基本を3行で説明して"}'
+curl http://localhost:8080/generate \
+	-X POST \
+	-H "Content-Type: application/json" \
+	-d '{"inputs":"RAGの基本を3行で説明して"}'
 ```
 
 ### Setup: 02_request-examples.ps1
@@ -106,7 +109,14 @@ curl http://localhost:8080/generate -X POST -H "Content-Type: application/json" 
 
 ```powershell
 $body = @{ inputs = "分散投資の基本を2行で説明して" } | ConvertTo-Json
-Invoke-RestMethod -Uri "http://localhost:8080/generate" -Method Post -ContentType "application/json" -Body $body
+$request = @{
+	Uri = "http://localhost:8080/generate"
+	Method = "Post"
+	ContentType = "application/json"
+	Body = $body
+}
+
+Invoke-RestMethod @request
 ```
 
 ## サンプル
@@ -116,7 +126,10 @@ Invoke-RestMethod -Uri "http://localhost:8080/generate" -Method Post -ContentTyp
 ```bash
 docker-compose up -d
 curl http://localhost:8080/health
-curl http://localhost:8080/generate -X POST -H "Content-Type: application/json" -d '{"inputs":"RAGの基本を3行で説明して"}'
+curl http://localhost:8080/generate \
+	-X POST \
+	-H "Content-Type: application/json" \
+	-d '{"inputs":"RAGの基本を3行で説明して"}'
 ```
 
 ### 検証
