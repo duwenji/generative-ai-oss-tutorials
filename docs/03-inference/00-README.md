@@ -1,6 +1,6 @@
 ---
 level: 🔰 初級（カテゴリ導入）
-prereq: -
+prereq: "-"
 prev: 02-rag/07-onyx.md
 next: 03-inference/01-vllm.md
 ---

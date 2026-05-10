@@ -1,6 +1,6 @@
 ---
 level: 🔰 初級（カテゴリ導入）
-prereq: -
+prereq: "-"
 prev: 06-multimodal/07-coqui-tts.md
 next: 07-visualization/01-vega-lite.md
 ---

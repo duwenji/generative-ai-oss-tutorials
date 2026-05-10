@@ -1,6 +1,6 @@
 ---
 level: 🔰 初級（カテゴリ導入）
-prereq: -
+prereq: "-"
 prev: 04-ui/07-anythingllm.md
 next: 05-evaluation/01-promptfoo.md
 ---

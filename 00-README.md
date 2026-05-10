@@ -1,6 +1,6 @@
 ---
 level: 📚 全体ガイド
-prereq: -
+prereq: "-"
 next: docs/01-agent-orchestration/00-README.md
 ---
 

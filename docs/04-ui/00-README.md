@@ -1,6 +1,6 @@
 ---
 level: 🔰 初級（カテゴリ導入）
-prereq: -
+prereq: "-"
 prev: 03-inference/04-llama-cpp.md
 next: 04-ui/01-open-webui.md
 ---

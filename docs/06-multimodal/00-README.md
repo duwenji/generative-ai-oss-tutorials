@@ -1,6 +1,6 @@
 ---
 level: 🔰 初級（カテゴリ導入）
-prereq: -
+prereq: "-"
 prev: 05-evaluation/04-guardrails.md
 next: 06-multimodal/01-whisper.md
 ---

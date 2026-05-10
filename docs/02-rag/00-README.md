@@ -1,6 +1,6 @@
 ---
 level: 🔰 初級（カテゴリ導入）
-prereq: -
+prereq: "-"
 prev: 01-agent-orchestration/05-semantic-kernel.md
 next: 02-rag/01-llamaindex.md
 ---

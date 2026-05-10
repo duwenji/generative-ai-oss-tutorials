@@ -1,6 +1,6 @@
 ---
 level: 🔰 初級（カテゴリ導入）
-prereq: -
+prereq: "-"
 prev: 08-protocols/03-backend-integration.md
 next: 09-code-generation/01-aider.md
 ---

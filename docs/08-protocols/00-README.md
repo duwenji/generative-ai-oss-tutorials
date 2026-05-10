@@ -1,6 +1,6 @@
 ---
 level: 🔰 初級（カテゴリ導入）
-prereq: -
+prereq: "-"
 prev: 07-visualization/02-echarts.md
 next: 08-protocols/01-mcp.md
 ---
