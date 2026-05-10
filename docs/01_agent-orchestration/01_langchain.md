@@ -86,6 +86,25 @@ pip install -U "langchain[openai]" python-dotenv
 OPENAI_API_KEY=sk-your-key-here
 ```
 
+### セキュリティ注意（必読）
+
+- APIキーは `.env` で管理し、ソースコードや教材本文に直接書かない
+- `.env` は Git にコミットしない（`.gitignore` に含める）
+- APIキーを誤って共有した場合は、OpenAI 側で即時ローテーションする
+- 共有や画面投影の前に、ターミナル履歴へキーが残っていないか確認する
+
+### 推奨実行（再現性あり）
+
+この教材には、実行検証用のスクリプトが同梱されています。
+
+```powershell
+# Python サンプル一括実行
+./examples/run-python-samples.ps1 -ApiKey "<YOUR_KEY>"
+
+# JavaScript サンプル一括実行
+./examples/run-js-samples.ps1 -ApiKey "<YOUR_KEY>" -CleanupNodeModules
+```
+
 ## 位置づけ
 
 ```mermaid
@@ -133,6 +152,21 @@ python 03_memory-persistence.py
 
 - 同じ質問でツールなし回答とツール利用回答を比較する
 - 複数ターン会話で前回の文脈が反映されるか確認する
+
+### 成功時の期待結果（要約）
+
+- 01_basic-chain: 2つのトピック（生成AI / ベクトル検索）に対して日本語説明が返る
+- 02_tool-use: `AAPL` の株価と、`1000 -> 1200` の収益率 `20%` が返る
+- 03_memory-persistence: 1回目で伝えた名前を2回目で正しく復唱できる
+
+### 典型エラーと対処
+
+- `OPENAI_API_KEY is not set`
+  対処: `.env` または環境変数へ `OPENAI_API_KEY` を設定して再実行
+- `UnicodeEncodeError`（主に Windows の対話入力/パイプ入力）
+  対処: 同梱の `run-python-samples.ps1` を使うか、`PYTHONUTF8=1` を設定して実行
+- `LangChainPendingDeprecationWarning`（`allowed_objects`）
+  対処: 現時点では動作に致命的影響なし。将来版で警告がエラー化された場合は `langgraph` の更新ノートに従い `allowed_objects` の明示設定を追加
 
 ## 実ソースコード（言語別に記載）
 
