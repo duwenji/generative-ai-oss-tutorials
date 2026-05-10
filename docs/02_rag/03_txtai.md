@@ -18,6 +18,21 @@ next: 02_rag/04_ragflow.md
 ## コンセプト
 txtai は埋め込み検索と生成ワークフローをまとめて扱える軽量フレームワークです。
 
+**バージョン**: 9.8.0+ / OSS準拠（2026-05時点）  
+**公式ドキュメント**: https://neuml.github.io/txtai/
+
+## 利用モデル
+
+txtai は用途に応じて埋め込みモデルや生成モデルを切り替えられます。
+
+- ローカルモデル（例: sentence-transformers / Ollama）
+	- オフライン実行やデータ統制に向き、小規模検証を始めやすい
+- クラウドモデル（例: OpenAI API）
+	- 高性能モデルを利用しやすい一方、送信データとコスト管理が必要
+
+この教材では、まずローカル構成で検索品質を確認し、
+必要に応じてクラウド構成を比較して採用判断する流れを推奨します。
+
 ## 仕組み
 
 1. 目的と入力を定義し、対象データや利用モデルを準備します。
@@ -52,18 +67,47 @@ flowchart TD
 
 ## サンプル
 
+このサンプルでは、同じ文書集合・同じ質問を使って、
+「ローカル埋め込み構成」と「クラウド埋め込み構成」の差分を確認します。
+
 ### 実行例
 
 ```bash
-# この教材の最小構成を順に実行
-# 具体的なコマンドは「最小セットアップ」または「実行フロー」を参照
+# 1) 最小環境を準備
+pip install txtai sentence-transformers
+
+# 2) 最小検索を実行
+python 01_basic-search.py
+
+# 3) 同じ質問で上位結果を確認
+#    質問: RAGの基本
+
+# 4) モデル構成を切り替えて再実行
+#    - A: ローカル埋め込み（all-MiniLM-L6-v2）
+#    - B: クラウド埋め込み（OpenAI Embeddings など）
 ```
+
+### 期待される確認ポイント
+
+- 上位結果の妥当性: 意図に合う文書が上位に来るか
+- スコア傾向: 上位$k$件のスコア差が極端でないか
+- 再現性: 同条件で同傾向の順位が得られるか
+- 運用要件: レイテンシ・コスト・データ統制に適合するか
 
 ### 検証
 
 - コマンドがエラーなく完了する
 - 想定した出力（画面表示・ファイル生成・回答）を確認できる
 - 変更した設定に応じて結果差分を説明できる
+
+### 差分記録テンプレート
+
+- 構成: ローカル埋め込み / クラウド埋め込み
+- 質問: RAGの基本
+- 上位結果: （上位3件を転記）
+- 妥当性評価: 高 / 中 / 低
+- 応答時間: xx 秒
+- 判断メモ: 採用する構成と理由
 ## 実ソースコード（言語別に記載）
 ### Python: 00_requirements.txt
 
@@ -73,7 +117,7 @@ flowchart TD
 - 実行: `pip install -r 00_requirements.txt`
 
 ```txt
-txtai==8.2.0
+txtai==9.8.0
 ```
 
 ### Python: 01_basic-search.py
@@ -112,6 +156,28 @@ if __name__ == "__main__":
 pip install txtai sentence-transformers
 python -c "from txtai import Embeddings; print('txtai ready')"
 ```
+
+## 補足
+
+**Q. txtai と LlamaIndex の使い分けは？**  
+A. txtai は軽量・シンプル。LlamaIndex は機能豊富・拡張性重視。小規模プロジェクトは txtai、大規模・複雑な要件は LlamaIndex 推奨。
+
+**Q. txtai でベクトル DB として使える？**  
+A. はい。インメモリストアで十分な場合と、永続化が必要な場合で分けて考えます。永続化時は SQLite backend を使用可能。
+
+**Q. オンプレミス環境で実行可能？**  
+A. はい。依存関係が軽い（sentence-transformers など）ため、オンプレ環境での実行に向いています。
+
+---
+
+## 参考リンク
+
+- [txtai 公式ドキュメント](https://neuml.github.io/txtai/)
+- [txtai GitHub](https://github.com/neuml/txtai)
+- [API Reference](https://neuml.github.io/txtai/api/)
+- [Embeddings Guide](https://neuml.github.io/txtai/embeddings/)
+
+---
 
 ## 演習課題
 

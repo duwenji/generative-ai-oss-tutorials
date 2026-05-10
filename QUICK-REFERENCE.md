@@ -1,5 +1,7 @@
 # QUICK REFERENCE
 
+**📢 対応状況**: ✅ 全 42 ファイル 2026-05 API 準拠レビュー完了
+
 ## 最短学習ルート
 
 - 体験重視: UI -> Agent -> RAG -> Evaluation

@@ -17,7 +17,7 @@ next: 02_rag/02_haystack.md
 - ファイル、DB、API等から直接読み込み
 - 索引を保存して再利用可能
 
-**バージョン**: 0.9.0  
+**バージョン**: 0.14.21+ / OSS準拠（2026-05時点）  
 **公式ドキュメント**: https://docs.llamaindex.ai/
 
 ## コンセプト
@@ -132,7 +132,7 @@ print("-" * 60)
 
 embed_model = OpenAIEmbedding(model="text-embedding-3-small")
 
-llm = OpenAI(model="gpt-3.5-turbo", temperature=0.7)
+llm = OpenAI(model="gpt-4o-mini", temperature=0.7)
 
 # ========== インデックス作成 ==========
 
@@ -237,7 +237,7 @@ load_dotenv()
 print("Loading index...\n")
 
 embed_model = OpenAIEmbedding(model="text-embedding-3-small")
-llm = OpenAI(model="gpt-3.5-turbo", temperature=0.7)
+llm = OpenAI(model="gpt-4o-mini", temperature=0.7)
 
 storage_context = StorageContext.from_defaults(
   persist_dir="./index_storage"

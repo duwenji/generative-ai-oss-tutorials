@@ -17,7 +17,8 @@ next: 04_ui/02_dify.md
 - インターネット接続不要でも動作
 - プラグイン、RAG機能も搭載
 
-**バージョン**: 0.1.0  
+**バージョン**: 0.3.0+ / OSS準拠（2026-05時点）  
+**公式ドキュメント**: https://openwebui.com/
 **公式ドキュメント**: https://github.com/open-webui/open-webui
 
 ## コンセプト

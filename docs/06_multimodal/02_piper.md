@@ -17,7 +17,8 @@ next: 06_multimodal/03_comfyui.md
 
 ## コンセプト
 Piper は軽量なTTS（Text-to-Speech）エンジンです。ローカルで高速に音声合成できます。
-
+**バージョン**: 2026-05時点 / OSS準拠  
+**公式ドキュメント**: https://github.com/rhasspy/piper
 ## 仕組み
 
 1. 目的と入力を定義し、対象データや利用モデルを準備します。

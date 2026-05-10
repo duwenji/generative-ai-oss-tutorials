@@ -2,6 +2,8 @@
 
 生成AI関連OSSをカテゴリ別に学ぶための教材です。まずは全体ガイドから読み始めてください。
 
+**📢 更新状況**: ✅ 全 42 ファイル 2026-05 API 準拠レビュー完了
+
 - 全体ガイド: [00_README.md](00_README.md)
 - スタイルガイド: [00_STYLE_GUIDE.md](00_STYLE_GUIDE.md)
 - 全体索引: [MASTER-INDEX.md](MASTER-INDEX.md)

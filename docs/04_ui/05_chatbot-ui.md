@@ -17,7 +17,8 @@ next: 04_ui/06_lobechat.md
 
 ## コンセプト
 Chatbot UI はシンプルな ChatGPT 風UIを構築するための軽量OSSです。
-
+**バージョン**: 最新版 / OSS準拠（2026-05時点）  
+**公式ドキュメント**: https://github.com/mckaywrigley/chatbot-ui
 ## 仕組み
 
 1. 目的と入力を定義し、対象データや利用モデルを準備します。

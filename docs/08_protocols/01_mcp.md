@@ -18,6 +18,9 @@ next: 08_protocols/02_mcp-servers.md
 ## コンセプト
 MCP（Model Context Protocol）は、LLM と外部ツールを標準化された方法で接続するためのプロトコルです。
 
+**仕様**: MCP 1.0 / OSS仕様（2026-05時点）  
+**公式ドキュメント**: https://modelcontextprotocol.io/
+
 ## 仕組み
 
 1. クライアントが `initialize` で能力情報を交換します。

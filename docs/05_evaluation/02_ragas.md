@@ -18,6 +18,9 @@ next: 05_evaluation/03_langfuse.md
 ## コンセプト
 Ragas は RAG の回答品質を定量評価するライブラリです。faithfulness や answer relevancy などの指標で、改善前後を比較できます。
 
+**バージョン**: 0.1.0+ / OSS準拠（2026-05時点）  
+**公式ドキュメント**: https://docs.ragas.io/
+
 ## 仕組み
 
 1. 目的と入力を定義し、対象データや利用モデルを準備します。

@@ -18,6 +18,9 @@ next: 02_rag/03_txtai.md
 ## コンセプト
 Haystack は検索と生成を組み合わせた RAG パイプラインを構築するフレームワークです。DocumentStore、Retriever、Generator を組み合わせて、文書QAアプリを段階的に作れます。
 
+**バージョン**: 2.28.0 推奨 / Haystack 1.x EOL（2026-05時点）  
+**公式ドキュメント**: https://docs.haystack.deepset.ai/
+
 ## 仕組み
 
 1. 目的と入力を定義し、対象データや利用モデルを準備します。
@@ -80,7 +83,7 @@ flowchart TD
 - 実行: `pip install -r 00_requirements.txt`
 
 ```txt
-farm-haystack==1.26.2
+haystack-ai==2.28.0
 sentence-transformers==2.7.0
 python-dotenv==1.0.0
 ```
@@ -195,6 +198,28 @@ pip install -r 00_requirements.txt
 python 01_basic-pipeline.py
 python 02_query-demo.py
 ```
+
+## 補足
+
+**Q. Haystack 1.x から 2.x への移行は必須ですか？**  
+A. はい。Haystack 1.x は 2025-03 に EOL。新規プロジェクトは 2.x を推奨。1.x から 2.x への移行ガイドは公式ドキュメント参照。
+
+**Q. Haystack 2.x の API は大きく変わったのか？**  
+A. 大きく変更。`Pipeline` ベース、`@component` デコレータ導入、より柔軟な設計に。詳細は公式ドキュメントを参照。
+
+**Q. 既存の 1.x コードをそのまま実行できる？**  
+A. いいえ。API が互換性ないため、コード書き直しが必要。移行ガイド参照。
+
+---
+
+## 参考リンク
+
+- [Haystack 公式ドキュメント（2.x）](https://docs.haystack.deepset.ai/)
+- [Haystack GitHub](https://github.com/deepset-ai/haystack)
+- [Migration Guide（1.x → 2.x）](https://docs.haystack.deepset.ai/docs/migration-guide)
+- [Components Reference](https://docs.haystack.deepset.ai/docs/components)
+
+---
 
 ## 演習課題
 

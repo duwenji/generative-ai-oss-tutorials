@@ -18,6 +18,9 @@ next: 09_code-generation/00_README.md
 ## コンセプト
 この教材は、既存の stock-analyzer の MCP 設定を読み取り、MCP サーバ構成とツール呼び出し要求を組み立てる実践例です。
 
+**仕様**: MCP 1.0 / 実装例（2026-05時点）  
+**公式ドキュメント**: https://modelcontextprotocol.io/
+
 ## 対象ファイル
 - stock-analyzer/backend/mcp_agent.config.yaml
 - stock-analyzer/backend/aiagent/mcp_agent.py

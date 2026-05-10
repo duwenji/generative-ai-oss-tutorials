@@ -17,6 +17,9 @@ prev: 09_code-generation/03_tabby.md
 ## コンセプト
 OpenHands は、Issue 形式の要件を入力として実装作業を自律実行する開発エージェントです。調査、編集、実行、ログ確認までを連結し、試作速度を上げることを狙います。
 
+**バージョン**: 最新版 / OSS準拠（2026-05時点）  
+**公式ドキュメント**: https://github.com/All-Hands-AI/OpenHands
+
 ## 仕組み
 
 1. 入力Issueを解析し、実行計画を作成します。

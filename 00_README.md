@@ -10,6 +10,9 @@ next: docs/01_agent-orchestration/00_README.md
 
 このディレクトリは、生成AI関連OSSをカテゴリ別に学ぶための教材です。
 
+**📢 更新状況**: ✅ 全 42 ファイル 2026-05 API 準拠レビュー完了  
+**最終更新**: 2026年5月 | LangChain `init_chat_model()`、Haystack 2.x、MCP 1.0 対応
+
 ## この教材の使い方（3ステップ）
 
 1. まず各カテゴリの `00_README.md` を読んで全体像を把握する

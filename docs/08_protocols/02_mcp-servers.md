@@ -18,6 +18,9 @@ next: 08_protocols/03_backend-integration.md
 ## コンセプト
 MCP Servers はファイル、DB、APIなどの機能を MCP 経由で提供する実装群です。
 
+**仕様**: MCP 1.0 対応 / OSS実装群（2026-05時点）  
+**公式ドキュメント**: https://modelcontextprotocol.io/
+
 ## 仕組み
 
 1. MCPサーバをプロセスとして起動し、ツール群を公開します。

@@ -17,7 +17,8 @@ next: 06_multimodal/05_invokeai.md
 
 ## コンセプト
 AUTOMATIC1111 は Stable Diffusion Web UI の定番実装です。UIでの試行錯誤と API 自動化の両方に向いています。
-
+**バージョン**: 最新版 / OSS準拠（2026-05時点）  
+**公式ドキュメント**: https://github.com/AUTOMATIC1111/stable-diffusion-webui
 ## 仕組み
 
 1. 目的と入力を定義し、対象データや利用モデルを準備します。

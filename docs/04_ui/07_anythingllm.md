@@ -17,7 +17,8 @@ next: 05_evaluation/00_README.md
 
 ## コンセプト
 AnythingLLM は文書QAまで含めたオールインワン型チャットUIです。
-
+**バージョン**: 最新版 / OSS準拠（2026-05時点）  
+**公式ドキュメント**: https://anythingllm.com/
 ## 仕組み
 
 1. 目的と入力を定義し、対象データや利用モデルを準備します。

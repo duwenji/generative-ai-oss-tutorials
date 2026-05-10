@@ -17,7 +17,7 @@ next: 03_inference/02_ollama.md
 - Llama、Mistral、Qwen等を直接サポート
 - 既存のOpenAI APIコードがそのまま動作
 
-**バージョン**: 0.3.0  
+**バージョン**: 0.6.0+ / OSS準拠（2026-05時点）  
 **公式ドキュメント**: https://docs.vllm.ai/
 
 ## コンセプト
@@ -179,11 +179,15 @@ A. 7Bモデル: 8GB GPU メモリ推奨。16GB あれば安定。
 
 ---
 
-## 補足
+## 参考リンク
 
-- [02_cli-examples.sh](./02_cli-examples.sh) を実行してテスト
-- Open WebUI や Dify と連携
-- 本番用に Kubernetes 化を検討
+- [vLLM 公式ドキュメント](https://docs.vllm.ai/)
+- [vLLM GitHub](https://github.com/vllm-project/vllm)
+- [Supported Models](https://docs.vllm.ai/en/latest/models/supported_models.html)
+- [Performance Guide](https://docs.vllm.ai/en/latest/performance.html)
+- [Docker Hub](https://hub.docker.com/r/vllm/vllm-openai)
+
+---
 
 ## サンプル
 

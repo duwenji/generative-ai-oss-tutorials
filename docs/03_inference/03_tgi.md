@@ -16,7 +16,12 @@ next: 03_inference/04_llama-cpp.md
 - 複数GPUでの配信
 
 ## コンセプト
-TGI（Text Generation Inference）は Hugging Face 製の推論サーバです。大規模モデルを本番運用しやすい構成を提供します。
+TGI（Text Generation Inference）は Hugging Face 製の推論サーバです。
+
+**バージョン**: 最新版 / OSS準拠（2026-05時点）  
+**公式ドキュメント**: https://huggingface.co/docs/text-generation-inference
+
+大規模モデルを本番運用しやすい構成を提供します。
 
 ## 仕組み
 

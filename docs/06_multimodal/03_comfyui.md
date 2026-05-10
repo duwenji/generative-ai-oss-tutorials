@@ -18,6 +18,9 @@ next: 06_multimodal/04_automatic1111.md
 ## コンセプト
 ComfyUI はノードベースで Stable Diffusion ワークフローを構築できるツールです。生成工程を可視化しながら細かく制御できます。
 
+**バージョン**: 最新版 / OSS準拠（2026-05時点）  
+**公式ドキュメント**: https://github.com/comfyanonymous/ComfyUI
+
 ## 仕組み
 
 1. 目的と入力を定義し、対象データや利用モデルを準備します。
