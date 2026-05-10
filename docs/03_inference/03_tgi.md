@@ -15,13 +15,16 @@ next: 03_inference/04_llama-cpp.md
 - 高スループット推論
 - 複数GPUでの配信
 
-## 概要
+## コンセプト
 TGI（Text Generation Inference）は Hugging Face 製の推論サーバです。大規模モデルを本番運用しやすい構成を提供します。
 
-## 詳細
-- OpenAI互換の推論API提供
-- 高スループット推論
-- 複数GPUでの配信
+## 仕組み
+
+1. モデルをコンテナ起動時にロードして推論APIを公開します。
+2. リクエストを効率よく処理してスループットを高めます。
+3. 生成APIを通じて外部アプリから推論を受け付けます。
+4. ヘルスチェックで稼働状態を監視します。
+5. モデルやリソース設定を更新しながら本番運用します。
 
 ## 位置づけ
 
@@ -100,6 +103,21 @@ curl http://localhost:8080/generate -X POST -H "Content-Type: application/json" 
 $body = @{ inputs = "分散投資の基本を2行で説明して" } | ConvertTo-Json
 Invoke-RestMethod -Uri "http://localhost:8080/generate" -Method Post -ContentType "application/json" -Body $body
 ```
+
+## サンプル
+
+### 実行例
+
+```bash
+docker-compose up -d
+curl http://localhost:8080/health
+curl http://localhost:8080/generate -X POST -H "Content-Type: application/json" -d '{"inputs":"RAGの基本を3行で説明して"}'
+```
+
+### 検証
+
+- health が OK を返すか確認する
+- generate の応答に推論テキストが含まれるか確認する
 
 ## 演習課題
 

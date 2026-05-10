@@ -15,13 +15,16 @@ next: 08_protocols/02_mcp-servers.md
 - コンテキスト供給の統一
 - クライアント/サーバ分離
 
-## 概要
+## コンセプト
 MCP（Model Context Protocol）は、LLM と外部ツールを標準化された方法で接続するためのプロトコルです。
 
-## 詳細
-- ツール呼び出しの標準化
-- コンテキスト供給の統一
-- クライアント/サーバ分離
+## 仕組み
+
+1. クライアントが `initialize` で能力情報を交換します。
+2. `tools/list` で利用可能ツールの一覧を取得します。
+3. ツール実行時は `tools/call` を JSON-RPC で送信します。
+4. サーバは実行結果を標準形式で返却します。
+5. クライアントは結果をLLM文脈へ統合して応答生成に利用します。
 
 ## 位置づけ
 
@@ -133,6 +136,20 @@ def main() -> None:
 if __name__ == "__main__":
 	main()
 ```
+
+## サンプル
+
+### 実行例
+
+```bash
+python 01_mcp-client-skeleton.py
+python 02_mcp-tool-call-skeleton.py
+```
+
+### 検証
+
+- `initialize` と `tools/list` の JSON-RPC フィールドが揃っているか確認する
+- `tools/call` の name と arguments が対象ツール仕様と一致するか確認する
 
 ## 演習課題
 

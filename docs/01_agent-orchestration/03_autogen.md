@@ -15,13 +15,19 @@ next: 01_agent-orchestration/04_crewai.md
 - AutoGen 入門 を最小構成で動かす手順を実行できる
 - 導入時のメリットと注意点を整理できる
 
-## 概要
+## コンセプト
 AutoGen は複数エージェントが協調してタスクを進めるフレームワークです。役割を分けた対話を作れるため、レビュー付き生成や議論型の自動化に向きます。
 
-## 使いどころ
-- 実装担当 + レビュー担当の2エージェント
-- 要件整理 → 実装 → 検証の分離
-- 長いタスクの分担
+**バージョン**: pyautogen 0.2.34+ / OSS準拠（2026-05時点）  
+**公式ドキュメント**: https://microsoft.github.io/autogen/
+
+## 仕組み
+
+1. 役割ごとにエージェントを定義し、責務を分離します。
+2. UserProxy が会話の起点となり、タスクを順番に渡します。
+3. 各エージェントは受け取った文脈に基づいて応答を生成します。
+4. 次のエージェントが前段の出力をレビューまたは改善します。
+5. 複数ターンの対話ログから改善点を抽出して次回へ反映します。
 
 ## 前提条件
 - Python 3.10+
@@ -101,7 +107,7 @@ def main() -> None:
 	llm_config = {
 		"config_list": [
 			{
-				"model": "gpt-3.5-turbo",
+				"model": "gpt-4o-mini",
 				"api_key": api_key,
 			}
 		],
@@ -158,6 +164,40 @@ cd 03_autogen-python
 pip install -r 00_requirements.txt
 python 01_two-agents-chat.py
 ```
+
+## サンプル
+
+### 指示例
+
+- Planner に 2週間の実装計画を作成させる
+- Reviewer に 欠落点を2点まで指摘させる
+
+### 検証
+
+- Planner の計画が段階化されているか確認する
+- Reviewer の改善提案が具体的か確認する
+
+## 補足
+
+**Q. AutoGen と LangGraph の使い分けは？**  
+A. AutoGen は「エージェント間の自然な対話」を重視する設計。LangGraph は「状態とグラフで厳密に制御」したい場面向け。AutoGen の方が実装が簡単ですが、ログ解析やデバッグは手間がかかります。
+
+**Q. max_consecutive_auto_reply の値を大きくしても大丈夫？**  
+A. API 呼び出し回数が増え、コストが嵩みます。3～5 程度に抑え、ループのリスクを低くするのが推奨。
+
+**Q. code_execution_config を有効にできる？**  
+A. はい。`{"last_n_messages": 2, "work_dir": "./code"}` のように設定すれば、エージェントが生成コードを実行できます。セキュリティリスクに注意。
+
+---
+
+## 参考リンク
+
+- [AutoGen 公式ドキュメント](https://microsoft.github.io/autogen/)
+- [AutoGen GitHub](https://github.com/microsoft/autogen)
+- [Agent Configuration Guide](https://microsoft.github.io/autogen/docs/Use-Cases/agent_chat)
+- [LLM Configuration](https://microsoft.github.io/autogen/docs/Getting-Started/Installation)
+
+---
 
 ## 演習課題
 

@@ -15,17 +15,20 @@ next: 09_code-generation/00_README.md
 - tools/call リクエストをJSON-RPC形式で作成
 - yfinance / fetch を想定した呼び出し設計
 
-## 概要
+## コンセプト
 この教材は、既存の stock-analyzer の MCP 設定を読み取り、MCP サーバ構成とツール呼び出し要求を組み立てる実践例です。
 
 ## 対象ファイル
 - stock-analyzer/backend/mcp_agent.config.yaml
 - stock-analyzer/backend/aiagent/mcp_agent.py
 
-## 詳細
-- 設定ファイルから server 名とコマンドを抽出
-- tools/call リクエストをJSON-RPC形式で作成
-- yfinance / fetch を想定した呼び出し設計
+## 仕組み
+
+1. 設定ファイルを読み込み、利用するMCPサーバ定義を抽出します。
+2. サーバごとの command と args をマップ化します。
+3. `initialize` と `tools/list` の要求を作成して接続前提を確認します。
+4. 業務ツール向けに `tools/call` 要求を組み立てます。
+5. 生成したJSON-RPCをバックエンド実装へ組み込める形で出力します。
 
 ## 位置づけ
 
@@ -142,6 +145,20 @@ def main() -> None:
 if __name__ == "__main__":
 	main()
 ```
+
+## サンプル
+
+### 実行例
+
+```bash
+python 01_load-config.py
+python 02_agent-request-example.py
+```
+
+### 検証
+
+- サーバ名、command、args が config と一致するか確認する
+- `tools/call` の name と arguments が対象ツール仕様に沿うか確認する
 
 ## 演習課題
 

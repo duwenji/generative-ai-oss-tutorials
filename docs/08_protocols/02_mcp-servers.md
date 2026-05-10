@@ -15,13 +15,16 @@ next: 08_protocols/03_backend-integration.md
 - SQL クエリ実行ツール
 - HTTP API 連携ツール
 
-## 概要
+## コンセプト
 MCP Servers はファイル、DB、APIなどの機能を MCP 経由で提供する実装群です。
 
-## 詳細
-- ファイル操作ツール
-- SQL クエリ実行ツール
-- HTTP API 連携ツール
+## 仕組み
+
+1. MCPサーバをプロセスとして起動し、ツール群を公開します。
+2. クライアントは `tools/list` で利用可能な機能を取得します。
+3. 必要な機能を `tools/call` で呼び出して実行します。
+4. サーバは実行結果を標準形式で返します。
+5. クライアントは結果を会話文脈へ取り込み、次の推論へ渡します。
 
 ## 位置づけ
 
@@ -66,6 +69,24 @@ npx @modelcontextprotocol/server-filesystem C:/Dev/stock
 ### 接続確認
 
 MCP対応クライアントから tools/list を実行し、ファイル系ツールが列挙されることを確認します。
+
+## サンプル
+
+### 実行例
+
+```bash
+npx @modelcontextprotocol/server-filesystem C:/Dev/stock
+```
+
+起動後の確認手順:
+
+- MCP対応クライアントで `tools/list` を実行する
+- `read_file` や `write_file` などのツール表示を確認する
+
+### 検証
+
+- 許可したパス配下のみアクセスできるか確認する
+- 不正パス指定時にエラーが返ることを確認する
 
 
 ## 実ソースコード（言語別に記載）

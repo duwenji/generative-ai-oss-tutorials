@@ -15,13 +15,16 @@ next: 03_inference/03_tgi.md
 - モデル取得から推論確認までの基本手順
 - API経由での生成テスト
 
-## 概要
+## コンセプト
 Ollama はローカルでLLMを簡単に実行するためのランタイムです。Dockerで立ち上げて、モデルを取得し、HTTP APIから推論を実行できます。
 
-## 詳細
-- ローカルLLMの起動
-- モデルのダウンロードと管理
-- Generate / Chat API の利用
+## 仕組み
+
+1. Ollamaサーバを起動してローカルAPIエンドポイントを公開します。
+2. 必要モデルを pull してローカルストレージへ配置します。
+3. `/api/generate` や `/api/chat` にプロンプトを送信します。
+4. 推論結果をアプリ側で受け取り、UIや業務処理へ連携します。
+5. モデル差し替えやパラメータ調整で品質を最適化します。
 
 ## 位置づけ
 
@@ -115,6 +118,21 @@ $body2 = @{
 
 Invoke-RestMethod -Uri "http://localhost:11434/api/chat" -Method Post -ContentType "application/json" -Body $body2
 ```
+
+## サンプル
+
+### 実行例
+
+```bash
+docker-compose up -d
+docker exec -it ollama ollama pull qwen2.5:3b
+curl http://localhost:11434/api/generate -d '{"model":"qwen2.5:3b","prompt":"生成AIを2行で説明して"}'
+```
+
+### 検証
+
+- `/api/tags` でモデル一覧が表示されるか確認する
+- 生成応答に空文字が混ざらないか確認する
 
 
 ## 実ソースコード（言語別に記載）

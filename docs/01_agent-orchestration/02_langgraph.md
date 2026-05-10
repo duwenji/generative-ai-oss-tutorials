@@ -15,13 +15,19 @@ next: 01_agent-orchestration/03_autogen.md
 - 条件分岐と再試行
 - 状態オブジェクトを持ちながら処理
 
-## 概要
+**バージョン**: 0.1.0+ / OSS準拠（2026-05時点）  
+**公式ドキュメント**: https://langchain-ai.github.io/langgraph/
+
+## コンセプト
 LangGraph は、状態を持つエージェントワークフローをグラフとして定義するライブラリです。複数ステップの分岐やループを明示できるので、実運用の対話フローに向きます。
 
-## 詳細
-- ノードごとに処理を分割
-- 条件分岐と再試行
-- 状態オブジェクトを持ちながら処理
+## 仕組み
+
+1. 状態オブジェクトを定義して、ノード間で共有します。
+2. 各ノードは状態を受け取り、更新した状態を返します。
+3. エッジで処理順を固定し、条件分岐で次ノードを選択します。
+4. 再試行やループをグラフとして明示し、制御を再現可能にします。
+5. 実行結果の状態を見れば、どの分岐を通ったか追跡できます。
 
 ## 前提条件
 - Python 3.10+
@@ -59,6 +65,20 @@ flowchart TD
 ```
 
 この教材では、まず単純な classify -> respond を作り、その後 validate/retry/finish の条件分岐付きワークフローへ拡張します。
+
+## サンプル
+
+### 実行例
+
+```bash
+python 01_basic-workflow.py
+python 02_state-management.py
+```
+
+### 検証
+
+- 入力を変えて intent が期待どおりに分岐するか確認する
+- retries の上限で finish へ遷移するか確認する
 
 ## 実ソースコード（言語別に記載）
 
@@ -323,6 +343,28 @@ npm install
 node 01_basic-workflow.js
 ```
 
+
+## 補足
+
+**Q. LangGraph と LangChain の使い分けは？**  
+A. LangChain は単発のチェーン（Prompt → LLM → Parser）向け。LangGraph は条件分岐・再試行・ループなど、複数ステップの制御フローが必要な場面向け。
+
+**Q. グラフ設計の際の注意点は？**  
+A. ノードが行う処理を小さく保ち、状態の構造をシンプルに設計すること。複雑な分岐は人間にとって保守しにくくなります。
+
+**Q. エラーハンドリングはどう実装する？**  
+A. ノード内で例外をキャッチして状態に書き込むか、条件分岐で「エラー分岐」を用意するのが一般的です。
+
+---
+
+## 参考リンク
+
+- [LangGraph 公式ドキュメント](https://langchain-ai.github.io/langgraph/)
+- [LangChain JS ドキュメント](https://docs.langchain.com/oss/javascript/langchain/overview)
+- [GitHub: LangGraph](https://github.com/langchain-ai/langgraph)
+- [State Management ガイド](https://langchain-ai.github.io/langgraph/concepts/agentic_concepts/#state-management)
+
+---
 
 ## 演習課題
 

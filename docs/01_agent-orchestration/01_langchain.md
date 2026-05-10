@@ -17,10 +17,10 @@ next: 01_agent-orchestration/02_langgraph.md
 - OpenAI、Anthropic、Ollama等に対応
 - ドキュメント検索、ベクトル化を統合
 
-**バージョン**: 0.1.0  
-**公式ドキュメント**: https://python.langchain.com/
+**バージョン**: OSS Docs準拠（2026-05時点）  
+**公式ドキュメント**: https://docs.langchain.com/oss/python/langchain/overview
 
-## 概要
+## コンセプト
 
 **LangChain** は、LLMアプリ開発を簡単にするPython/JS ライブラリです。
 
@@ -34,14 +34,15 @@ next: 01_agent-orchestration/02_langgraph.md
 
 ---
 
-## 詳細
+## 仕組み
 
-### 用途
+### 処理の流れ
 
-- LLMアプリの基本実装
-- チャットボット構築
-- 外部API連携（金融API、Weather API等）
-- RAGシステムの基盤
+1. プロンプトをテンプレート化して入力を構造化する
+2. モデル呼び出しを標準化して複数プロバイダを切り替える
+3. ツール呼び出しで外部データや関数実行を連携する
+4. 会話履歴を保持して複数ターンの文脈を維持する
+5. 出力パーサで最終形式を整えて後続処理へ渡す
 
 ### メリット
 
@@ -75,7 +76,7 @@ next: 01_agent-orchestration/02_langgraph.md
 ### インストール
 
 ```bash
-pip install langchain langchain-openai python-dotenv
+pip install -U "langchain[openai]" python-dotenv
 ```
 
 ### API キーの設定
@@ -118,7 +119,22 @@ flowchart TD
 
 この教材では、同じユースケースを Python と JavaScript で比較しながら、LangChain の中核機能を順に確認します。
 
-## 補足
+## サンプル
+
+### 実行順
+
+```bash
+python 01_basic-chain.py
+python 02_tool-use.py
+python 03_memory-persistence.py
+```
+
+### 検証
+
+- 同じ質問でツールなし回答とツール利用回答を比較する
+- 複数ターン会話で前回の文脈が反映されるか確認する
+
+## 実ソースコード（言語別に記載）
 
 ### Python: 01_basic-chain.py
 
@@ -134,7 +150,7 @@ flowchart TD
 """
 
 from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
+from langchain.chat_models import init_chat_model
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
@@ -142,10 +158,10 @@ from langchain_core.output_parsers import StrOutputParser
 load_dotenv()
 
 # 1. LLMモデルの初期化
-# ChatOpenAI: OpenAI's GPT-4o / GPT-3.5を使用
-llm = ChatOpenAI(
-    model="gpt-3.5-turbo",
-    temperature=0.7,  # 0-1: 低いほど決定的、高いほど創造的
+# init_chat_model: プロバイダを抽象化した初期化
+llm = init_chat_model(
+  "openai:gpt-4o-mini",
+  temperature=0.7,
 )
 
 # 2. プロンプトテンプレートの作成
@@ -186,27 +202,20 @@ if __name__ == "__main__":
 - 実行: `python 02_tool-use.py`
 
 ```python
-"""LangChain tool calling example."""
+"""LangChain tool calling example (new agent API)."""
 
 from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
-from langchain_core.tools import tool
-from langchain.agents import AgentExecutor, create_openai_tools_agent
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain.agents import create_agent
 
 load_dotenv()
 
 # ========== ツール定義 ==========
-# @tool デコレータで関数をツール化
-
-@tool
 def get_stock_price(symbol: str) -> str:
     """株価を取得する（デモ用）。"""
     prices = {"AAPL": 180.5, "MSFT": 320.0, "7203": 1500.0}
     price = prices.get(symbol, "Not found")
     return f"株価情報: {symbol} = {price}"
 
-@tool
 def calculate_portfolio_return(initial: float, final: float) -> str:
     """収益率を計算する。"""
     if initial <= 0:
@@ -218,23 +227,10 @@ def calculate_portfolio_return(initial: float, final: float) -> str:
 # ========== エージェント構築 ==========
 
 tools = [get_stock_price, calculate_portfolio_return]
-
-llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
-
-prompt = ChatPromptTemplate.from_messages(
-    [
-        ("system", "あなたは金融アシスタントです。必要ならツールを使ってください。"),
-        ("human", "{question}"),
-        MessagesPlaceholder("agent_scratchpad"),
-    ]
-)
-
-agent = create_openai_tools_agent(llm, tools, prompt)
-agent_executor = AgentExecutor.from_agent_and_tools(
-    agent=agent,
+agent = create_agent(
+    model="openai:gpt-4o-mini",
     tools=tools,
-    verbose=True,
-    max_iterations=5,
+    system_prompt="あなたは金融アシスタントです。必要ならツールを使ってください。",
 )
 
 # ========== 実行 ==========
@@ -249,9 +245,15 @@ if __name__ == "__main__":
         print(f"\nQuestion: {question}")
         print("-" * 60)
 
-        result = agent_executor.invoke({"question": question})
+        result = agent.invoke(
+            {
+                "messages": [
+                    {"role": "user", "content": question}
+                ]
+            }
+        )
 
-        print(f"\nAnswer: {result['output']}")
+        print(f"\nAnswer: {result['messages'][-1].content}")
         print("=" * 60)
 ```
 
@@ -263,55 +265,21 @@ if __name__ == "__main__":
 - 実行: `python 03_memory-persistence.py`
 
 ```python
-"""LangChain memory example."""
-
-import os
-from pathlib import Path
+"""LangChain memory example (new agent API + checkpointer)."""
 
 from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.messages import HumanMessage, AIMessage
-from langchain_core.chat_history import InMemoryChatMessageHistory
-from langchain_core.runnables.history import RunnableWithMessageHistory
+from langchain.agents import create_agent
+from langgraph.checkpoint.memory import InMemorySaver
 
-env_path = Path(__file__).with_name(".env")
-load_dotenv(dotenv_path=env_path, override=False)
+load_dotenv()
 
-if not os.getenv("OPENAI_API_KEY"):
-    raise EnvironmentError(
-        "OPENAI_API_KEY が見つかりません。"
-        "このフォルダの .env.example を .env にコピーして設定してください。"
-    )
+memory = InMemorySaver()
 
-# ========== メモリの初期化 ==========
-
-# InMemoryChatMessageHistory: 会話履歴をメモリに保存（セッション終了で消失）
-chat_history = InMemoryChatMessageHistory()
-
-llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.7)
-
-# ========== プロンプトテンプレート作成 ==========
-
-prompt = ChatPromptTemplate.from_messages([
-    ("system", "あなたは親切なAIアシスタントです。ユーザーの前回の質問や回答を覚えて、会話を続けてください。"),
-
-    # MessagesPlaceholder: 会話履歴が自動的に挿入される
-    MessagesPlaceholder(variable_name="history"),
-
-    ("human", "{question}"),
-])
-
-# ========== チェーン構築 ==========
-
-chain = prompt | llm
-
-# RunnableWithMessageHistory: 会話履歴を管理しながらチェーン実行
-chain_with_history = RunnableWithMessageHistory(
-    runnable=chain,
-    get_session_history=lambda session_id: chat_history,
-    input_messages_key="question",
-    history_messages_key="history",
+agent = create_agent(
+    model="openai:gpt-4o-mini",
+    tools=[],
+    system_prompt="あなたは親切なAIアシスタントです。会話履歴を参照して回答してください。",
+    checkpointer=memory,
 )
 
 # ========== 実行 ==========
@@ -319,9 +287,11 @@ chain_with_history = RunnableWithMessageHistory(
 if __name__ == "__main__":
     print("Chat bot with memory")
     print("=" * 60)
-    print("複数の質問を入力すると履歴を参照して回答します。")
+    print("同じ thread_id で会話すると履歴を保持します。")
     print("'exit' で終了します。")
     print("=" * 60)
+
+    config = {"configurable": {"thread_id": "demo-thread"}}
 
     while True:
         user_input = input("\nYou: ").strip()
@@ -333,22 +303,16 @@ if __name__ == "__main__":
         if not user_input:
             continue
 
-        # チェーン実行（会話履歴付き）
-        response = chain_with_history.invoke(
-            {"question": user_input},
-            config={"configurable": {"session_id": "default"}},
+        result = agent.invoke(
+            {
+                "messages": [
+                    {"role": "user", "content": user_input}
+                ]
+            },
+            config=config,
         )
 
-        print(f"Assistant: {response.content}")
-
-        # 会話履歴を追加
-        chat_history.add_messages([
-            HumanMessage(content=user_input),
-            AIMessage(content=response.content),
-        ])
-
-        # 現在の履歴を表示（デバッグ用）
-        print(f"   [history: {len(chat_history.messages)} messages]")
+        print(f"Assistant: {result['messages'][-1].content}")
 ```
 
 ### JavaScript: 01_basic-chain.js
@@ -369,15 +333,15 @@ if __name__ == "__main__":
  * npm start
  */
 
-const { ChatOpenAI } = require("langchain/chat_models/openai");
-const { ChatPromptTemplate } = require("langchain/prompts");
-const { StringOutputParser } = require("langchain/schema/output_parser");
-require("dotenv").config();
+import "dotenv/config";
+import { ChatOpenAI } from "@langchain/openai";
+import { ChatPromptTemplate } from "@langchain/core/prompts";
+import { StringOutputParser } from "@langchain/core/output_parsers";
 
 async function main() {
   // 1. LLM の初期化
   const llm = new ChatOpenAI({
-    modelName: "gpt-3.5-turbo",
+    model: "gpt-4o-mini",
     temperature: 0.7,
   });
 
@@ -424,7 +388,7 @@ main().catch((error) => {
 
 ```javascript
 /**
- * LangChain JS Tool Use Example
+ * LangChain JS Tool Use Example (new agent API)
  *
  * LLMにツール（関数）実行を命令する方法を示します。
  *
@@ -433,16 +397,14 @@ main().catch((error) => {
  * node 02_tool-use.js
  */
 
-const { ChatOpenAI } = require("langchain/chat_models/openai");
-const { tool } = require("langchain/tools");
-const { createOpenAIToolsAgent, AgentExecutor } = require("langchain/agents");
-const { ChatPromptTemplate, MessagesPlaceholder } = require("langchain/prompts");
-require("dotenv").config();
+import "dotenv/config";
+import { createAgent, tool } from "langchain";
+import * as z from "zod";
 
 // ========== ツール定義 ==========
 
 const getStockPriceTool = tool(
-  async (symbol) => {
+  ({ symbol }) => {
     // デモ用：ダミーデータ
     const prices = { AAPL: 180.5, MSFT: 320.0, "7203": 1500.0 };
     const price = prices[symbol] || "Not found";
@@ -451,21 +413,14 @@ const getStockPriceTool = tool(
   {
     name: "get_stock_price",
     description: "銘柄コードから株価を取得します。",
-    schema: {
-      type: "object",
-      properties: {
-        symbol: {
-          type: "string",
-          description: "銘柄コード (例: AAPL, 7203)",
-        },
-      },
-      required: ["symbol"],
-    },
+    schema: z.object({
+      symbol: z.string().describe("銘柄コード (例: AAPL, 7203)"),
+    }),
   }
 );
 
 const calculateReturnTool = tool(
-  async ({ initial, final }) => {
+  ({ initial, final }) => {
     if (initial <= 0) return "初期投資額が不正です";
     const returnRate = ((final - initial) / initial) * 100;
     return `収益率: ${returnRate.toFixed(2)}%`;
@@ -473,20 +428,10 @@ const calculateReturnTool = tool(
   {
     name: "calculate_return",
     description: "投資の収益率を計算します。",
-    schema: {
-      type: "object",
-      properties: {
-        initial: {
-          type: "number",
-          description: "初期投資額",
-        },
-        final: {
-          type: "number",
-          description: "最終価値",
-        },
-      },
-      required: ["initial", "final"],
-    },
+    schema: z.object({
+      initial: z.number().describe("初期投資額"),
+      final: z.number().describe("最終価値"),
+    }),
   }
 );
 
@@ -495,37 +440,16 @@ const calculateReturnTool = tool(
 async function main() {
   const tools = [getStockPriceTool, calculateReturnTool];
 
-  const llm = new ChatOpenAI({
-    modelName: "gpt-3.5-turbo",
-    temperature: 0,
-  });
-
-  const prompt = ChatPromptTemplate.fromMessages([
-    [
-      "system",
-      "You are a helpful financial assistant. Use the tools to answer questions.",
-    ],
-    new MessagesPlaceholder("chat_history"),
-    ["human", "{input}"],
-    new MessagesPlaceholder("agent_scratchpad"),
-  ]);
-
-  const agent = await createOpenAIToolsAgent({
-    llm,
+  const agent = createAgent({
+    model: "gpt-4o-mini",
     tools,
-    prompt,
-  });
-
-  const agentExecutor = new AgentExecutor({
-    agent,
-    tools,
-    verbose: true,
+    systemPrompt: "You are a helpful financial assistant. Use tools when needed.",
   });
 
   // ========== 実行 ==========
 
   const questions = [
-    "APPLの現在の株価は？",
+    "AAPLの現在の株価は？",
     "1000ドル投資して1200ドルになった収益率は？",
   ];
 
@@ -533,9 +457,12 @@ async function main() {
     console.log(`\nQuestion: ${question}`);
     console.log("-".repeat(60));
 
-    const result = await agentExecutor.invoke({ input: question });
+    const result = await agent.invoke({
+      messages: [{ role: "user", content: question }],
+    });
 
-    console.log(`Answer: ${result.output}`);
+    const last = result.messages[result.messages.length - 1];
+    console.log(`Answer: ${last.content}`);
     console.log("=".repeat(60));
   }
 }
@@ -555,36 +482,25 @@ main().catch((error) => {
 
 ```javascript
 /**
- * LangChain JS Memory Example
+ * LangChain JS Memory Example (new agent API)
  *
  * 会話履歴を持つシンプルなチャットループ。
  * 実行前に .env へ OPENAI_API_KEY を設定してください。
  */
 
-const { ChatOpenAI } = require("langchain/chat_models/openai");
-const {
-  ChatPromptTemplate,
-  MessagesPlaceholder,
-} = require("langchain/prompts");
-const {
-  HumanMessage,
-  AIMessage,
-} = require("langchain/schema");
-require("dotenv").config();
+import "dotenv/config";
+import { createAgent } from "langchain";
+import { MemorySaver } from "@langchain/langgraph";
 
 async function main() {
-  const llm = new ChatOpenAI({
-    modelName: "gpt-3.5-turbo",
-    temperature: 0.4,
+  const checkpointer = new MemorySaver();
+
+  const agent = createAgent({
+    model: "gpt-4o-mini",
+    tools: [],
+    systemPrompt: "あなたは丁寧な日本語アシスタントです。会話履歴を参照して答えてください。",
+    checkpointer,
   });
-
-  const prompt = ChatPromptTemplate.fromMessages([
-    ["system", "あなたは丁寧な日本語アシスタントです。会話履歴を参照して答えてください。"],
-    new MessagesPlaceholder("history"),
-    ["human", "{input}"],
-  ]);
-
-  const history = [];
 
   const questions = [
     "私の名前は佐藤です。覚えてください。",
@@ -592,28 +508,52 @@ async function main() {
     "この会話でやったことを2行でまとめてください。",
   ];
 
-  for (const q of questions) {
-    const chainInput = await prompt.formatMessages({
-      history,
-      input: q,
-    });
+  const config = {
+    configurable: {
+      thread_id: "js-memory-demo",
+    },
+  };
 
-    const res = await llm.invoke(chainInput);
+  for (const q of questions) {
+    const result = await agent.invoke(
+      {
+        messages: [{ role: "user", content: q }],
+      },
+      config
+    );
+
+    const last = result.messages[result.messages.length - 1];
 
     console.log(`\nQ: ${q}`);
-    console.log(`A: ${res.content}`);
-
-    history.push(new HumanMessage(q));
-    history.push(new AIMessage(res.content));
+    console.log(`A: ${last.content}`);
   }
 
-  console.log(`\n履歴メッセージ数: ${history.length}`);
+  const state = await agent.getState(config);
+  console.log(`\n履歴メッセージ数: ${state.values.messages.length}`);
 }
 
 main().catch((e) => {
   console.error("Error:", e.message);
   process.exit(1);
 });
+```
+
+### JavaScript: 依存関係メモ
+
+- 役割: JS サンプル実行時の最小依存
+- 実行: `npm install langchain @langchain/openai @langchain/langgraph zod dotenv`
+
+```json
+{
+  "type": "module",
+  "dependencies": {
+    "@langchain/langgraph": "latest",
+    "@langchain/openai": "latest",
+    "dotenv": "latest",
+    "langchain": "latest",
+    "zod": "latest"
+  }
+}
 ```
 
 ---
@@ -633,16 +573,10 @@ A. はい。Ollama + LangChain で完全ローカル環境構築可能。
 
 ## 参考リンク
 
-- [LangChain 公式ドキュメント](https://python.langchain.com/)
+- [LangChain 公式ドキュメント（Python）](https://docs.langchain.com/oss/python/langchain/overview)
+- [LangChain 公式ドキュメント（JavaScript）](https://docs.langchain.com/oss/javascript/langchain/overview)
 - [GitHub Repository](https://github.com/langchain-ai/langchain)
-- [日本語ガイド](https://note.com/npaka)
 
-
-## 実ソースコード（言語別に記載）
-
-### 主要サンプル
-- この教材の実装例は、本文中の実行手順に対応しています。
-- 必要に応じて、主要コードの抜粋をこのセクションへ追記してください。
 
 ## 演習課題
 

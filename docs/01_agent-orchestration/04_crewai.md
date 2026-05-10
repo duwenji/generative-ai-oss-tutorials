@@ -15,13 +15,19 @@ next: 02_rag/00_README.md
 - タスク分割
 - 複数エージェント協調
 
-## 概要
+## コンセプト
 CrewAI は役割を持ったエージェントチームを作り、タスクを分担して実行するフレームワークです。Planner / Researcher / Reviewer のように責務分離した設計に向きます。
 
-## 詳細
-- Role ベース設計
-- タスク分割
-- 複数エージェント協調
+**バージョン**: 0.41.1+ / OSS準拠（2026-05時点）  
+**公式ドキュメント**: https://docs.crewai.com/
+
+## 仕組み
+
+1. Agent に role と goal を定義して役割を固定します。
+2. Task に期待出力を定義し、担当Agentへ割り当てます。
+3. Crew が Task 実行順を制御し、全体フローを管理します。
+4. 順次実行で前段結果を次段へ渡し、品質を段階的に高めます。
+5. 最終結果を統合して、実行ログと合わせて評価します。
 
 ## 位置づけ
 
@@ -143,6 +149,41 @@ cd 04_crewai-python
 pip install -r 00_requirements.txt
 python 01_basic-crew.py
 ```
+
+## サンプル
+
+### 指示例
+
+- Analyst に2週間の計画を作成させる
+- Reviewer に改善提案を3点以内で返させる
+
+### 検証
+
+- 14項目の計画が出力されるか確認する
+- 改善提案が task1 の結果に対応しているか確認する
+
+## 補足
+
+**Q. CrewAI と AutoGen の使い分けは？**  
+A. CrewAI は「役割・タスク・プロセス」を先に定義して実行する構造化アプローチ。AutoGen は「エージェント間の対話」をより柔軟に設計したい場合向け。CrewAI の方がデバッグしやすく、本番運用に向いています。
+
+**Q. sequential 以外のプロセスは？**  
+A. CrewAI は `Process.sequential` と `Process.hierarchical` をサポート。hierarchical ではマネージャーエージェントが全体を統括し、より高度な制御が可能になります。
+
+**Q. モデルを明示的に指定できる？**  
+A. はい。`Agent(..., model="gpt-4o-mini")` のように指定できます。指定しない場合は環境変数の `OPENAI_MODEL_NAME` から読み込みます。
+
+---
+
+## 参考リンク
+
+- [CrewAI 公式ドキュメント](https://docs.crewai.com/)
+- [CrewAI GitHub](https://github.com/joaomdmoura/crewai)
+- [Agent クラスリファレンス](https://docs.crewai.com/core-concepts/Agents)
+- [Task クラスリファレンス](https://docs.crewai.com/core-concepts/Tasks)
+- [プロセス設定ガイド](https://docs.crewai.com/core-concepts/Processes)
+
+---
 
 ## 演習課題
 
