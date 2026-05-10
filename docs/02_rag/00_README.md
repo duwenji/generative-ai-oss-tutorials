@@ -1,7 +1,7 @@
 ---
 level: 🔰 初級（カテゴリ導入）
 prereq: -
-prev: 01_agent-orchestration/04_crewai.md
+prev: 01_agent-orchestration/05_semantic-kernel.md
 next: 02_rag/01_llamaindex.md
 ---
 
@@ -15,21 +15,21 @@ next: 02_rag/01_llamaindex.md
 
 ```mermaid
 flowchart LR
-	A[業務ナレッジ] --> B[RAG]
-	B --> C[検索基盤]
-	B --> D[生成回答]
-	B --> E[運用監視]
+  A[業務ナレッジ] --> B[RAG]
+  B --> C[検索基盤]
+  B --> D[生成回答]
+  B --> E[運用監視]
 ```
 
 ## 学習フロー
 
 ```mermaid
 flowchart TD
-	S[開始] --> L[LlamaIndex]
-	L --> H[Haystack]
-	H --> T[txtai]
-	T --> O[RAGFlow/privateGPT/Quivr/Danswer]
-	O --> X[比較メモ作成]
+  S[開始] --> L[LlamaIndex]
+  L --> H[Haystack]
+  H --> T[txtai]
+  T --> O[RAGFlow/privateGPT/Quivr/Danswer]
+  O --> X[比較メモ作成]
 ```
 
 ## 含まれるOSS
@@ -190,6 +190,7 @@ pip install --upgrade privategpt  # またはソースから
 pip install --upgrade onyx  # または Docker イメージを使用
 ```
 
+
 ## 完了条件
 
 - カテゴリ内の主要OSSを3つ以上説明できる
@@ -198,5 +199,5 @@ pip install --upgrade onyx  # または Docker イメージを使用
 
 ---
 
-[← 前へ](01_agent-orchestration/04_crewai.md) | [次へ →](02_rag/01_llamaindex.md)
+[← 前へ](01_agent-orchestration/05_semantic-kernel.md) | [次へ →](02_rag/01_llamaindex.md)
 

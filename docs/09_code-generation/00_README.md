@@ -15,21 +15,21 @@ next: 09_code-generation/01_aider.md
 
 ```mermaid
 flowchart LR
-	A[開発生産性向上] --> B[Code Generation Tools]
-	B --> C[Aider]
-	B --> D[Continue]
-	B --> E[Tabby/OpenHands]
+  A[開発生産性向上] --> B[Code Generation Tools]
+  B --> C[Aider]
+  B --> D[Continue]
+  B --> E[Tabby/OpenHands]
 ```
 
 ## 学習フロー
 
 ```mermaid
 flowchart TD
-	S[開始] --> A1[AiderでCLI体験]
-	A1 --> C1[ContinueでIDE連携]
-	C1 --> T1[Tabbyでセルフホスト]
-	T1 --> O1[OpenHandsで自律実装]
-	O1 --> X[導入方針を確定]
+  S[開始] --> A1[AiderでCLI体験]
+  A1 --> C1[ContinueでIDE連携]
+  C1 --> T1[Tabbyでセルフホスト]
+  T1 --> O1[OpenHandsで自律実装]
+  O1 --> X[導入方針を確定]
 ```
 
 ## 含まれるOSS
@@ -60,4 +60,5 @@ flowchart TD
 ---
 
 [← 前へ](08_protocols/03_backend-integration.md) | [次へ →](09_code-generation/01_aider.md)
+
 

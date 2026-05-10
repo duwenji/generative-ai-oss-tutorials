@@ -15,21 +15,21 @@ next: 06_multimodal/01_whisper.md
 
 ```mermaid
 flowchart LR
-	A[マルチモーダル応用] --> B[音声/画像OSS]
-	B --> C[Whisper/Piper/Coqui]
-	B --> D[ComfyUI/A1111]
-	B --> E[InvokeAI/Fooocus]
+  A[マルチモーダル応用] --> B[音声/画像OSS]
+  B --> C[Whisper/Piper/Coqui]
+  B --> D[ComfyUI/A1111]
+  B --> E[InvokeAI/Fooocus]
 ```
 
 ## 学習フロー
 
 ```mermaid
 flowchart TD
-	S[開始] --> W[Whisperで音声認識]
-	W --> P[PiperでTTS]
-	P --> C[ComfyUI/A1111で画像生成]
-	C --> I[InvokeAI/Fooocusで運用UI]
-	I --> T[Coquiで拡張]
+  S[開始] --> W[Whisperで音声認識]
+  W --> P[PiperでTTS]
+  P --> C[ComfyUI/A1111で画像生成]
+  C --> I[InvokeAI/Fooocusで運用UI]
+  I --> T[Coquiで拡張]
 ```
 
 ## 含まれるOSS
@@ -73,4 +73,5 @@ flowchart TD
 ---
 
 [← 前へ](05_evaluation/04_guardrails.md) | [次へ →](06_multimodal/01_whisper.md)
+
 

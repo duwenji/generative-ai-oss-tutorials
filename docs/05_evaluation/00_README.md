@@ -15,21 +15,21 @@ LLMアプリの出力品質を測定し、安全性・信頼性を確保。
 
 ```mermaid
 flowchart LR
-	A[LLMアプリ品質管理] --> B[評価/監視]
-	B --> C[promptfoo]
-	B --> D[Ragas]
-	B --> E[Langfuse/Guardrails]
+  A[LLMアプリ品質管理] --> B[評価/監視]
+  B --> C[promptfoo]
+  B --> D[Ragas]
+  B --> E[Langfuse/Guardrails]
 ```
 
 ## 学習フロー
 
 ```mermaid
 flowchart TD
-	S[開始] --> P[promptfooで比較]
-	P --> R[RagasでRAG評価]
-	R --> L[Langfuseで観測]
-	L --> G[Guardrailsで制約]
-	G --> X[評価運用を定義]
+  S[開始] --> P[promptfooで比較]
+  P --> R[RagasでRAG評価]
+  R --> L[Langfuseで観測]
+  L --> G[Guardrailsで制約]
+  G --> X[評価運用を定義]
 ```
 
 ## 含まれるOSS
@@ -64,4 +64,5 @@ flowchart TD
 ---
 
 [← 前へ](04_ui/07_anythingllm.md) | [次へ →](05_evaluation/01_promptfoo.md)
+
 

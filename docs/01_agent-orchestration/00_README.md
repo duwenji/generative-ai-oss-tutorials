@@ -15,21 +15,22 @@ next: 01_agent-orchestration/01_langchain.md
 
 ```mermaid
 flowchart LR
-	A[LLMアプリ開発] --> B[Agent Orchestration]
-	B --> C[LangChain]
-	B --> D[LangGraph]
-	B --> E[AutoGen/CrewAI]
+  A[LLMアプリ開発] --> B[Agent Orchestration]
+  B --> C[LangChain]
+  B --> D[LangGraph]
+  B --> E[AutoGen/CrewAI]
 ```
 
 ## 学習フロー
 
 ```mermaid
 flowchart TD
-	S[開始] --> L[LangChain基礎]
-	L --> G[LangGraphで状態遷移]
-	G --> M[マルチエージェント実装]
-	M --> C[比較評価メモ作成]
-	C --> X[カテゴリ完了]
+  S[開始] --> L[LangChain基礎]
+  L --> G[LangGraphで状態遷移]
+  G --> M[マルチエージェント実装]
+  M --> K[Semantic Kernelで統合設計]
+  K --> C[比較評価メモ作成]
+  C --> X[カテゴリ完了]
 ```
 
 ## 含まれるOSS
@@ -45,6 +46,7 @@ flowchart TD
 1. LangChain (基本)
 2. LangGraph (ステップ処理)
 3. AutoGen / CrewAI (複数エージェント)
+4. Semantic Kernel (アプリ統合)
 
 ## 教材リンク
 
@@ -52,6 +54,7 @@ flowchart TD
 - [02_langgraph.md](./02_langgraph.md)
 - [03_autogen.md](./03_autogen.md)
 - [04_crewai.md](./04_crewai.md)
+- [05_semantic-kernel.md](./05_semantic-kernel.md)
 
 ## 完了条件
 
@@ -62,4 +65,5 @@ flowchart TD
 ---
 
 [← 前へ](00_README.md) | [次へ →](01_agent-orchestration/01_langchain.md)
+
 

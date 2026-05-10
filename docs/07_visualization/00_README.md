@@ -15,22 +15,22 @@ LLMの出力や分析結果を視覚化するための教材です。
 
 ```mermaid
 flowchart LR
-	A[分析結果活用] --> B[可視化]
-	B --> C[Vega-Lite]
-	B --> D[ECharts]
-	C --> E[宣言的仕様]
-	D --> F[高機能チャート]
+  A[分析結果活用] --> B[可視化]
+  B --> C[Vega-Lite]
+  B --> D[ECharts]
+  C --> E[宣言的仕様]
+  D --> F[高機能チャート]
 ```
 
 ## 学習フロー
 
 ```mermaid
 flowchart TD
-	S[開始] --> V[Vega-Liteで仕様生成]
-	V --> J[JSON specを確認]
-	J --> E[ECharts optionを作成]
-	E --> R[画面で描画確認]
-	R --> X[可視化選定メモ]
+  S[開始] --> V[Vega-Liteで仕様生成]
+  V --> J[JSON specを確認]
+  J --> E[ECharts optionを作成]
+  E --> R[画面で描画確認]
+  R --> X[可視化選定メモ]
 ```
 
 ## 含まれるOSS
@@ -59,4 +59,5 @@ flowchart TD
 ---
 
 [← 前へ](06_multimodal/07_coqui-tts.md) | [次へ →](07_visualization/01_vega-lite.md)
+
 

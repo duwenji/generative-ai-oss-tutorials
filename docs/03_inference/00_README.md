@@ -15,21 +15,21 @@ next: 03_inference/01_vllm.md
 
 ```mermaid
 flowchart LR
-	A[LLM提供基盤] --> B[推論実行]
-	B --> C[vLLM]
-	B --> D[Ollama]
-	B --> E[TGI/llama.cpp]
+  A[LLM提供基盤] --> B[推論実行]
+  B --> C[vLLM]
+  B --> D[Ollama]
+  B --> E[TGI/llama.cpp]
 ```
 
 ## 学習フロー
 
 ```mermaid
 flowchart TD
-	S[開始] --> O[Ollamaでローカル検証]
-	O --> V[vLLMでAPI化]
-	V --> T[TGIで配信比較]
-	T --> L[llama.cpp軽量推論]
-	L --> X[運用指針を整理]
+  S[開始] --> O[Ollamaでローカル検証]
+  O --> V[vLLMでAPI化]
+  V --> T[TGIで配信比較]
+  T --> L[llama.cpp軽量推論]
+  L --> X[運用指針を整理]
 ```
 
 ## 含まれるOSS
@@ -61,4 +61,5 @@ flowchart TD
 ---
 
 [← 前へ](02_rag/07_danswer.md) | [次へ →](03_inference/01_vllm.md)
+
 

@@ -15,21 +15,21 @@ next: 04_ui/01_open-webui.md
 
 ```mermaid
 flowchart LR
-	A[ユーザー接点] --> B[UI基盤]
-	B --> C[チャットUI]
-	B --> D[ノーコード構築]
-	B --> E[RAG統合]
+  A[ユーザー接点] --> B[UI基盤]
+  B --> C[チャットUI]
+  B --> D[ノーコード構築]
+  B --> E[RAG統合]
 ```
 
 ## 学習フロー
 
 ```mermaid
 flowchart TD
-	S[開始] --> W[Open WebUI]
-	W --> D[Dify/Flowise]
-	D --> L[LibreChat/Chatbot UI]
-	L --> O[LobeChat/AnythingLLM]
-	O --> X[運用比較メモ]
+  S[開始] --> W[Open WebUI]
+  W --> D[Dify/Flowise]
+  D --> L[LibreChat/Chatbot UI]
+  L --> O[LobeChat/AnythingLLM]
+  O --> X[運用比較メモ]
 ```
 
 ## 含まれるOSS
@@ -71,4 +71,5 @@ flowchart TD
 ---
 
 [← 前へ](03_inference/04_llama-cpp.md) | [次へ →](04_ui/01_open-webui.md)
+
 

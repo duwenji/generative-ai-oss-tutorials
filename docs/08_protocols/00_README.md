@@ -15,21 +15,21 @@ AIアプリと外部ツールを安全に統合するための標準を学ぶ教
 
 ```mermaid
 flowchart LR
-	A[AIアプリ統合] --> B[Protocols]
-	B --> C[MCP]
-	B --> D[MCP Servers]
-	D --> E[Backend Integration]
+  A[AIアプリ統合] --> B[Protocols]
+  B --> C[MCP]
+  B --> D[MCP Servers]
+  D --> E[Backend Integration]
 ```
 
 ## 学習フロー
 
 ```mermaid
 flowchart TD
-	S[開始] --> M[MCP基礎]
-	M --> S2[MCP Servers導入]
-	S2 --> B[バックエンド連携]
-	B --> T[tools-call設計]
-	T --> X[運用フロー定義]
+  S[開始] --> M[MCP基礎]
+  M --> S2[MCP Servers導入]
+  S2 --> B[バックエンド連携]
+  B --> T[tools-call設計]
+  T --> X[運用フロー定義]
 ```
 
 ## 含まれるOSS
@@ -60,4 +60,5 @@ flowchart TD
 ---
 
 [← 前へ](07_visualization/02_echarts.md) | [次へ →](08_protocols/01_mcp.md)
+
 

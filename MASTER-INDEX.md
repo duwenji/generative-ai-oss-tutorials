@@ -16,6 +16,7 @@
 - [docs/01_agent-orchestration/02_langgraph.md](docs/01_agent-orchestration/02_langgraph.md) - LangGraph 0.1.0+
 - [docs/01_agent-orchestration/03_autogen.md](docs/01_agent-orchestration/03_autogen.md) - AutoGen 0.2.34
 - [docs/01_agent-orchestration/04_crewai.md](docs/01_agent-orchestration/04_crewai.md) - CrewAI 0.41.1
+- [docs/01_agent-orchestration/05_semantic-kernel.md](docs/01_agent-orchestration/05_semantic-kernel.md) - Semantic Kernel
 
 ## 02. RAG ✅
 - [docs/02_rag/00_README.md](docs/02_rag/00_README.md)
