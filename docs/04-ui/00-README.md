@@ -62,6 +62,11 @@ flowchart TD
 - [06-lobechat.md](./06-lobechat.md)
 - [07-anythingllm.md](./07-anythingllm.md)
 
+## 実行証跡サンプル
+
+- [Open WebUI スクリーンショット一式](./examples/open-webui/)
+- [Open WebUI 実行ログ](./examples/open-webui/run-log.txt)
+
 ## 完了条件
 
 - カテゴリ内の主要OSSを3つ以上説明できる

@@ -81,10 +81,125 @@ flowchart TD
 
 ### 実行例
 
-```bash
-# この教材の最小構成を順に実行
-# 具体的なコマンドは「最小セットアップ」または「実行フロー」を参照
+このセクションでは、Windows PowerShell 前提で Open WebUI と Ollama の最小構成を順に起動します。
+
+#### 0. 作業ディレクトリ準備（PowerShell）
+
+```powershell
+New-Item -ItemType Directory -Path .\sandbox\open-webui -Force | Out-Null
+Set-Location .\sandbox\open-webui
 ```
+
+#### 1. docker-compose.yml を作成
+
+```yaml
+services:
+	ollama:
+		image: ollama/ollama:latest
+		container_name: ollama
+		ports:
+			- "11434:11434"
+		volumes:
+			- ollama_data:/root/.ollama
+		restart: unless-stopped
+
+	open-webui:
+		image: ghcr.io/open-webui/open-webui:main
+		container_name: open-webui
+		ports:
+			- "8080:8080"
+		environment:
+			- OLLAMA_BASE_URL=http://ollama:11434
+		volumes:
+			- open_webui_data:/app/backend/data
+		depends_on:
+			- ollama
+		restart: unless-stopped
+
+volumes:
+	ollama_data:
+	open_webui_data:
+```
+
+#### 2. コンテナ起動と状態確認
+
+```powershell
+docker compose up -d
+docker compose ps
+docker compose logs open-webui --tail 50
+```
+
+期待状態:
+
+- `open-webui` と `ollama` が `Up` になっている
+- `open-webui` のログに致命的エラーが出ていない
+
+実行イメージ:
+
+![docker compose ps](examples/open-webui/01-docker-compose-ps.png)
+
+#### 3. 使うモデルを Ollama に取得
+
+```powershell
+docker exec ollama ollama pull llama3.2:3b
+docker exec ollama ollama list
+```
+
+期待状態:
+
+- `ollama list` に `llama3.2:3b` が表示される
+
+#### 4. Open WebUI 初期アクセス
+
+```powershell
+Start-Process "http://localhost:8080"
+```
+
+ブラウザ操作:
+
+1. 初回アクセスで管理者アカウントを作成
+2. モデル選択で `llama3.2:3b` を選ぶ
+3. 「こんにちは。3行で自己紹介して。」を送信
+
+実行イメージ（サインアップ）:
+
+![signup](examples/open-webui/02-open-webui-signup.png)
+
+実行イメージ（モデル選択完了）:
+
+![model selected](examples/open-webui/03-model-selected.png)
+
+#### 5. 基本機能の完了判定（最低ライン）
+
+- UI からチャット送信できる
+- ローカルモデルから応答が返る
+- 会話履歴がサイドバーに保存される
+
+実行イメージ（初回入力）:
+
+![first chat input](examples/open-webui/04-first-chat-input.png)
+
+実行イメージ（初回回答）:
+
+![first chat output](examples/open-webui/05-first-chat-output.png)
+
+実行イメージ（履歴サイドバー）:
+
+![history sidebar](examples/open-webui/06-history-sidebar.png)
+
+#### 6. 停止・再開（検証用）
+
+```powershell
+docker compose stop
+docker compose start
+docker compose down
+```
+
+使い分け:
+
+- `docker compose stop`: コンテナだけ停止します。次回は `docker compose start` で高速に再開できます。
+- `docker compose down`: コンテナ停止に加えて、Compose 管理のネットワークも削除します。次回は `docker compose up -d` で再作成して起動します。
+- データも初期化したい場合: `docker compose down -v`（ボリューム削除）
 
 ### 検証
 

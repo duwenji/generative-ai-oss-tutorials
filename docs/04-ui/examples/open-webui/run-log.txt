@@ -1,0 +1,35 @@
+[日時]
+2026-05-13
+
+[実行環境]
+- OS: Windows
+- Runtime: Docker Compose
+- Open WebUI: ghcr.io/open-webui/open-webui:main
+- Ollama: ollama/ollama:latest
+- Model: llama3.2:3b
+
+[実行コマンド]
+docker compose up -d
+docker compose ps
+docker exec ollama ollama pull llama3.2:3b
+docker exec ollama ollama list
+
+[結果]
+- ollama: Up
+- open-webui: Up (healthy)
+- llama3.2:3b: pull完了
+- Open WebUI 初回管理者アカウント作成完了
+- 初回チャット送信と回答表示を確認
+- チャット履歴がサイドバーに保存されることを確認
+
+[スクリーンショット]
+- 01-docker-compose-ps.png
+- 02-open-webui-signup.png
+- 03-model-selected.png
+- 04-first-chat-input.png
+- 05-first-chat-output.png
+- 06-history-sidebar.png
+
+[備考]
+- 初回イメージ取得とモデルpullは時間がかかる
+- 初期画面のリリースノートダイアログは閉じてから操作

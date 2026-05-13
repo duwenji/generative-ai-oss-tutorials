@@ -35,3 +35,7 @@
 - [docs/08-protocols/00-README.md](docs/08-protocols/00-README.md)
 - [docs/09-code-generation/00-README.md](docs/09-code-generation/00-README.md)
 
+## 実行証跡サンプル
+
+- [Open WebUI 実行例（画面キャプチャ/ログ）](docs/04-ui/examples/open-webui/)
+
