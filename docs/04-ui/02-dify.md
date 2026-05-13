@@ -82,10 +82,167 @@ flowchart TD
 
 ### 実行例
 
-```bash
-# この教材の最小構成を順に実行
-# 具体的なコマンドは「最小セットアップ」または「実行フロー」を参照
+このセクションでは、Windows PowerShell 前提で Dify の最小構成を順に起動します。
+
+#### 0. 作業ディレクトリ準備（PowerShell）
+
+```powershell
+New-Item -ItemType Directory -Path .\sandbox\dify -Force | Out-Null
+Set-Location .\sandbox\dify
 ```
+
+#### 1. docker-compose.yml を作成
+
+```yaml
+version: "3.8"
+
+services:
+  dify:
+    image: langgenius/dify-api:latest
+    container_name: dify-api
+    ports:
+      - "8081:5001"
+    environment:
+      - MODE=api
+      - SECRET_KEY=change-me
+      - CONSOLE_WEB_URL=http://localhost:3000
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_DATABASE=dify
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - postgres
+      - redis
+
+  dify-web:
+    image: langgenius/dify-web:latest
+    container_name: dify-web
+    ports:
+      - "3000:3000"
+    environment:
+      - CONSOLE_API_URL=http://localhost:8081
+
+  postgres:
+    image: postgres:15
+    container_name: dify-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=dify
+    volumes:
+      - dify_postgres:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: dify-redis
+    volumes:
+      - dify_redis:/data
+
+volumes:
+  dify_postgres:
+  dify_redis:
+```
+
+#### 2. コンテナ起動と状態確認
+
+```powershell
+docker compose up -d
+docker compose ps
+docker compose logs dify-api --tail 50
+```
+
+期待状態:
+
+- `dify-api`、`dify-web`、`dify-postgres`、`dify-redis` が `Up` になっている
+- `dify-api` のログに致命的エラーが出ていない
+
+実行イメージ:
+
+![docker compose ps](examples/dify/01-docker-compose-ps.png)
+
+#### 3. 管理者アカウント作成
+
+```powershell
+Start-Process "http://localhost:3000"
+```
+
+ブラウザ操作:
+
+1. 初回アクセスで管理者アカウントを作成
+2. メールアドレスとパスワードを設定して登録
+
+実行イメージ（セットアップ画面）:
+
+![dify setup](examples/dify/02-dify-setup.png)
+
+#### 4. LLM Provider 設定
+
+ブラウザ操作:
+
+1. 右上のアカウントメニュー → **Settings** → **Model Provider** を開く
+2. OpenAI または Ollama の API エンドポイントを設定
+   - OpenAI: API キーを入力
+   - Ollama: `http://host.docker.internal:11434` を URL に設定
+
+実行イメージ（LLM Provider 設定）:
+
+![llm provider](examples/dify/03-llm-provider.png)
+
+#### 5. アプリ作成・チャット確認
+
+ブラウザ操作:
+
+1. **Studio** → **Create App** → **Chatbot** を選択
+2. LLM ノードで登録済みのモデルを選択
+3. **Publish** してプレビューを開く
+4. 「こんにちは。3行で自己紹介して。」を送信
+
+実行イメージ（アプリ作成）:
+
+![app created](examples/dify/04-app-created.png)
+
+実行イメージ（チャット入力）:
+
+![chat input](examples/dify/05-chat-input.png)
+
+実行イメージ（チャット回答）:
+
+![chat output](examples/dify/06-chat-output.png)
+
+#### 5.1 Workflow Builder（ドラッグ&ドロップ）
+
+ブラウザ操作:
+
+1. **Studio** → **Create from Blank** → **Workflow** を選択
+2. ノードパネルから **LLM** と **End** を追加し、`Start -> LLM -> End` を構成
+3. キャンバス上でノードをドラッグ&ドロップして配置を調整
+
+実行イメージ（Workflow 作成）:
+
+![workflow builder](examples/dify/07-workflow-builder.png)
+
+#### 6. 基本機能の完了判定（最低ライン）
+
+- 管理画面 (http://localhost:3000) にログインできる
+- LLM Provider が正常に登録されている
+- チャットボットアプリから応答が返る
+
+#### 7. 停止・再開（検証用）
+
+```powershell
+docker compose stop
+docker compose start
+docker compose down
+```
+
+使い分け:
+
+- `docker compose stop`: コンテナだけ停止します。次回は `docker compose start` で高速に再開できます。
+- `docker compose down`: コンテナ停止に加えて、Compose 管理のネットワークも削除します。次回は `docker compose up -d` で再作成して起動します。
+- データも初期化したい場合: `docker compose down -v`（ボリューム削除）
 
 ### 検証
 
@@ -94,115 +251,24 @@ flowchart TD
 - 変更した設定に応じて結果差分を説明できる
 
 ## 実ソースコード（言語別に記載）
-### Setup: 00_docker-compose.yml
+### Source: 02-dify.md（tutorials側）
 
-```yaml
-version: "3.8"
-
-services:
-	dify:
-		image: langgenius/dify-api:latest
-		container_name: dify-api
-		ports:
-			- "8081:5001"
-		environment:
-			- MODE=api
-			- SECRET_KEY=change-me
-			- CONSOLE_WEB_URL=http://localhost:3000
-			- DB_HOST=postgres
-			- DB_PORT=5432
-			- DB_USERNAME=postgres
-			- DB_PASSWORD=postgres
-			- DB_DATABASE=dify
-			- REDIS_HOST=redis
-			- REDIS_PORT=6379
-		depends_on:
-			- postgres
-			- redis
-
-	dify-web:
-		image: langgenius/dify-web:latest
-		container_name: dify-web
-		ports:
-			- "3000:3000"
-		environment:
-			- CONSOLE_API_URL=http://localhost:8081
-
-	postgres:
-		image: postgres:15
-		container_name: dify-postgres
-		environment:
-			- POSTGRES_USER=postgres
-			- POSTGRES_PASSWORD=postgres
-			- POSTGRES_DB=dify
-		volumes:
-			- dify_postgres:/var/lib/postgresql/data
-
-	redis:
-		image: redis:7-alpine
-		container_name: dify-redis
-		volumes:
-			- dify_redis:/data
-
-volumes:
-	dify_postgres:
-	dify_redis:
-```
-
-### Setup: 01_setup-guide.md
+- 役割: Dify の最小セットアップ記述
+- 入力: Docker 実行環境
+- 出力: Dify 管理画面・API 起動状態
 
 ```text
-# Dify セットアップガイド
-
 ## 前提条件
+
+### 前提条件
 - Docker / Docker Compose
 - メモリ 8GB 以上推奨
 
-## 起動
-docker-compose up -d
+### クイックスタート
+docker compose up -d
 
-## アクセス先
-- 管理画面: http://localhost:3000
-- API: http://localhost:8081
-
-## 初期設定
-1. 管理者アカウント作成
-2. LLM Provider で OpenAI または Ollama を設定
-3. 新規 App を作成してチャット開始
-```
-
-### Setup: 02_config-examples.md
-
-```text
-# Dify 設定例
-
-## 概要
-- App Type: Chatbot
-- Prompt:
-	- あなたは株式分析の初学者向けアシスタントです
-	- 専門用語は短く補足を入れてください
-
-## 詳細
-1. Knowledge に PDF/Markdown を登録
-2. Retriever ノードで top_k=3
-3. LLM ノードで回答生成
-4. 最後に Citation を有効化
-
-## 実行方法
-### 1. アプリケーション作成
-
-"Create app" ボタンから新規作成。
-
-### 2. ワークフロー構築
-
-- **Input ノード**: ユーザーからの入力
-- **LLM ノード**: テキスト生成
-- **Output ノード**: 結果出力
-
-### 3. 公開
-
-作成したアプリケーションを API または Web UI として公開。
-
+管理画面: http://localhost:3000
+API: http://localhost:8081
 ```
 
 ---

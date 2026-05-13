@@ -1,0 +1,5 @@
+NAME            IMAGE                       COMMAND                   SERVICE         CREATED          STATUS          PORTS
+dify-api        langgenius/dify-api:0.7.0   "/bin/bash /entrypoi窶ｦ"   dify-api        45 seconds ago   Up 44 seconds   0.0.0.0:8081->5001/tcp, [::]:8081->5001/tcp
+dify-postgres   postgres:15                 "docker-entrypoint.s窶ｦ"   dify-postgres   46 seconds ago   Up 44 seconds   5432/tcp
+dify-redis      redis:7-alpine              "docker-entrypoint.s窶ｦ"   dify-redis      46 seconds ago   Up 44 seconds   6379/tcp
+dify-web        langgenius/dify-web:0.7.0   "/bin/sh ./entrypoin窶ｦ"   dify-web        45 seconds ago   Up 44 seconds   0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp
