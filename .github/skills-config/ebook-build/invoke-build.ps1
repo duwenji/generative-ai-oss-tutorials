@@ -18,6 +18,11 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '../../..')).Path
+$configFileResolved = if ([System.IO.Path]::IsPathRooted($ConfigFile)) { 
+    $ConfigFile 
+} else { 
+    Join-Path $repoRoot $ConfigFile 
+}
 
 $sharedCandidates = @(
     (Join-Path $repoRoot '../shared-copilot-skills/ebook-build'),
@@ -43,7 +48,7 @@ if (-not (Test-Path $dispatcherScript)) {
 
 & pwsh -NoProfile -ExecutionPolicy Bypass -File $dispatcherScript `
     -RepoRoot   $repoRoot `
-    -ConfigFile $ConfigFile `
+    -ConfigFile $configFileResolved `
     -BuildStep  $BuildStep
 
 exit $LASTEXITCODE
