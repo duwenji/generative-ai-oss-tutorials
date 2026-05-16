@@ -1,0 +1,30 @@
+[日時]
+YYYY-MM-DD HH:MM
+
+[実行環境]
+- OS: Windows
+- Runtime: Node.js + pnpm
+- Node.js: 
+- pnpm: 
+- Model Provider: (OpenAI / others)
+
+[実行コマンド]
+git clone https://github.com/lobehub/lobe-chat.git
+pnpm install
+pnpm dev
+
+[結果]
+- 依存解決: 成功/失敗
+- 開発サーバ起動: 成功/失敗
+- 応答生成: 成功/失敗
+
+[スクリーンショット]
+- 01-pnpm-install.png
+- 02-env-local.png
+- 03-dev-server-started.png
+- 04-home.png
+- 05-chat-input.png
+- 06-chat-output.png
+
+[備考]
+- 

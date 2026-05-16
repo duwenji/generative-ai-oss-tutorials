@@ -11,14 +11,59 @@ next: 05-evaluation/00-README.md
 
 ## この教材で身につくこと
 
-- AnythingLLM 入門 の主な役割と適用場面を説明できる
-- AnythingLLM 入門 を最小構成で動かす手順を実行できる
-- 導入時のメリットと注意点を整理できる
+- オールインワン型 UI の最小構成
+- Windows + PowerShell での Docker 実行
+- LLM Provider とワークスペース初期設定
+- 実行証跡（ハードコピー）運用
 
-## コンセプト
-AnythingLLM は文書QAまで含めたオールインワン型チャットUIです。
+## 公式ポジショニング
+AnythingLLM は、any LLM、any document、any agent を 1 つにまとめ、private-first で使える all-in-one AI application です。
+
 **バージョン**: 最新版 / OSS準拠（2026-05時点）  
 **公式ドキュメント**: https://anythingllm.com/
+
+## この OSS を選ぶべきケース
+
+- 文書を取り込み、要約、検索、QA をすぐ始めたい
+- ローカル優先、private-first の運用を重視したい
+- 単なるチャット UI ではなく、ワークスペース単位で文書と会話を管理したい
+- 個人利用からチーム利用まで、文書活用を中心に広げたい
+
+## この OSS を選ばない方がよいケース
+
+- ノード接続でワークフローを細かく設計したい
+- AI アプリ公開や workflow 配備を主目的とする
+- Agent や Tool Call よりも、まずチャット UI の軽さを優先したい
+
+## Dify / Flowise との見分け方
+
+- AnythingLLM はフロー設計よりも、文書を起点にした利用体験を早く作ることに向いています
+- Dify や Flowise が構築基盤であるのに対し、AnythingLLM は文書中心の利用基盤として捉えると分かりやすいです
+- 選定時は、アプリを作りたいのか、文書と会話の利用環境を整えたいのかで判断します
+
+## 前提条件
+
+### 前提条件
+
+- Windows 11 + PowerShell 7 推奨
+- Docker Desktop（Compose v2 有効）
+- メモリ 8GB 以上推奨
+
+### 事前チェック（PowerShell）
+
+```powershell
+docker --version
+docker compose version
+```
+
+### クイックスタート
+
+```powershell
+docker compose up -d
+```
+
+ブラウザで http://localhost:3003 にアクセス。
+
 ## 仕組み
 
 1. 目的と入力を定義し、対象データや利用モデルを準備します。
@@ -39,7 +84,7 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-		S[開始] --> U[docker-compose up -d]
+		S[開始] --> U[docker compose up -d]
 		U --> A[http://localhost:3003 アクセス]
 		A --> I[初期設定]
 		I --> Q[文書QA開始]
@@ -50,29 +95,27 @@ flowchart TD
 
 ### 実行例
 
-```bash
-# この教材の最小構成を順に実行
-# 具体的なコマンドは「最小セットアップ」または「実行フロー」を参照
+このセクションでは、Windows PowerShell 前提で AnythingLLM の最小構成を順に起動します。
+
+#### 0. 作業ディレクトリ準備（PowerShell）
+
+```powershell
+New-Item -ItemType Directory -Path .\sandbox\anythingllm -Force | Out-Null
+Set-Location .\sandbox\anythingllm
 ```
 
-### 検証
-
-- コマンドがエラーなく完了する
-- 想定した出力（画面表示・ファイル生成・回答）を確認できる
-- 変更した設定に応じて結果差分を説明できる
-
-## 実ソースコード（言語別に記載）
-### Setup: 00_docker-compose.yml
+#### 1. docker-compose.yml を作成
 
 ```yaml
-version: "3.8"
-
 services:
 	anythingllm:
 		image: mintplexlabs/anythingllm:latest
 		container_name: anythingllm
 		ports:
 			- "3003:3001"
+		environment:
+			- STORAGE_DIR=/app/server/storage
+			- OPEN_AI_KEY=${OPENAI_API_KEY}
 		volumes:
 			- anythingllm_data:/app/server/storage
 		restart: unless-stopped
@@ -81,21 +124,125 @@ volumes:
 	anythingllm_data:
 ```
 
-### Setup: 01_setup-guide.md
+#### 2. コンテナ起動と状態確認
 
-```text
-# AnythingLLM セットアップガイド
-
-docker-compose up -d
-
-http://localhost:3003 へアクセスして初期設定を行います。
+```powershell
+docker compose up -d
+docker compose ps
+docker compose logs anythingllm --tail 80
 ```
+
+期待状態:
+
+- `anythingllm` が `Up` になっている
+- ログに致命的エラーが出ていない
+
+実行イメージ:
+
+![docker compose ps](examples/anythingllm/01-docker-compose-ps.png)
+
+#### 3. 初期アクセス
+
+```powershell
+Start-Process "http://localhost:3003"
+```
+
+ブラウザ操作:
+
+1. 初回セットアップ画面を開く
+2. ワークスペース名を設定
+
+実行イメージ（setup）:
+
+![setup](examples/anythingllm/02-setup.png)
+
+#### 4. LLM Provider 設定
+
+ブラウザ操作:
+
+1. Settings から Provider を選択
+2. OpenAI または Ollama を設定
+	 - Ollama の場合は `http://host.docker.internal:11434` を利用
+
+実行イメージ（provider settings）:
+
+![provider settings](examples/anythingllm/03-provider-settings.png)
+
+#### 5. ドキュメント登録とチャット確認
+
+ブラウザ操作:
+
+1. テスト用テキストファイルを 1 つアップロード
+2. `この文書を3行で要約して。` を送信
+3. 応答を確認（取り込み直後に未検出エラーが出る場合は数秒待って再送）
+
+実行イメージ（workspace created）:
+
+![workspace created](examples/anythingllm/04-workspace-created.png)
+
+実行イメージ（chat input）:
+
+![chat input](examples/anythingllm/05-chat-input.png)
+
+実行イメージ（chat output）:
+
+![chat output](examples/anythingllm/06-chat-output.png)
+
+#### 5.1 インデックス完了と再送確認
+
+ブラウザ操作:
+
+1. 取り込み直後に未検出エラーが出た場合は数秒待って再送する
+2. 再送後に同じ質問で回答が返ることを確認する
+3. 初回失敗と再送成功の有無を `run-log.txt` に記録する
+
+確認ポイント:
+
+- 文書取り込み直後の揺らぎを手順として説明できる
+- 最終的に文書由来の回答が返ったことを証跡化できる
+
+#### 6. 基本機能の完了判定（最低ライン）
+
+- ワークスペース作成が完了する
+- Provider 設定で応答が返る
+- 1ファイル以上を取り込んで回答できる
+
+#### 7. 停止・再開（検証用）
+
+```powershell
+docker compose stop
+docker compose start
+docker compose down
+```
+
+使い分け:
+
+- `docker compose stop`: コンテナだけ停止します。次回は `docker compose start` で高速に再開できます。
+- `docker compose down`: コンテナ停止に加えて、Compose 管理のネットワークも削除します。次回は `docker compose up -d` で再作成して起動します。
+- データも初期化したい場合: `docker compose down -v`（ボリューム削除）
+
+### 検証
+
+- コマンドがエラーなく完了する
+- 想定した出力（画面表示・ファイル生成・回答）を確認できる
+- 変更した設定に応じて結果差分を説明できる
+
+## よくある質問
+
+**Q. 初期画面が表示されません。**  
+A. `docker compose ps` で `Up` を確認し、`docker compose logs anythingllm --tail 120` で起動ログを確認してください。
+
+**Q. Ollama 接続に失敗します。**  
+A. URL を `http://host.docker.internal:11434` に設定し、Ollama 側でモデルが pull 済みか確認してください。
+
+**Q. 文書をアップロードしても回答に反映されません。**  
+A. 取り込み完了まで時間がかかる場合があります。インデックス完了後に再質問してください。
 
 ## 演習課題
 
-1. ``AnythingLLM 入門`` を使う想定ユースケースを1つ定義し、入力・出力の例を記録してください。
-2. 最小構成で動かし、デフォルトから設定を1つ変えて挙動の差分を確認してください。
-3. ``AnythingLLM 入門`` を使わない場合の代替手段と比較し、選ぶ基準をまとめてください。
+1. 1つのドキュメントQAユースケースを定義し、期待する回答形式を記述してください。
+2. Provider または埋め込み設定を 1 つ変更し、応答差分を記録してください。
+3. Dify の RAG と比較し、AnythingLLM を選ぶ基準を 3 点でまとめてください。
 
 
 ### 解答の目安
@@ -109,9 +256,9 @@ http://localhost:3003 へアクセスして初期設定を行います。
 
 ## 理解度チェック
 
-1. ``AnythingLLM 入門`` の主な役割を1文で説明してください。
-2. ``AnythingLLM 入門`` を導入する際の最大のメリットと注意点は何ですか？
-3. ``AnythingLLM 入門`` が向かないユースケースとして、どのようなケースが考えられますか？
+1. AnythingLLM の主な役割を 1 文で説明してください。
+2. オールインワン UI のメリットと注意点は何ですか？
+3. AnythingLLM が向かないユースケースを 1 つ挙げて理由を述べてください。
 
 
 ### 解説の要点

@@ -1,0 +1,30 @@
+[日時]
+YYYY-MM-DD HH:MM
+
+[実行環境]
+- OS: Windows
+- Runtime: Node.js + npm
+- Node.js: 
+- npm: 
+- Model Provider: (OpenAI / others)
+
+[実行コマンド]
+git clone https://github.com/mckaywrigley/chatbot-ui.git
+npm install
+npm run dev
+
+[結果]
+- 依存解決: 成功/失敗
+- 開発サーバ起動: 成功/失敗
+- 応答生成: 成功/失敗
+
+[スクリーンショット]
+- 01-npm-install.png
+- 02-env-local.png
+- 03-dev-server-started.png
+- 04-home.png
+- 05-chat-input.png
+- 06-chat-output.png
+
+[備考]
+- 

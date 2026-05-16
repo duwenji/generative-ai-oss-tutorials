@@ -1,0 +1,33 @@
+[日時]
+YYYY-MM-DD HH:MM
+
+[実行環境]
+- OS: Windows
+- Runtime: Docker Compose
+- LibreChat: latest
+- Model Provider: (OpenAI / Ollama / others)
+
+[実行コマンド]
+git clone https://github.com/danny-avila/LibreChat.git
+Copy-Item .env.example .env
+docker compose up -d
+docker compose ps
+
+[結果]
+- コンテナ起動: 成功/失敗
+- 初期アクセス: 成功/失敗
+- 通常チャット疎通: 成功/失敗
+- Tool Call / MCP 実施: 実施せず/成功/失敗
+
+[スクリーンショット]
+- 01-env-prepared.png
+- 02-env-edited.png
+- 03-docker-compose-ps.png
+- 04-signup-login.png
+- 05-chat-input.png
+- 06-chat-output.png
+
+[備考]
+- 05 は送信前入力、06 は送信後結果を保存する。
+- Tool Call / MCP を使った場合は、利用した機能名、結果、失敗時は理由をここに記録する。
+- Tool Call / MCP を未実施で通常応答を 06 に採用した場合は、その理由をここに記録する。

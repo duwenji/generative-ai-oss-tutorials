@@ -11,14 +11,69 @@ next: 04-ui/06-lobechat.md
 
 ## この教材で身につくこと
 
-- Chatbot UI 入門 の主な役割と適用場面を説明できる
-- Chatbot UI 入門 を最小構成で動かす手順を実行できる
-- 導入時のメリットと注意点を整理できる
+- 軽量チャット UI のローカル開発手順
+- Windows + PowerShell での Node 実行
+- `.env.local` による API 接続設定
+- 実行証跡（ハードコピー）運用
 
-## コンセプト
-Chatbot UI はシンプルな ChatGPT 風UIを構築するための軽量OSSです。
+## 公式ポジショニング
+Chatbot UI は、任意モデル向けの open-source AI chat app として、自分で構成を管理しながら ChatGPT 風 UI を組み立てるための OSS です。
+
 **バージョン**: 最新版 / OSS準拠（2026-05時点）  
 **公式ドキュメント**: https://github.com/mckaywrigley/chatbot-ui
+
+## この OSS を選ぶべきケース
+
+- ChatGPT 風の会話 UI をベースに、自分でフロントや環境設定を調整したい
+- アプリ構築基盤よりも、会話 UI そのものの実装や見た目を把握したい
+- Node.js / Next.js 前提の開発に抵抗がなく、構成をコードで管理したい
+
+## この OSS を選ばない方がよいケース
+
+- Docker 単体で簡単にセルフホスト UI を立てたい
+- Agent、Tool Call、MCP を製品の主価値として最初から使いたい
+- 文書取り込みや RAG を中核機能としてすぐ使いたい
+
+## 位置づけ上の注意
+
+- 見た目はシンプルですが、公式 Quickstart では Supabase を含む構成理解が重要です
+- そのため、UI の印象よりも運用前提が軽いとは限りません
+- 最小起動はできても、継続利用には環境変数、バックエンド、保存先の理解が必要です
+
+## 外部接続と拡張の考え方
+
+- Chatbot UI はモデル接続を前提とした会話 UI で、まず確認すべきは API 接続と画面動作です
+- Dify や Flowise のようなアプリ構築基盤とは役割が異なり、ワークフロー設計より UI 実装に重心があります
+- Open WebUI や LibreChat と比較すると、選定観点は「軽さ」ではなく「自分でコードと構成を持つ前提を受け入れられるか」です
+
+## 前提条件
+
+### 前提条件
+
+- Windows 11 + PowerShell 7 推奨
+- Git
+- Node.js 20 LTS 推奨
+- npm 10 以上
+
+### 事前チェック（PowerShell）
+
+```powershell
+git --version
+node --version
+npm --version
+```
+
+### クイックスタート
+
+```powershell
+git clone https://github.com/mckaywrigley/chatbot-ui.git
+Set-Location .\chatbot-ui
+npm install
+npm run dev
+```
+
+ブラウザで http://localhost:3000 にアクセス。
+
 ## 仕組み
 
 1. 目的と入力を定義し、対象データや利用モデルを準備します。
@@ -50,10 +105,105 @@ flowchart TD
 
 ### 実行例
 
-```bash
-# この教材の最小構成を順に実行
-# 具体的なコマンドは「最小セットアップ」または「実行フロー」を参照
+このセクションでは、Windows PowerShell 前提で Chatbot UI の最小構成を順に起動します。
+
+#### 0. 作業ディレクトリ準備（PowerShell）
+
+```powershell
+New-Item -ItemType Directory -Path .\sandbox -Force | Out-Null
+Set-Location .\sandbox
 ```
+
+#### 1. ソース取得と依存解決
+
+```powershell
+git clone https://github.com/mckaywrigley/chatbot-ui.git
+Set-Location .\chatbot-ui
+npm install
+```
+
+実行イメージ（npm install）:
+
+![npm install](examples/chatbot-ui/01-npm-install.png)
+
+#### 2. 環境変数を設定
+
+```powershell
+Copy-Item .env.example .env.local
+```
+
+`.env.local` の最低限の設定例:
+
+- `OPENAI_API_KEY=...`
+
+実行イメージ（env local）:
+
+![env local](examples/chatbot-ui/02-env-local.png)
+
+#### 3. 開発サーバ起動
+
+```powershell
+npm run dev
+```
+
+期待状態:
+
+- `ready - started server on` のような起動ログが表示される
+
+実行イメージ（dev server started）:
+
+![dev server started](examples/chatbot-ui/03-dev-server-started.png)
+
+#### 4. 初期アクセス
+
+ブラウザで http://localhost:3000 を開き、初期画面表示を確認します。
+
+実行イメージ（home）:
+
+![home](examples/chatbot-ui/04-home.png)
+
+#### 5. チャット確認
+
+ブラウザ操作:
+
+1. モデルを選択
+2. `こんにちは。3行で自己紹介して。` を送信
+3. 送信前入力と送信後応答を確認
+
+実行イメージ（chat input）:
+
+![chat input](examples/chatbot-ui/05-chat-input.png)
+
+実行イメージ（chat output）:
+
+![chat output](examples/chatbot-ui/06-chat-output.png)
+
+#### 5.1 構成前提の確認（運用時の注意）
+
+確認作業:
+
+1. `.env.local` に設定したキーが UI 上の接続状態に反映されることを確認
+2. 公式 Quickstart で前提になるバックエンド構成（例: Supabase）を把握し、今回の最小構成との差分をメモする
+
+確認ポイント:
+
+- 「画面は軽量」でも運用前提は別であることを説明できる
+- 追加構成が必要な場合の次アクションを明示できる
+
+#### 6. 基本機能の完了判定（最低ライン）
+
+- UI が表示される
+- API キー設定で応答が返る
+- エラー表示時に原因を特定できる
+
+#### 7. 停止・再開（検証用）
+
+`npm run dev` 実行ターミナルで `Ctrl + C` を入力して停止します。
+
+使い分け:
+
+- 一時停止は `Ctrl + C` 後に `npm run dev` で再起動
+- 依存更新後や環境変数変更後は、必ず再起動して反映を確認
 
 ### 検証
 
@@ -61,25 +211,22 @@ flowchart TD
 - 想定した出力（画面表示・ファイル生成・回答）を確認できる
 - 変更した設定に応じて結果差分を説明できる
 
-## 実ソースコード（言語別に記載）
-### Setup: 00_setup-guide.md
+## よくある質問
 
-```text
-# Chatbot UI セットアップガイド
+**Q. `npm install` で失敗します。**  
+A. Node.js のバージョン不一致が多いです。`node --version` で 20 系を確認し、必要なら nvm-windows で切り替えてください。
 
-git clone https://github.com/mckaywrigley/chatbot-ui.git
-cd chatbot-ui
-npm install
-npm run dev
+**Q. API キーエラーが出ます。**  
+A. `.env.local` のキー名と値を確認し、開発サーバを再起動してください。
 
-http://localhost:3000 で確認します。
-```
+**Q. 3000 番ポートが競合します。**  
+A. Next.js の起動時に別ポートを指定するか、競合プロセスを停止してください。
 
 ## 演習課題
 
-1. ``Chatbot UI 入門`` を使う想定ユースケースを1つ定義し、入力・出力の例を記録してください。
-2. 最小構成で動かし、デフォルトから設定を1つ変えて挙動の差分を確認してください。
-3. ``Chatbot UI 入門`` を使わない場合の代替手段と比較し、選ぶ基準をまとめてください。
+1. カスタマーサポート向け UI を想定し、プロンプト設計と出力例を 3 件作成してください。
+2. モデル設定または system prompt を 1 つ変更し、差分を記録してください。
+3. LobeChat と比較し、軽量性と拡張性の観点で選定基準をまとめてください。
 
 
 ### 解答の目安
@@ -93,9 +240,9 @@ http://localhost:3000 で確認します。
 
 ## 理解度チェック
 
-1. ``Chatbot UI 入門`` の主な役割を1文で説明してください。
-2. ``Chatbot UI 入門`` を導入する際の最大のメリットと注意点は何ですか？
-3. ``Chatbot UI 入門`` が向かないユースケースとして、どのようなケースが考えられますか？
+1. Chatbot UI の主な役割を 1 文で説明してください。
+2. 軽量 UI のメリットと注意点は何ですか？
+3. Chatbot UI が向かないユースケースを 1 つ挙げて理由を述べてください。
 
 
 ### 解説の要点

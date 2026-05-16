@@ -11,14 +11,70 @@ next: 04-ui/07-anythingllm.md
 
 ## この教材で身につくこと
 
-- LobeChat 入門 の主な役割と適用場面を説明できる
-- LobeChat 入門 を最小構成で動かす手順を実行できる
-- 導入時のメリットと注意点を整理できる
+- モダンなチャット UI のセットアップ手順
+- Windows + PowerShell での pnpm 実行
+- `.env.local` による Provider 設定
+- 実行証跡（ハードコピー）運用
 
-## コンセプト
-LobeChat はモダンなUIと拡張性を持つチャットクライアントです。
+## 公式ポジショニング
+LobeChat は、Agent、Skills、MCP、Memory を扱える collaborative agent platform として、モダンな操作体験の上で AI 活用を進めるための OSS です。
+
 **バージョン**: 最新版 / OSS準拠（2026-05時点）  
 **公式ドキュメント**: https://lobechat.com/
+
+## この OSS を選ぶべきケース
+
+- Agent を中心に据えた操作体験を重視したい
+- Skills や MCP を組み合わせて、拡張しながら使いたい
+- チャット UI の見た目だけでなく、継続的な Agent 活用や協働を意識している
+- モダンな UI/UX を維持しつつ、複数モデルや外部接続へ広げたい
+
+## この OSS を選ばない方がよいケース
+
+- 最小構成の軽いチャット UI を短時間で立ち上げたい
+- ノードベースのワークフロー設計を主目的とする
+- 文書取り込み中心の private-first 運用を最優先にしたい
+
+## LibreChat との見分け方
+
+- LibreChat は統合 AI 会話基盤として Provider、Tool Call、MCP、認証を広く扱う方向が強いです
+- LobeChat は Agent 活用、Skills、Memory、操作体験を前面に出している点が特徴です
+- 選定時は、外部連携の統合基盤を重視するか、Agent を日常的に使う体験を重視するかで判断します
+
+## 前提条件
+
+### 前提条件
+
+- Windows 11 + PowerShell 7 推奨
+- Git
+- Node.js 20 LTS 推奨
+- pnpm 9 以上
+
+### 事前チェック（PowerShell）
+
+```powershell
+git --version
+node --version
+pnpm --version
+```
+
+`pnpm` が未導入の場合:
+
+```powershell
+npm install -g pnpm@latest
+```
+
+### クイックスタート
+
+```powershell
+git clone https://github.com/lobehub/lobe-chat.git
+Set-Location .\lobe-chat
+pnpm install
+pnpm dev
+```
+
+ブラウザで http://localhost:3210 にアクセス。
+
 ## 仕組み
 
 1. 目的と入力を定義し、対象データや利用モデルを準備します。
@@ -50,10 +106,105 @@ flowchart TD
 
 ### 実行例
 
-```bash
-# この教材の最小構成を順に実行
-# 具体的なコマンドは「最小セットアップ」または「実行フロー」を参照
+このセクションでは、Windows PowerShell 前提で LobeChat の最小構成を順に起動します。
+
+#### 0. 作業ディレクトリ準備（PowerShell）
+
+```powershell
+New-Item -ItemType Directory -Path .\sandbox -Force | Out-Null
+Set-Location .\sandbox
 ```
+
+#### 1. ソース取得と依存解決
+
+```powershell
+git clone https://github.com/lobehub/lobe-chat.git
+Set-Location .\lobe-chat
+pnpm install
+```
+
+実行イメージ（pnpm install）:
+
+![pnpm install](examples/lobechat/01-pnpm-install.png)
+
+#### 2. 環境変数を設定
+
+```powershell
+Copy-Item .env.example .env.local
+```
+
+`.env.local` の最低限の設定例:
+
+- `OPENAI_API_KEY=...`
+
+実行イメージ（env local）:
+
+![env local](examples/lobechat/02-env-local.png)
+
+#### 3. 開発サーバ起動
+
+```powershell
+pnpm dev
+```
+
+期待状態:
+
+- 起動ログに `ready` が表示される
+
+実行イメージ（dev server started）:
+
+![dev server started](examples/lobechat/03-dev-server-started.png)
+
+#### 4. 初期アクセス
+
+ブラウザで http://localhost:3210 を開き、初期画面表示を確認します。
+
+実行イメージ（home）:
+
+![home](examples/lobechat/04-home.png)
+
+#### 5. チャット確認
+
+ブラウザ操作:
+
+1. モデルを選択
+2. `こんにちは。3行で自己紹介して。` を送信
+3. 送信前入力と送信後応答を確認
+
+実行イメージ（chat input）:
+
+![chat input](examples/lobechat/05-chat-input.png)
+
+実行イメージ（chat output）:
+
+![chat output](examples/lobechat/06-chat-output.png)
+
+#### 5.1 Agent / Skills / MCP の可視確認
+
+ブラウザ操作:
+
+1. Agent または拡張機能メニューを開き、利用可能な機能が参照できることを確認
+2. Skills/MCP を使う構成の場合は、有効化した機能名を `run-log.txt` に記録
+
+確認ポイント:
+
+- 通常チャット確認と、Agent 拡張確認を分けて説明できる
+- 後続で Tool/Skill を使う準備状態が画面で確認できる
+
+#### 6. 基本機能の完了判定（最低ライン）
+
+- UI が表示される
+- API キー設定で応答が返る
+- 設定変更時の差分を説明できる
+
+#### 7. 停止・再開（検証用）
+
+`pnpm dev` 実行ターミナルで `Ctrl + C` を入力して停止します。
+
+使い分け:
+
+- 一時停止は `Ctrl + C` 後に `pnpm dev` で再起動
+- 依存更新後や環境変数変更後は、必ず再起動して反映を確認
 
 ### 検証
 
@@ -61,25 +212,22 @@ flowchart TD
 - 想定した出力（画面表示・ファイル生成・回答）を確認できる
 - 変更した設定に応じて結果差分を説明できる
 
-## 実ソースコード（言語別に記載）
-### Setup: 00_setup-guide.md
+## よくある質問
 
-```text
-# LobeChat セットアップガイド
+**Q. `pnpm` コマンドが見つかりません。**  
+A. `npm install -g pnpm@latest` で導入し、新しいターミナルで再実行してください。
 
-git clone https://github.com/lobehub/lobe-chat.git
-cd lobe-chat
-pnpm install
-pnpm dev
+**Q. 起動時に Node バージョン警告が出ます。**  
+A. `node --version` を確認し、20 系 LTS に合わせてください。
 
-http://localhost:3210 を確認します。
-```
+**Q. API キー設定が反映されません。**  
+A. `.env.local` の編集後に `pnpm dev` を再起動してください。
 
 ## 演習課題
 
-1. ``LobeChat 入門`` を使う想定ユースケースを1つ定義し、入力・出力の例を記録してください。
-2. 最小構成で動かし、デフォルトから設定を1つ変えて挙動の差分を確認してください。
-3. ``LobeChat 入門`` を使わない場合の代替手段と比較し、選ぶ基準をまとめてください。
+1. 1つの業務ユースケースを定義し、必要なプロンプトと期待出力を整理してください。
+2. モデルまたは system prompt を変更し、回答差分を記録してください。
+3. Chatbot UI と比較し、LobeChat を選ぶ基準を 3 点でまとめてください。
 
 
 ### 解答の目安
@@ -93,9 +241,9 @@ http://localhost:3210 を確認します。
 
 ## 理解度チェック
 
-1. ``LobeChat 入門`` の主な役割を1文で説明してください。
-2. ``LobeChat 入門`` を導入する際の最大のメリットと注意点は何ですか？
-3. ``LobeChat 入門`` が向かないユースケースとして、どのようなケースが考えられますか？
+1. LobeChat の主な役割を 1 文で説明してください。
+2. モダン UI を採用するメリットと注意点は何ですか？
+3. LobeChat が向かないユースケースを 1 つ挙げて理由を述べてください。
 
 
 ### 解説の要点

@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  anythingllm:
+    image: mintplexlabs/anythingllm
+    container_name: anythingllm
+    ports:
+      - "3003:3001"
+    environment:
+      - STORAGE_DIR=/app/server/storage
+      - OPEN_AI_KEY=${OPENAI_API_KEY}
+    volumes:
+      - anythingllm_data:/app/server/storage
+volumes:
+  anythingllm_data:
