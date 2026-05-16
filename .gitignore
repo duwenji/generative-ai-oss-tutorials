@@ -1,1 +1,16 @@
 ebook-output/
+
+# Sandbox generated/runtime artifacts
+sandbox/**/.git/
+sandbox/**/node_modules/
+sandbox/**/.next/
+sandbox/**/dist/
+sandbox/**/build/
+sandbox/**/coverage/
+sandbox/**/uploads/
+sandbox/**/data/
+sandbox/**/data*/
+sandbox/**/*.log
+sandbox/**/.env
+sandbox/**/.env.*
+sandbox/**/.env*
