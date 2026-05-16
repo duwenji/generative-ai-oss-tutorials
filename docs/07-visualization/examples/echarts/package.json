@@ -1,0 +1,9 @@
+{
+  "name": "echarts-tutorial",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "node 01_option-template.js"
+  }
+}

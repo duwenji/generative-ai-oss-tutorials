@@ -18,6 +18,9 @@ next: 08-protocols/00-README.md
 ## コンセプト
 ECharts は高機能で拡張性の高い可視化ライブラリです。ダッシュボードや時系列表示に向きます。
 
+とくに、複数系列・ズーム・凡例連動・ツールチップなど、実務でよく使う要件を1つの option でまとめて表現できる点が強みです。  
+LLMと組み合わせる場合も、要件を「系列」「軸」「インタラクション」に分解して option に落とし込めるため、試作から改善までを繰り返しやすくなります。
+
 **バージョン**: 5.x / OSS準拠（2026-05時点）  
 **公式ドキュメント**: https://echarts.apache.org/
 
@@ -49,6 +52,19 @@ flowchart TD
 		V --> X[描画確認]
 ```
 
+## 最小実行
+
+```bash
+cd examples/echarts
+npm install
+node 01_option-template.js
+```
+
+## サンプル整合性メモ
+
+- `01_option-template.js` は 2 系列（`Revenue` / `Cost`）の line チャート option を生成
+- `02_echarts-option.json` には `tooltip` と `dataZoom` が含まれ、時系列の読み取りと拡大確認ができる
+
 ## サンプル
 
 ### 実行例
@@ -56,7 +72,12 @@ flowchart TD
 ```bash
 # この教材の最小構成を順に実行
 # 具体的なコマンドは「最小セットアップ」または「実行フロー」を参照
+cd examples/echarts
+node 01_option-template.js
+python -m http.server 8019
 ```
+
+ブラウザで `http://localhost:8019/03_render.html` を開くと、複数系列チャートが表示されます。
 
 ### 検証
 
@@ -64,8 +85,16 @@ flowchart TD
 - 想定した出力（画面表示・ファイル生成・回答）を確認できる
 - 変更した設定に応じて結果差分を説明できる
 
+### 描画結果（複数系列）
+
+![echarts line series](examples/echarts/01-echarts-line-series.png)
+
 ## 実ソースコード（言語別に記載）
-### 02_echarts-js/00_package.json
+### JSON: examples/echarts/package.json
+
+- 役割: 実行スクリプト定義
+- 入力: なし
+- 出力: `generate` スクリプトで option JSON を生成
 
 ```json
 {
@@ -74,30 +103,53 @@ flowchart TD
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"start": "node 01_option-template.js"
+		"generate": "node 01_option-template.js"
 	}
 }
 ```
 
-### 02_echarts-js/01_option-template.js
+### JavaScript: examples/echarts/01_option-template.js
+
+- 役割: ECharts option JSONを生成してファイル出力
+- 入力: 月次配列、売上配列、コスト配列（スクリプト内定義）
+- 出力: `examples/echarts/02_echarts-option.json`
+- 実行: `cd examples/echarts && node 01_option-template.js`
 
 ```javascript
 import fs from "node:fs";
 
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+const revenue = [120, 132, 101, 134, 160, 155];
+const cost = [80, 92, 88, 96, 110, 118];
+
 const option = {
-	title: { text: "Monthly Revenue" },
+	title: { text: "Monthly Revenue vs Cost" },
 	tooltip: { trigger: "axis" },
+	legend: { data: ["Revenue", "Cost"] },
 	xAxis: {
 		type: "category",
-		data: ["Jan", "Feb", "Mar", "Apr"],
+		data: months,
 	},
-	yAxis: { type: "value" },
+	yAxis: {
+		type: "value",
+		name: "Amount",
+	},
+	dataZoom: [
+		{ type: "inside", start: 0, end: 100 },
+		{ start: 0, end: 100 },
+	],
 	series: [
 		{
 			name: "Revenue",
 			type: "line",
-			data: [120, 132, 101, 134],
 			smooth: true,
+			data: revenue,
+		},
+		{
+			name: "Cost",
+			type: "line",
+			smooth: true,
+			data: cost,
 		},
 	],
 };
@@ -106,27 +158,69 @@ fs.writeFileSync("02_echarts-option.json", JSON.stringify(option, null, 2), "utf
 console.log("Generated 02_echarts-option.json");
 ```
 
-### 02_echarts-js/02_echarts-option.json
+### JSON: examples/echarts/02_echarts-option.json
+
+- 役割: Web画面に渡す最終 option
+- 入力: なし（`examples/echarts/01_option-template.js` で生成される）
+- 出力: ECharts 描画用JSON
 
 ```json
 {
-	"title": { "text": "Monthly Revenue" },
+	"title": { "text": "Monthly Revenue vs Cost" },
 	"tooltip": { "trigger": "axis" },
+	"legend": { "data": ["Revenue", "Cost"] },
 	"xAxis": {
 		"type": "category",
-		"data": ["Jan", "Feb", "Mar", "Apr"]
+		"data": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
 	},
-	"yAxis": { "type": "value" },
+	"yAxis": {
+		"type": "value",
+		"name": "Amount"
+	},
+	"dataZoom": [
+		{ "type": "inside", "start": 0, "end": 100 },
+		{ "start": 0, "end": 100 }
+	],
 	"series": [
 		{
 			"name": "Revenue",
 			"type": "line",
-			"data": [120, 132, 101, 134],
-			"smooth": true
+			"smooth": true,
+			"data": [120, 132, 101, 134, 160, 155]
+		},
+		{
+			"name": "Cost",
+			"type": "line",
+			"smooth": true,
+			"data": [80, 92, 88, 96, 110, 118]
 		}
 	]
 }
 ```
+
+### 生成JSONの読み解きポイント
+
+1. 全体設定は `title` / `tooltip` / `legend`
+	確認ポイント: 画面で最初に見える情報と、ユーザー操作時の補助情報を定義している。
+2. 軸定義は `xAxis` と `yAxis`
+	確認ポイント: 時系列カテゴリ（`xAxis.data`）と数値スケール（`yAxis`）の責務が分かれている。
+3. インタラクションは `dataZoom`
+	確認ポイント: `inside` を含めるとマウス操作で拡大縮小でき、大量データでも確認しやすい。
+4. 主役は `series`
+	確認ポイント: 配列の1要素が1系列を表し、`name` と `data` を揃えることで比較チャートになる。
+5. 見た目調整は `type` / `smooth`
+	確認ポイント: 折れ線か棒か、補間するかを系列単位で切り替えられる。
+
+EChartsのJSONは「画面機能（ズーム・凡例・ツールチップ）」をまとめて持てるため、実運用で必要な操作性を1つの option で管理しやすい構造です。
+
+### Vega-LiteとEChartsのJSON比較（理解を深める観点）
+
+1. Vega-Lite: `encoding` 中心
+	データ列と見た目の対応を宣言的に書く。
+2. ECharts: `series` と機能設定中心
+	チャート機能やインタラクションを option として具体的に組み立てる。
+3. 学習時の見分け方
+	「列の対応関係を先に考える」ならVega-Lite、「UI操作まで含めて設計する」ならEChartsが読みやすい。
 
 ## 演習課題
 
