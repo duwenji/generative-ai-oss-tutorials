@@ -10,6 +10,9 @@
 - `04-signup-login.png`
 - `05-chat-input.png`
 - `06-chat-output.png`
+- `07-toolcall-mcp.png`
+- `08-mcp-connected.png`
+- `09-toolcall-output.png`
 - `SCENARIO.md`
 - `run-log.txt`
 

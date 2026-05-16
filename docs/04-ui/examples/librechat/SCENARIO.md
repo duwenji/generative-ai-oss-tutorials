@@ -96,6 +96,11 @@
 - 通常の OpenAI チャットで応答が返るだけの画面は、最小疎通確認としては有効だが、価値証跡としては優先度を下げる
 - Tool Call / MCP を採用した場合は `run-log.txt` の備考欄に、使用した機能名、成功/失敗、結果の要点を記録する
 - Tool Call / MCP を未実施で通常応答を採用した場合は、その理由と未実施範囲を `run-log.txt` に明記する
+- 5.1 の補助証跡として `07-toolcall-mcp.png`（MCP Settings 画面）を採取し、実施状況または未実施理由を可視化する
+- `08-mcp-connected.png` で接続状態（Connected）を確認する
+- `09-toolcall-output.png` で Tool Call 実行痕跡（ツール名、パラメータ、結果または失敗理由）を確認する
+- `09` 採取前に `uploads` 配下へサンプルファイル（例: `mcp-test-1.txt`, `mcp-test-2.txt`）を配置し、空ディレクトリ由来の `(No response)` を回避する
+- `(No response)` が出た場合は失敗として終わらせず、サンプルファイル投入後に再実行して差分を記録する
 
 ## 品質ゲート
 
@@ -108,5 +113,7 @@
 ## 完了判定
 
 - `01` から `06` のすべてで採用条件を満たす
+- `07-toolcall-mcp.png` が存在し、5.1 の説明と矛盾しない
+- `08-mcp-connected.png` と `09-toolcall-output.png` が存在し、接続と実行の両方を説明できる
 - `run-log.txt` の結果欄が実態と一致する
 - [../04-librechat.md](../04-librechat.md) の説明と証跡の意味が一致する

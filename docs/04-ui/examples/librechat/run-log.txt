@@ -1,23 +1,31 @@
 [日時]
-YYYY-MM-DD HH:MM
+2026-05-16 23:53
 
 [実行環境]
 - OS: Windows
 - Runtime: Docker Compose
-- LibreChat: latest
-- Model Provider: (OpenAI / Ollama / others)
+- LibreChat: registry.librechat.ai/danny-avila/librechat-dev:latest
+- Model Provider: OpenAI（APIキー設定済み）
 
 [実行コマンド]
 git clone https://github.com/danny-avila/LibreChat.git
 Copy-Item .env.example .env
+docker rm -f chat-mongodb chat-meilisearch vectordb rag_api LibreChat
+docker network rm librechat_default
 docker compose up -d
 docker compose ps
+docker compose logs --tail 80 api
 
 [結果]
-- コンテナ起動: 成功/失敗
-- 初期アクセス: 成功/失敗
-- 通常チャット疎通: 成功/失敗
-- Tool Call / MCP 実施: 実施せず/成功/失敗
+- コンテナ起動: 成功
+- 初期アクセス: 成功（http://localhost:3080）
+- アカウント作成: 成功（tutorial@example.com / Tutorial User）
+- ログイン: 成功
+- 通常チャット疎通: 成功（`こんにちは。3行で自己紹介して。` に 3行応答）
+- Tool Call / MCP 実施: 実施（filesystem MCP 接続・list_directory 実行）
+- コンテナ状態: `LibreChat` / `chat-mongodb` / `chat-meilisearch` / `rag_api` / `vectordb` が Up
+- APIログ要点: `Server listening on all interfaces at port 3080` を確認
+- RAGログ要点: `Application startup complete` を確認
 
 [スクリーンショット]
 - 01-env-prepared.png
@@ -26,8 +34,19 @@ docker compose ps
 - 04-signup-login.png
 - 05-chat-input.png
 - 06-chat-output.png
+- 07-toolcall-mcp.png
+- 08-mcp-connected.png
+- 09-toolcall-output.png
 
 [備考]
-- 05 は送信前入力、06 は送信後結果を保存する。
-- Tool Call / MCP を使った場合は、利用した機能名、結果、失敗時は理由をここに記録する。
-- Tool Call / MCP を未実施で通常応答を 06 に採用した場合は、その理由をここに記録する。
+- `.env` の `OPENAI_API_KEY` がプレースホルダ値 `user_provided` だったため `No key found` が発生していた。
+- ホスト環境の OpenAI APIキーを `.env` へ設定し、`docker compose up -d --force-recreate api` で反映した。
+- 05 は送信前入力（「こんにちは。3行で自己紹介して。」入力後、未送信状態）、06 は送信後の正常応答状態を保存。
+- `librechat.yaml` と `docker-compose.override.yml` を追加し、`filesystem` MCP サーバを有効化した。
+- 07 は MCP Settings 画面、08 は `filesystem - Connected` 状態、09 は `Ran list_directory in filesystem` の実行痕跡を保存した。
+- 初回 `(No response)` は `/app/uploads` が空の状態で再現した。
+- 検証用に `mcp-test-1.txt` / `mcp-test-2.txt` を配置して再実行したところ、09 で `[FILE] mcp-test-1.txt` / `[FILE] mcp-test-2.txt` の出力取得に成功した。
+- 既存コンテナ名競合（`chat-mongodb` / `vectordb`）が発生したため、関連コンテナと `librechat_default` ネットワークを削除後に再起動して解消。
+- `librechat.yaml` 未配置（ENOENT）は解消済み。
+- 01/02/03 は HTML で再現した証跡画像（実測データ使用）。
+- 次工程: 実運用データまたは固定サンプルファイルを用意した状態で 5.1 を再現し、空ディレクトリ時の挙動も注意事項として残す。
