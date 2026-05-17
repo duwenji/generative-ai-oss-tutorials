@@ -1,0 +1,16 @@
+# docker compose config
+
+実行日時: 2026-05-17
+コマンド: docker compose config
+
+## 出力メモ
+
+- `.env` の値解決は成功
+- `lobe` サービスは `3210:3210` を公開
+- 主要依存は `postgresql` / `redis` / `rustfs` / `rustfs-init` / `searxng`
+
+## 確認ポイント
+- port mapping: `0.0.0.0:3210->3210/tcp`
+- env file loaded: `.env` 読み込み成功
+- service names: `lobehub`, `lobe-postgres`, `lobe-redis`, `lobe-rustfs`, `lobe-rustfs-init`, `lobe-searxng`
+- notes: deprecated な `INTERNAL_APP_URL` は現行構成から除外して起動確認済み

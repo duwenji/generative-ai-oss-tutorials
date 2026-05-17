@@ -20,9 +20,17 @@ npm run dev
 - 応答生成: 未実施（Supabase 設定不足で画面到達前に停止）
 
 [スクリーンショット]
+- 01-npm-install.png
+- 02-env-local.png
+- 03-dev-server-started.png
 - 04-home.png
+- 05-chat-input.png
+- 06-chat-output.png
 
 [備考]
 - `04-home.png` は実際には Supabase 未設定時のエラー状態を記録している。
-- 01〜03 は今回未取得。
-- 次工程: `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` / `SUPABASE_SERVICE_ROLE_KEY` を用意し、`supabase start` 後に再撮影する。
+- `01-npm-install.png` は `npm install --ignore-scripts` の結果（依存解決）を記録。
+- `02-env-local.png` は `.env.local` 未作成（`Test-Path .env.local = False`）の確認結果。
+- `03-dev-server-started.png` は `npm run dev -- --port 3002` の実行結果（`EADDRINUSE`）を記録。
+- `05-chat-input.png` / `06-chat-output.png` は環境不足時の入力・結果状態を記録。
+- 次工程: `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` / `SUPABASE_SERVICE_ROLE_KEY` を設定し、実応答の証跡を再取得する。

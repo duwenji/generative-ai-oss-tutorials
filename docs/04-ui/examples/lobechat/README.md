@@ -1,18 +1,24 @@
-# LobeChat 実行証跡
+# LobeChat Examples
 
-このディレクトリは [../06-lobechat.md](../06-lobechat.md) の実行例に対応する証跡を保存します。
+このディレクトリには、LobeChat 教材の実行証跡を保存します。
 
-## 含まれるファイル
+## 保存物
 
-- `01-pnpm-install.png`
-- `02-env-local.png`
-- `03-dev-server-started.png`
-- `04-home.png`
-- `05-chat-input.png`
-- `06-chat-output.png`
-- `run-log.txt`
+- 01-env-local.png
+- 02-docker-compose-ps.png
+- 03-home.png
+- 04-chat-input.png
+- 05-chat-output.png
+- 06-agent-menu.png
+- 07-skills-mcp.png
+- 03-docker-compose-logs.txt
+- 04-docker-compose-config.txt
+- run-log.txt
 
-## 使い方
+## 採取ルール
 
-- 実行手順に沿って画面を取得し、同じファイル名で上書きしてください。
-- 取得日時、モデル名、エラー有無は `run-log.txt` に追記してください。
+- Windows + PowerShell 前提で採取する
+- 秘密値は画面上でもログ上でも必ずマスクする
+- 画像名と run-log.txt の記録を一致させる
+- 05 と 06 ではなく、04 と 05 を同一会話の送信前後として扱う
+- Agent / Skills / MCP は通常チャット確認とは別証跡として保存する

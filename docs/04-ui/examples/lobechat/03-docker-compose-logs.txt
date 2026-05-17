@@ -1,0 +1,15 @@
+# docker compose logs --tail 80
+
+実行日時: 2026-05-17
+コマンド: docker compose logs --tail 80
+
+## 抜粋ログ
+
+- 初回起動時は `NEXTAUTH_SKIP_ENV_VALIDATION` による deprecated error で `lobehub` が Restarting
+- 当該設定を除去後、`lobehub` は起動し `Database` migration を開始
+- 依存サービス起動直後には一時的な `ECONNREFUSED` が見えたが、継続起動で解消
+
+## 判定
+- database migration pass: 起動ログ上で migration 開始を確認
+- fatal error: deprecated な `NEXTAUTH_SKIP_ENV_VALIDATION` を除去後はブロッカーなし
+- notes: 初回ログと修正後ログを分けて記録すると第三者検証しやすい
