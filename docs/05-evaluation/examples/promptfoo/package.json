@@ -1,0 +1,14 @@
+{
+  "name": "promptfoo-samples",
+  "private": true,
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=20 <25"
+  },
+  "scripts": {
+    "eval": "promptfoo eval -c 00_promptfooconfig.yaml"
+  },
+  "devDependencies": {
+    "promptfoo": "^0.121.11"
+  }
+}

@@ -1,0 +1,17 @@
+description: Beginner prompt regression test
+providers:
+  - id: openai:gpt-3.5-turbo
+prompts:
+  - "あなたは投資学習アシスタントです。{{question}} を初心者向けに3行で説明してください。"
+  - "{{question}} を中学生にもわかる言葉で2行で説明してください。"
+tests:
+  - vars:
+      question: "RAG"
+    assert:
+      - type: contains
+        value: "検索"
+  - vars:
+      question: "分散投資"
+    assert:
+      - type: llm-rubric
+        value: "初心者向けで、専門用語に短い補足がある"

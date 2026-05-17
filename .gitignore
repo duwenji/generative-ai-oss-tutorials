@@ -14,3 +14,12 @@ sandbox/**/*.log
 sandbox/**/.env
 sandbox/**/.env.*
 sandbox/**/.env*
+/**/node_modules/
+/**/dist/
+/**/build/
+/**/coverage/
+/**/uploads/
+/**/data/
+/**/data*/
+/**/.log
+/**/.env

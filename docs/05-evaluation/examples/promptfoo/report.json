@@ -1,0 +1,858 @@
+{
+  "evalId": "eval-Djv-2026-05-17T12:37:33",
+  "results": {
+    "version": 3,
+    "timestamp": "2026-05-17T12:37:33.200Z",
+    "prompts": [
+      {
+        "id": "bb5119bd3d8dc6dfcf33b053ece782a59105b90237b3127ebac310d81e941fc6",
+        "raw": "あなたは投資学習アシスタントです。{{question}} を初心者向けに3行で説明してください。",
+        "label": "あなたは投資学習アシスタントです。{{question}} を初心者向けに3行で説明してください。",
+        "provider": "openai:gpt-3.5-turbo",
+        "metrics": {
+          "score": 0.6,
+          "testPassCount": 0,
+          "testFailCount": 2,
+          "testErrorCount": 0,
+          "assertPassCount": 0,
+          "assertFailCount": 2,
+          "totalLatencyMs": 5754,
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 326,
+            "total": 326,
+            "numRequests": 2,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 518,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 518,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      },
+      {
+        "id": "6159289ef4ff69f70fb0bc35e3daf996a64a6994af4dc53e3dccc269fa8de35d",
+        "raw": "{{question}} を中学生にもわかる言葉で2行で説明してください。",
+        "label": "{{question}} を中学生にもわかる言葉で2行で説明してください。",
+        "provider": "openai:gpt-3.5-turbo",
+        "metrics": {
+          "score": 0.6,
+          "testPassCount": 0,
+          "testFailCount": 2,
+          "testErrorCount": 0,
+          "assertPassCount": 0,
+          "assertFailCount": 2,
+          "totalLatencyMs": 5354,
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 232,
+            "total": 232,
+            "numRequests": 2,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 723,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 723,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "error": "Expected output to contain \"検索\"",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Expected output to contain \"検索\"",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to contain \"検索\"",
+              "assertion": {
+                "type": "contains",
+                "value": "検索"
+              }
+            }
+          ]
+        },
+        "id": "106ebc52-c323-4ffc-8251-99c3993e5214",
+        "latencyMs": 3087,
+        "namedScores": {},
+        "prompt": {
+          "raw": "あなたは投資学習アシスタントです。RAG を初心者向けに3行で説明してください。",
+          "label": "あなたは投資学習アシスタントです。{{question}} を初心者向けに3行で説明してください。",
+          "config": {}
+        },
+        "promptId": "bb5119bd3d8dc6dfcf33b053ece782a59105b90237b3127ebac310d81e941fc6",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:gpt-3.5-turbo",
+          "label": ""
+        },
+        "response": {
+          "output": "RAG（Risk, Appetite, and Goals）は、リスク、投資意欲、目標を表す投資用語です。投資家がリスクをどれだけ受け入れるか、どれだけのリスクを取るか、そしてどのような目標を持って投資を行うかを考慮する際に使用されます。投資家が自身のRAGを理解し、それに基づいて投資戦略を立てることが重要です。",
+          "tokenUsage": {
+            "cached": 189,
+            "total": 189
+          },
+          "cached": true,
+          "latencyMs": 3087,
+          "finishReason": "stop",
+          "cost": 0,
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-expose-headers": "X-Request-ID, CF-Ray, CF-Ray",
+                "alt-svc": "h3=\":443\"; ma=86400",
+                "cf-cache-status": "[REDACTED]",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-encoding": "br",
+                "content-type": "application/json",
+                "date": "Sun, 17 May 2026 12:26:12 GMT",
+                "openai-organization": "[REDACTED]",
+                "openai-processing-ms": "1322",
+                "openai-project": "[REDACTED]",
+                "openai-version": "[REDACTED]",
+                "server": "cloudflare",
+                "set-cookie": "[REDACTED]",
+                "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-openai-proxy-wasm": "[REDACTED]",
+                "x-ratelimit-limit-requests": "[REDACTED]",
+                "x-ratelimit-limit-tokens": "[REDACTED]",
+                "x-ratelimit-remaining-requests": "[REDACTED]",
+                "x-ratelimit-remaining-tokens": "[REDACTED]",
+                "x-ratelimit-reset-requests": "[REDACTED]",
+                "x-ratelimit-reset-tokens": "[REDACTED]",
+                "x-request-id": "[REDACTED]"
+              }
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "question": "RAG"
+          },
+          "assert": [
+            {
+              "type": "contains",
+              "value": "検索"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {
+          "question": "RAG"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-expose-headers": "X-Request-ID, CF-Ray, CF-Ray",
+              "alt-svc": "h3=\":443\"; ma=86400",
+              "cf-cache-status": "[REDACTED]",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-encoding": "br",
+              "content-type": "application/json",
+              "date": "Sun, 17 May 2026 12:26:12 GMT",
+              "openai-organization": "[REDACTED]",
+              "openai-processing-ms": "1322",
+              "openai-project": "[REDACTED]",
+              "openai-version": "[REDACTED]",
+              "server": "cloudflare",
+              "set-cookie": "[REDACTED]",
+              "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-openai-proxy-wasm": "[REDACTED]",
+              "x-ratelimit-limit-requests": "[REDACTED]",
+              "x-ratelimit-limit-tokens": "[REDACTED]",
+              "x-ratelimit-remaining-requests": "[REDACTED]",
+              "x-ratelimit-remaining-tokens": "[REDACTED]",
+              "x-ratelimit-reset-requests": "[REDACTED]",
+              "x-ratelimit-reset-tokens": "[REDACTED]",
+              "x-request-id": "[REDACTED]"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "error": "Expected output to contain \"検索\"",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Expected output to contain \"検索\"",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to contain \"検索\"",
+              "assertion": {
+                "type": "contains",
+                "value": "検索"
+              }
+            }
+          ]
+        },
+        "id": "c53f0ca7-bdd8-41e2-abe1-45f5ac305e52",
+        "latencyMs": 2666,
+        "namedScores": {},
+        "prompt": {
+          "raw": "RAG を中学生にもわかる言葉で2行で説明してください。",
+          "label": "{{question}} を中学生にもわかる言葉で2行で説明してください。",
+          "config": {}
+        },
+        "promptId": "6159289ef4ff69f70fb0bc35e3daf996a64a6994af4dc53e3dccc269fa8de35d",
+        "promptIdx": 1,
+        "provider": {
+          "id": "openai:gpt-3.5-turbo",
+          "label": ""
+        },
+        "response": {
+          "output": "RAGは「Read, Analyze, Generate」の頭文字を取った言葉で、文章を読んで理解し、分析して自分の意見や考えをまとめる学習方法のことです。文章を深く理解するために役立つ手法です。",
+          "tokenUsage": {
+            "cached": 111,
+            "total": 111
+          },
+          "cached": true,
+          "latencyMs": 2666,
+          "finishReason": "stop",
+          "cost": 0,
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-expose-headers": "X-Request-ID, CF-Ray, CF-Ray",
+                "alt-svc": "h3=\":443\"; ma=86400",
+                "cf-cache-status": "[REDACTED]",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-encoding": "br",
+                "content-type": "application/json",
+                "date": "Sun, 17 May 2026 12:26:12 GMT",
+                "openai-organization": "[REDACTED]",
+                "openai-processing-ms": "855",
+                "openai-project": "[REDACTED]",
+                "openai-version": "[REDACTED]",
+                "server": "cloudflare",
+                "set-cookie": "[REDACTED]",
+                "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-openai-proxy-wasm": "[REDACTED]",
+                "x-ratelimit-limit-requests": "[REDACTED]",
+                "x-ratelimit-limit-tokens": "[REDACTED]",
+                "x-ratelimit-remaining-requests": "[REDACTED]",
+                "x-ratelimit-remaining-tokens": "[REDACTED]",
+                "x-ratelimit-reset-requests": "[REDACTED]",
+                "x-ratelimit-reset-tokens": "[REDACTED]",
+                "x-request-id": "[REDACTED]"
+              }
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "question": "RAG"
+          },
+          "assert": [
+            {
+              "type": "contains",
+              "value": "検索"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {
+          "question": "RAG"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-expose-headers": "X-Request-ID, CF-Ray, CF-Ray",
+              "alt-svc": "h3=\":443\"; ma=86400",
+              "cf-cache-status": "[REDACTED]",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-encoding": "br",
+              "content-type": "application/json",
+              "date": "Sun, 17 May 2026 12:26:12 GMT",
+              "openai-organization": "[REDACTED]",
+              "openai-processing-ms": "855",
+              "openai-project": "[REDACTED]",
+              "openai-version": "[REDACTED]",
+              "server": "cloudflare",
+              "set-cookie": "[REDACTED]",
+              "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-openai-proxy-wasm": "[REDACTED]",
+              "x-ratelimit-limit-requests": "[REDACTED]",
+              "x-ratelimit-limit-tokens": "[REDACTED]",
+              "x-ratelimit-remaining-requests": "[REDACTED]",
+              "x-ratelimit-remaining-tokens": "[REDACTED]",
+              "x-ratelimit-reset-requests": "[REDACTED]",
+              "x-ratelimit-reset-tokens": "[REDACTED]",
+              "x-request-id": "[REDACTED]"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "error": "初心者向けに簡潔に説明されており、「分散投資」には『複数の異なる資産に投資すること』という補足があります。ただし、『ポートフォリオ』などの専門用語には短い補足がなく、初心者にはやや分かりにくい可能性があります。",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.6,
+          "reason": "初心者向けに簡潔に説明されており、「分散投資」には『複数の異なる資産に投資すること』という補足があります。ただし、『ポートフォリオ』などの専門用語には短い補足がなく、初心者にはやや分かりにくい可能性があります。",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 518,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 518,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "初心者向けで、専門用語に短い補足がある"
+              },
+              "pass": false,
+              "score": 0.6,
+              "reason": "初心者向けに簡潔に説明されており、「分散投資」には『複数の異なる資産に投資すること』という補足があります。ただし、『ポートフォリオ』などの専門用語には短い補足がなく、初心者にはやや分かりにくい可能性があります。",
+              "tokensUsed": {
+                "total": 518,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 518,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID, CF-Ray, CF-Ray",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 17 May 2026 12:26:17 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "4649",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n分散投資とは、複数の異なる資産に投資することです。これにより、リスクを分散しポートフォリオ全体の安定性を高めることができます。初心者にとってはリスク管理の一つの方法として有効です。\\n</Output>\\n<Rubric>\\n初心者向けで、専門用語に短い補足がある\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "ed701fd4-22fd-4406-8bd0-d7298ea62909",
+        "latencyMs": 2667,
+        "namedScores": {},
+        "prompt": {
+          "raw": "あなたは投資学習アシスタントです。分散投資 を初心者向けに3行で説明してください。",
+          "label": "あなたは投資学習アシスタントです。{{question}} を初心者向けに3行で説明してください。",
+          "config": {}
+        },
+        "promptId": "bb5119bd3d8dc6dfcf33b053ece782a59105b90237b3127ebac310d81e941fc6",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:gpt-3.5-turbo",
+          "label": ""
+        },
+        "response": {
+          "output": "分散投資とは、複数の異なる資産に投資することです。これにより、リスクを分散しポートフォリオ全体の安定性を高めることができます。初心者にとってはリスク管理の一つの方法として有効です。",
+          "tokenUsage": {
+            "cached": 137,
+            "total": 137
+          },
+          "cached": true,
+          "latencyMs": 2667,
+          "finishReason": "stop",
+          "cost": 0,
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-expose-headers": "X-Request-ID, CF-Ray, CF-Ray",
+                "alt-svc": "h3=\":443\"; ma=86400",
+                "cf-cache-status": "[REDACTED]",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-encoding": "br",
+                "content-type": "application/json",
+                "date": "Sun, 17 May 2026 12:26:12 GMT",
+                "openai-organization": "[REDACTED]",
+                "openai-processing-ms": "855",
+                "openai-project": "[REDACTED]",
+                "openai-version": "[REDACTED]",
+                "server": "cloudflare",
+                "set-cookie": "[REDACTED]",
+                "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-openai-proxy-wasm": "[REDACTED]",
+                "x-ratelimit-limit-requests": "[REDACTED]",
+                "x-ratelimit-limit-tokens": "[REDACTED]",
+                "x-ratelimit-remaining-requests": "[REDACTED]",
+                "x-ratelimit-remaining-tokens": "[REDACTED]",
+                "x-ratelimit-reset-requests": "[REDACTED]",
+                "x-ratelimit-reset-tokens": "[REDACTED]",
+                "x-request-id": "[REDACTED]"
+              }
+            }
+          }
+        },
+        "score": 0.6,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "question": "分散投資"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "初心者向けで、専門用語に短い補足がある"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "vars": {
+          "question": "分散投資"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-expose-headers": "X-Request-ID, CF-Ray, CF-Ray",
+              "alt-svc": "h3=\":443\"; ma=86400",
+              "cf-cache-status": "[REDACTED]",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-encoding": "br",
+              "content-type": "application/json",
+              "date": "Sun, 17 May 2026 12:26:12 GMT",
+              "openai-organization": "[REDACTED]",
+              "openai-processing-ms": "855",
+              "openai-project": "[REDACTED]",
+              "openai-version": "[REDACTED]",
+              "server": "cloudflare",
+              "set-cookie": "[REDACTED]",
+              "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-openai-proxy-wasm": "[REDACTED]",
+              "x-ratelimit-limit-requests": "[REDACTED]",
+              "x-ratelimit-limit-tokens": "[REDACTED]",
+              "x-ratelimit-remaining-requests": "[REDACTED]",
+              "x-ratelimit-remaining-tokens": "[REDACTED]",
+              "x-ratelimit-reset-requests": "[REDACTED]",
+              "x-ratelimit-reset-tokens": "[REDACTED]",
+              "x-request-id": "[REDACTED]"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "error": "初心者にも分かりやすい平易な説明で、分散投資については短く補足されています。ただし、株式・債券・不動産などの専門的な用語には補足説明がないため、 rubric を完全には満たしていません。",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.6,
+          "reason": "初心者にも分かりやすい平易な説明で、分散投資については短く補足されています。ただし、株式・債券・不動産などの専門的な用語には補足説明がないため、 rubric を完全には満たしていません。",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 723,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 723,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "初心者向けで、専門用語に短い補足がある"
+              },
+              "pass": false,
+              "score": 0.6,
+              "reason": "初心者にも分かりやすい平易な説明で、分散投資については短く補足されています。ただし、株式・債券・不動産などの専門的な用語には補足説明がないため、 rubric を完全には満たしていません。",
+              "tokensUsed": {
+                "total": 723,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 723,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID, CF-Ray, CF-Ray",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 17 May 2026 12:26:21 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "8074",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n分散投資とは、お金を複数の異なる投資先に分散させることでリスクを減らす投資方法です。例えば、株式や債券、不動産などに分散して投資することができます。\\n</Output>\\n<Rubric>\\n初心者向けで、専門用語に短い補足がある\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "68d9f098-9033-4660-a4bb-38a47dbba732",
+        "latencyMs": 2688,
+        "namedScores": {},
+        "prompt": {
+          "raw": "分散投資 を中学生にもわかる言葉で2行で説明してください。",
+          "label": "{{question}} を中学生にもわかる言葉で2行で説明してください。",
+          "config": {}
+        },
+        "promptId": "6159289ef4ff69f70fb0bc35e3daf996a64a6994af4dc53e3dccc269fa8de35d",
+        "promptIdx": 1,
+        "provider": {
+          "id": "openai:gpt-3.5-turbo",
+          "label": ""
+        },
+        "response": {
+          "output": "分散投資とは、お金を複数の異なる投資先に分散させることでリスクを減らす投資方法です。例えば、株式や債券、不動産などに分散して投資することができます。",
+          "tokenUsage": {
+            "cached": 121,
+            "total": 121
+          },
+          "cached": true,
+          "latencyMs": 2688,
+          "finishReason": "stop",
+          "cost": 0,
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-expose-headers": "X-Request-ID, CF-Ray, CF-Ray",
+                "alt-svc": "h3=\":443\"; ma=86400",
+                "cf-cache-status": "[REDACTED]",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-encoding": "br",
+                "content-type": "application/json",
+                "date": "Sun, 17 May 2026 12:26:12 GMT",
+                "openai-organization": "[REDACTED]",
+                "openai-processing-ms": "934",
+                "openai-project": "[REDACTED]",
+                "openai-version": "[REDACTED]",
+                "server": "cloudflare",
+                "set-cookie": "[REDACTED]",
+                "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-openai-proxy-wasm": "[REDACTED]",
+                "x-ratelimit-limit-requests": "[REDACTED]",
+                "x-ratelimit-limit-tokens": "[REDACTED]",
+                "x-ratelimit-remaining-requests": "[REDACTED]",
+                "x-ratelimit-remaining-tokens": "[REDACTED]",
+                "x-ratelimit-reset-requests": "[REDACTED]",
+                "x-ratelimit-reset-tokens": "[REDACTED]",
+                "x-request-id": "[REDACTED]"
+              }
+            }
+          }
+        },
+        "score": 0.6,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "question": "分散投資"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "初心者向けで、専門用語に短い補足がある"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "vars": {
+          "question": "分散投資"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-expose-headers": "X-Request-ID, CF-Ray, CF-Ray",
+              "alt-svc": "h3=\":443\"; ma=86400",
+              "cf-cache-status": "[REDACTED]",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-encoding": "br",
+              "content-type": "application/json",
+              "date": "Sun, 17 May 2026 12:26:12 GMT",
+              "openai-organization": "[REDACTED]",
+              "openai-processing-ms": "934",
+              "openai-project": "[REDACTED]",
+              "openai-version": "[REDACTED]",
+              "server": "cloudflare",
+              "set-cookie": "[REDACTED]",
+              "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-openai-proxy-wasm": "[REDACTED]",
+              "x-ratelimit-limit-requests": "[REDACTED]",
+              "x-ratelimit-limit-tokens": "[REDACTED]",
+              "x-ratelimit-remaining-requests": "[REDACTED]",
+              "x-ratelimit-remaining-tokens": "[REDACTED]",
+              "x-ratelimit-reset-requests": "[REDACTED]",
+              "x-ratelimit-reset-tokens": "[REDACTED]",
+              "x-request-id": "[REDACTED]"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      }
+    ],
+    "stats": {
+      "successes": 0,
+      "failures": 4,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 0,
+        "completion": 0,
+        "cached": 558,
+        "total": 558,
+        "numRequests": 4,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0
+        },
+        "assertions": {
+          "total": 1241,
+          "prompt": 0,
+          "completion": 0,
+          "cached": 1241,
+          "numRequests": 0,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          }
+        }
+      },
+      "durationMs": 58,
+      "evaluationDurationMs": 58
+    }
+  },
+  "config": {
+    "tags": {},
+    "description": "Beginner prompt regression test",
+    "prompts": [
+      "あなたは投資学習アシスタントです。{{question}} を初心者向けに3行で説明してください。",
+      "{{question}} を中学生にもわかる言葉で2行で説明してください。"
+    ],
+    "providers": [
+      {
+        "id": "openai:gpt-3.5-turbo"
+      }
+    ],
+    "tests": [
+      {
+        "vars": {
+          "question": "RAG"
+        },
+        "assert": [
+          {
+            "type": "contains",
+            "value": "検索"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "question": "分散投資"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "初心者向けで、専門用語に短い補足がある"
+          }
+        ]
+      }
+    ],
+    "scenarios": [],
+    "env": {},
+    "outputPath": [
+      "report.json"
+    ],
+    "extensions": [],
+    "metadata": {},
+    "evaluateOptions": {}
+  },
+  "shareableUrl": null,
+  "metadata": {
+    "promptfooVersion": "0.121.11",
+    "nodeVersion": "v24.15.0",
+    "platform": "win32",
+    "arch": "x64",
+    "exportedAt": "2026-05-17T12:37:33.302Z",
+    "evaluationCreatedAt": "2026-05-17T12:37:33.200Z"
+  }
+}
