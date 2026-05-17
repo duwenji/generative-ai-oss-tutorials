@@ -9,89 +9,99 @@ next: 06-multimodal/00-README.md
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念
 
-## この教材で身につくこと
+---
+
+## 1. 機能・役割（概要）
+Guardrailsは、AI信頼性プラットフォームとして、LLM出力の安全性・信頼性・形式品質を高めるOSS/クラウド対応のツール群です。  
+主な役割は、スキーマ検証・ルール検証・リスク検知・合成データ生成・ランタイムガードなどを通じて、AI出力の品質と運用リスクを制御することです。
+
+## 2. この教材で身につくこと（ゴール）
 
 - JSONスキーマ検証
 - 不正出力の再生成
 - 禁止語・形式違反の検知
+- シナリオ自動生成・リスク評価
 
-## コンセプト
-Guardrails は LLM 出力をスキーマやルールで検証し、安全性と形式品質を高めるライブラリです。
-
+## 3. コンセプト
+Guardrailsは「AI信頼性プラットフォーム」として、合成データ生成・エッジケース検出・出力ガード（ポリシー違反・幻覚・漏洩検知）を提供。  
 **バージョン**: 0.5.0+ / OSS準拠（2026-05時点）  
 **公式ドキュメント**: https://docs.guardrailsai.com/
 
-## 仕組み
+## 4. 仕組み（全体の流れ）
+- スキーマ・ルール・ポリシーを定義し、AI出力を自動検証
+- 合成データやシナリオ生成でリスク検知・評価
+- ランタイムガードで本番出力を制御
 
-1. 目的と入力を定義し、対象データや利用モデルを準備します。
-2. コア処理（検索・推論・生成・検証のいずれか）を実行します。
-3. 実行結果を保存または表示し、次工程に渡せる形式へ整えます。
-4. パラメータを調整して挙動差分を比較し、品質を確認します。
-5. 運用を想定して再実行手順と確認ポイントを定着させます。
-## 位置づけ
+### 詳細手順
+1. 目的と入力を定義し、対象データや利用モデルを準備
+2. コア処理（検証・再生成・リスク評価）を実行
+3. 実行結果を保存・表示し、次工程に渡せる形式へ整形
+4. パラメータ調整で挙動差分を比較し、品質を確認
+5. 運用を想定して再実行手順と確認ポイントを定着
 
+## 5. 位置づけ（図解）
 ```mermaid
 flowchart LR
-	A[出力品質制御] --> B[Guardrails]
-	B --> C[Schema検証]
-	B --> D[形式チェック]
-	B --> E[不正出力検知]
+  A[出力品質制御] --> B[Guardrails]
+  B --> C[Schema検証]
+  B --> D[形式チェック]
+  B --> E[不正出力検知]
 ```
 
-## 実行フロー
+## 6. 事前準備
 
-```mermaid
-flowchart TD
-	S[開始] --> J[JSONバリデーション]
-	J --> O[出力フォーマット確認]
-	O --> R[違反結果確認]
-	R --> X[終了]
-```
+- Python環境
+- 必要パッケージ（guardrails-ai, python-dotenv, pydantic）
 
-## サンプル
-
-### 実行例
-
-```bash
-# この教材の最小構成を順に実行
-# 具体的なコマンドは「最小セットアップ」または「実行フロー」を参照
-```
-
-### 検証
-
-- コマンドがエラーなく完了する
-- 想定した出力（画面表示・ファイル生成・回答）を確認できる
-- 変更した設定に応じて結果差分を説明できる
-
-## 実ソースコード（言語別に記載）
-### 00_requirements.txt
-
+### requirements.txt
 ```txt
 guardrails-ai==0.5.1
 python-dotenv==1.0.0
 pydantic==2.7.1
 ```
 
-### 01_basic-validation.py
+## 7. 最小セットアップ
 
+```bash
+python -m venv .venv
+source .venv/bin/activate  # Windowsは .venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+## 8. 実行フロー
+
+```mermaid
+flowchart TD
+  S[開始] --> J[JSONバリデーション]
+  J --> O[出力フォーマット確認]
+  O --> R[違反結果確認]
+  R --> X[終了]
+```
+
+## 9. 検証
+
+- コマンドがエラーなく完了する
+- 想定した出力（画面表示・ファイル生成・回答）を確認できる
+- 変更した設定に応じて結果差分を説明できる
+
+## 10. 主要ファイルの説明
+
+### 01_basic-validation.py
+Guardrailsによる基本的なJSONスキーマ検証例。
 ```python
 """Guardrails basic JSON validation demo."""
-
 from pydantic import BaseModel, Field
-
 
 class StockAdvice(BaseModel):
 	symbol: str = Field(min_length=1)
 	recommendation: str = Field(pattern="^(buy|hold|sell)$")
 	reason: str = Field(min_length=5)
 
-
-def validate_payload(payload: dict) -> None:
+## 演習課題
 	parsed = StockAdvice.model_validate(payload)
 	print("Validated:", parsed.model_dump())
 
 
-def main() -> None:
 	good = {
 		"symbol": "7203",
 		"recommendation": "hold",
@@ -102,28 +112,23 @@ def main() -> None:
 		"recommendation": "strong-buy",
 		"reason": "短い",
 	}
-
 	validate_payload(good)
-
 	try:
 		validate_payload(bad)
 	except Exception as exc:
 		print("Validation error:", exc)
-
 
 if __name__ == "__main__":
 	main()
 ```
 
 ### 02_output-format-check.py
-
+出力フォーマット（JSON構造）チェック例。
 ```python
 """Simple output format check for LLM text."""
-
 import json
 
-
-def check_json_output(text: str) -> bool:
+1. ``Guardrails 入門`` を使う想定ユースケースを1つ定義し、入力・出力の例を記録してください。
 	try:
 		obj = json.loads(text)
 		required = {"symbol", "recommendation", "reason"}
@@ -131,23 +136,15 @@ def check_json_output(text: str) -> bool:
 	except Exception:
 		return False
 
-
-def main() -> None:
+2. 最小構成で動かし、デフォルトから設定を1つ変えて挙動の差分を確認してください。
 	ok = '{"symbol":"AAPL","recommendation":"buy","reason":"成長率が高い"}'
 	ng = "AAPL is good"
-
 	print("ok result:", check_json_output(ok))
 	print("ng result:", check_json_output(ng))
-
 
 if __name__ == "__main__":
 	main()
 ```
-
-## 演習課題
-
-1. ``Guardrails 入門`` を使う想定ユースケースを1つ定義し、入力・出力の例を記録してください。
-2. 最小構成で動かし、デフォルトから設定を1つ変えて挙動の差分を確認してください。
 3. ``Guardrails 入門`` を使わない場合の代替手段と比較し、選ぶ基準をまとめてください。
 
 

@@ -7,66 +7,56 @@ next: 05-evaluation/03-langfuse.md
 
 # Ragas 入門
 
+# Ragas 入門
+
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念
 
-## この教材で身につくこと
+---
 
-- 評価データセット作成
-- RAG指標の測定
-- スコア比較
+## 1. 機能・役割（概要）
+Ragasは、RAG（検索拡張生成）やAIエージェントの出力品質を、実験ベースで定量評価・比較できるOSSライブラリです。  
+主な役割は、faithfulnessやanswer relevancyなど多様な指標で品質を可視化し、継続的な改善ループを実現することです。
 
-## コンセプト
-Ragas は RAG の回答品質を定量評価するライブラリです。faithfulness や answer relevancy などの指標で、改善前後を比較できます。
+## 2. この教材で身につくこと（ゴール）
 
+- 評価データセットの作成
+- RAG指標（faithfulness, relevancy等）の測定
+- before/afterのスコア比較
+- 実験ループの構築
+
+## 3. コンセプト
+Ragasは「実験ファースト」な評価設計を推奨し、手動評価の限界を克服。  
+カスタム指標や豊富な既存指標、LangChain/LlamaIndex等との連携も容易です。  
 **バージョン**: 0.1.0+ / OSS準拠（2026-05時点）  
 **公式ドキュメント**: https://docs.ragas.io/
 
-## 仕組み
+## 4. 仕組み（全体の流れ）
+- データセット・指標・実験単位で評価設計
+- コア関数（evaluate）で一括スコア算出
+- before/after比較やカスタム指標追加も容易
 
-1. 目的と入力を定義し、対象データや利用モデルを準備します。
-2. コア処理（検索・推論・生成・検証のいずれか）を実行します。
-3. 実行結果を保存または表示し、次工程に渡せる形式へ整えます。
-4. パラメータを調整して挙動差分を比較し、品質を確認します。
-5. 運用を想定して再実行手順と確認ポイントを定着させます。
-## 位置づけ
+### 詳細手順
+1. 目的と入力を定義し、対象データや利用モデルを準備
+2. コア処理（検索・推論・生成・検証）を実行
+3. 実行結果を保存・表示し、次工程に渡せる形式へ整形
+4. パラメータ調整で挙動差分を比較し、品質を確認
+5. 運用を想定して再実行手順と確認ポイントを定着
 
+## 5. 位置づけ（図解）
 ```mermaid
 flowchart LR
-	A[RAG評価] --> B[Ragas]
-	B --> C[faithfulness]
-	B --> D[answer relevancy]
-	B --> E[改善前後比較]
+  A[RAG評価] --> B[Ragas]
+  B --> C[faithfulness]
+  B --> D[answer relevancy]
+  B --> E[改善前後比較]
 ```
 
-## 実行フロー
+## 6. 事前準備
 
-```mermaid
-flowchart TD
-	S[開始] --> D[評価データ作成]
-	D --> E[evaluate実行]
-	E --> M[指標出力]
-	M --> C[before/after比較]
-	C --> X[終了]
-```
+- Python環境
+- 必要パッケージ（ragas, datasets, pandas, langchain-openai, python-dotenv）
 
-## サンプル
-
-### 実行例
-
-```bash
-# この教材の最小構成を順に実行
-# 具体的なコマンドは「最小セットアップ」または「実行フロー」を参照
-```
-
-### 検証
-
-- コマンドがエラーなく完了する
-- 想定した出力（画面表示・ファイル生成・回答）を確認できる
-- 変更した設定に応じて結果差分を説明できる
-
-## 実ソースコード（言語別に記載）
-### 00_requirements.txt
-
+### requirements.txt
 ```txt
 ragas==0.1.10
 datasets==2.19.1
@@ -75,93 +65,106 @@ langchain-openai==0.1.0
 python-dotenv==1.0.0
 ```
 
-### 01_basic-ragas-eval.py
+## 7. 最小セットアップ
 
+```bash
+# 仮想環境作成・パッケージインストール
+python -m venv .venv
+source .venv/bin/activate  # Windowsは .venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+## 8. 実行フロー
+
+```mermaid
+flowchart TD
+  S[開始] --> D[評価データ作成]
+  D --> E[evaluate実行]
+  E --> M[指標出力]
+  M --> C[before/after比較]
+  C --> X[終了]
+```
+
+## 9. 検証
+
+- コマンドがエラーなく完了する
+- 想定した出力（スコア・比較表）を確認できる
+- 設定変更による差分を説明できる
+
+## 10. 主要ファイルの説明
+
+### 01_basic-ragas-eval.py
+基本的なRAG評価例。faithfulness, answer relevancyの2指標でスコアを算出。
 ```python
 """Ragas basic evaluation example."""
-
 from dotenv import load_dotenv
 from datasets import Dataset
 from ragas import evaluate
 from ragas.metrics import faithfulness, answer_relevancy
 
-
 load_dotenv()
 
+## 実行
+    data = {
+        "question": [
+            "RAGとは何ですか?",
+            "分散投資の基本を教えて",
+        ],
+        "answer": [
+            "RAGは検索で見つけた情報を使って回答を作る手法です。",
+            "分散投資は資産を複数に分けてリスクを下げる考え方です。",
+        ],
+        "contexts": [
+            ["RAGはRetrieval-Augmented Generationの略で、検索結果を生成時に参照する。"],
+            ["分散投資は複数資産へ配分して価格変動リスクを抑える。"],
+        ],
+        "ground_truth": [
+            "RAGは検索結果を参照して回答精度を上げる手法。",
+            "分散投資は資産配分でリスクを軽減する。",
+        ],
+    }
+    return Dataset.from_dict(data)
 
-def build_dataset() -> Dataset:
-	data = {
-		"question": [
-			"RAGとは何ですか?",
-			"分散投資の基本を教えて",
-		],
-		"answer": [
-			"RAGは検索で見つけた情報を使って回答を作る手法です。",
-			"分散投資は資産を複数に分けてリスクを下げる考え方です。",
-		],
-		"contexts": [
-			["RAGはRetrieval-Augmented Generationの略で、検索結果を生成時に参照する。"],
-			["分散投資は複数資産へ配分して価格変動リスクを抑える。"],
-		],
-		"ground_truth": [
-			"RAGは検索結果を参照して回答精度を上げる手法。",
-			"分散投資は資産配分でリスクを軽減する。",
-		],
-	}
-	return Dataset.from_dict(data)
-
-
-def main() -> None:
-	dataset = build_dataset()
-	result = evaluate(
-		dataset,
-		metrics=[faithfulness, answer_relevancy],
-	)
-
-	print("Ragas scores")
-	print(result)
-
+```bash
+    dataset = build_dataset()
+    result = evaluate(
+        dataset,
+        metrics=[faithfulness, answer_relevancy],
+    )
+    print("Ragas scores")
+    print(result)
 
 if __name__ == "__main__":
-	main()
+    main()
 ```
 
 ### 02_compare-runs.py
-
+before/afterのスコア比較例。pandasで差分を算出。
 ```python
 """Compare two dummy RAG runs by simple table output."""
-
 import pandas as pd
 
-
-def main() -> None:
-	before = pd.DataFrame(
-		{
-			"metric": ["faithfulness", "answer_relevancy"],
-			"score": [0.71, 0.68],
-		}
-	)
-	after = pd.DataFrame(
-		{
-			"metric": ["faithfulness", "answer_relevancy"],
-			"score": [0.80, 0.77],
-		}
-	)
-
-	merged = before.merge(after, on="metric", suffixes=("_before", "_after"))
-	merged["delta"] = merged["score_after"] - merged["score_before"]
-
-	print("Comparison")
-	print(merged.to_string(index=False))
-
+cd 02-ragas-python
+    before = pd.DataFrame(
+        {
+            "metric": ["faithfulness", "answer_relevancy"],
+            "score": [0.71, 0.68],
+        }
+    )
+    after = pd.DataFrame(
+        {
+            "metric": ["faithfulness", "answer_relevancy"],
+            "score": [0.80, 0.77],
+        }
+    )
+    merged = before.merge(after, on="metric", suffixes=("_before", "_after"))
+    merged["delta"] = merged["score_after"] - merged["score_before"]
+    print("Comparison")
+    print(merged.to_string(index=False))
 
 if __name__ == "__main__":
-	main()
+    main()
 ```
-
-## 実行
-```bash
-cd 02-ragas-python
 pip install -r 00_requirements.txt
 python 01_basic-ragas-eval.py
 ```

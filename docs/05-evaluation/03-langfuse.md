@@ -5,98 +5,112 @@ prev: 05-evaluation/02-ragas.md
 next: 05-evaluation/04-guardrails.md
 ---
 
+
 # Langfuse 入門
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念
 
-## この教材で身につくこと
+---
+
+## 1. 機能・役割（概要）
+Langfuseは、LLMアプリの「観測・評価・実験・プロンプト管理」を一体化したOSSプラットフォームです。  
+主な役割は、トレース収集・評価・コスト監視・プロンプト管理などを統合し、継続的な品質改善と運用監視を実現することです。
+
+## 2. この教材で身につくこと（ゴール）
 
 - プロンプト/応答のトレース
 - 実行単位の評価記録
 - モデル利用コスト把握
+- 本番運用の品質監視・改善ループ構築
 
-## コンセプト
-Langfuse は LLM アプリのトレース、評価、コスト監視を行う観測基盤です。
+## 3. コンセプト
+Langfuseは「OTel準拠・80+統合・エンタープライズ対応」のLLM観測基盤。  
+トレース・評価・プロンプト管理・コスト監視・実験・アノテーションを一体化。  
 **バージョン**: 2.0.0+ / OSS準拠（2026-05時点）  
 **公式ドキュメント**: https://langfuse.com/
-## 仕組み
 
-1. 目的と入力を定義し、対象データや利用モデルを準備します。
-2. コア処理（検索・推論・生成・検証のいずれか）を実行します。
-3. 実行結果を保存または表示し、次工程に渡せる形式へ整えます。
-4. パラメータを調整して挙動差分を比較し、品質を確認します。
-5. 運用を想定して再実行手順と確認ポイントを定着させます。
-## 位置づけ
+## 4. 仕組み（全体の流れ）
+- SDKやAPIでアプリからトレース・評価データを送信
+- Web UIで可視化・分析・実験
+- before/after比較やプロンプト管理も容易
 
+### 詳細手順
+1. 目的と入力を定義し、対象データや利用モデルを準備
+2. コア処理（検索・推論・生成・検証）を実行
+3. 実行結果を保存・表示し、次工程に渡せる形式へ整形
+4. パラメータ調整で挙動差分を比較し、品質を確認
+5. 運用を想定して再実行手順と確認ポイントを定着
+
+## 5. 位置づけ（図解）
 ```mermaid
 flowchart LR
-		A[LLM観測基盤] --> B[Langfuse]
-		B --> C[Trace収集]
-		B --> D[評価スコア保存]
-		B --> E[コスト可視化]
+  A[LLM観測基盤] --> B[Langfuse]
+  B --> C[Trace収集]
+  B --> D[評価スコア保存]
+  B --> E[コスト可視化]
 ```
 
-## 実行フロー
+## 6. 事前準備
+
+- Docker環境（セルフホストの場合）
+- langfuse公式イメージ利用
+
+### docker-compose.yml
+```yaml
+version: "3.8"
+services:
+  langfuse-web:
+    image: langfuse/langfuse:2
+    container_name: langfuse-web
+    ports:
+      - "3002:3000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@langfuse-postgres:5432/langfuse
+      - NEXTAUTH_SECRET=change-me
+      - SALT=change-me-too
+    depends_on:
+      - langfuse-postgres
+  langfuse-postgres:
+    image: postgres:15
+    container_name: langfuse-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=langfuse
+    volumes:
+      - langfuse_db:/var/lib/postgresql/data
+volumes:
+  langfuse_db:
+```
+
+## 7. 最小セットアップ
+
+```bash
+docker-compose up -d
+# ブラウザで http://localhost:3002 にアクセス
+```
+
+## 8. 実行フロー
 
 ```mermaid
 flowchart TD
-		S[開始] --> U[docker-compose up -d]
-		U --> W[http://localhost:3002]
-		W --> P[Project作成]
-		P --> K[APIキー発行]
-		K --> X[アプリ連携]
+  S[開始] --> U[docker-compose up -d]
+  U --> W[http://localhost:3002]
+  W --> P[Project作成]
+  P --> K[APIキー発行]
+  K --> X[アプリ連携]
 ```
 
-## サンプル
-
-### 実行例
-
-```bash
-# この教材の最小構成を順に実行
-# 具体的なコマンドは「最小セットアップ」または「実行フロー」を参照
-```
-
-### 検証
+## 9. 検証
 
 - コマンドがエラーなく完了する
 - 想定した出力（画面表示・ファイル生成・回答）を確認できる
 - 変更した設定に応じて結果差分を説明できる
 
-## 実ソースコード（言語別に記載）
-### 00_docker-compose.yml
-
-```yaml
-version: "3.8"
-
-services:
-	langfuse-web:
-		image: langfuse/langfuse:2
-		container_name: langfuse-web
-		ports:
-			- "3002:3000"
-		environment:
-			- DATABASE_URL=postgresql://postgres:postgres@langfuse-postgres:5432/langfuse
-			- NEXTAUTH_SECRET=change-me
-			- SALT=change-me-too
-		depends_on:
-			- langfuse-postgres
-
-	langfuse-postgres:
-		image: postgres:15
-		container_name: langfuse-postgres
-		environment:
-			- POSTGRES_USER=postgres
-			- POSTGRES_PASSWORD=postgres
-			- POSTGRES_DB=langfuse
-		volumes:
-			- langfuse_db:/var/lib/postgresql/data
-
-volumes:
-	langfuse_db:
-```
+## 10. 主要ファイルの説明
 
 ### 01_setup-guide.md
-
+Langfuseのセットアップ手順・初期設定例。
 ```text
 # Langfuse セットアップガイド
 
