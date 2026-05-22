@@ -30,7 +30,7 @@ AutoGen は複数エージェントが協調してタスクを進めるフレー
 5. 複数ターンの対話ログから改善点を抽出して次回へ反映します。
 
 ## 前提条件
-- Python 3.10+
+- Python 3.12+
 - OpenAI 互換 API キー
 
 ## 位置づけ
@@ -63,121 +63,266 @@ flowchart TD
 
 この教材では「計画生成 -> レビュー」の2ターン対話を最小構成で実装します。
 
+
 ## 実ソースコード（言語別に記載）
-### Python: 00_requirements.txt
+### Python: requirements.txt
 
 - 役割: 実行に必要な依存関係を固定
 - 入力: なし
-- 出力: pipでインストール可能なパッケージ一覧
-- 実行: `pip install -r 00_requirements.txt`
+- 出力: uvでインストール可能なパッケージ一覧
+- 実行:
+	- uv推奨: `uv pip install -r requirements.txt`
+		（uv未導入の場合は `pip install uv` で導入）
+	- pipも利用可: `pip install -r requirements.txt`
 
 ```txt
 pyautogen==0.2.34
 python-dotenv==1.0.0
 ```
 
-### Python: 01_two-agents-chat.py
 
-- 役割: Planner/Reviewer の2エージェント対話を実行
-- 入力: タスク文（RAG導入計画）
-- 出力: 計画案とレビュー結果
+### Python: 01_two-agents-chat.py（GroupChat/GroupChatManager版）
+
+- 役割: Planner/Reviewer の2エージェント対話を自動で進行
+- 入力: タスク文（例: AWSトレーニング計画）
+- 出力: 計画案とレビュー結果（全ログ）
 - 実行: `python 01_two-agents-chat.py`
 
 ```python
 """
-AutoGen Two Agents Chat
+AutoGen Two Agents Chat (GroupChat版)
 
-実装担当とレビュー担当の2エージェントで、
-短い設計方針を作ってレビューする例です。
+Planner（実装担当）とReviewer（レビュー担当）がGroupChatで自動対話する最小例です。
 """
 
 import os
 from dotenv import load_dotenv
 import autogen
 
-
 load_dotenv()
 
-
 def main() -> None:
-	api_key = os.getenv("OPENAI_API_KEY")
-	if not api_key:
-		raise RuntimeError("OPENAI_API_KEY が未設定です。.env を確認してください。")
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise RuntimeError("OPENAI_API_KEY が未設定です。.env を確認してください。")
 
-	llm_config = {
-		"config_list": [
-			{
-				"model": "gpt-4o-mini",
-				"api_key": api_key,
-			}
-		],
-		"temperature": 0.2,
-	}
+    llm_config = {
+        "config_list": [
+            {
+                "model": "gpt-4o-mini",
+                "api_key": api_key,
+            }
+        ],
+        "temperature": 0.2,
+    }
 
-	planner = autogen.AssistantAgent(
-		name="Planner",
-		llm_config=llm_config,
-		system_message=(
-			"あなたは実装計画担当です。"
-			"初心者にも分かる箇条書きで、短い計画を作成してください。"
-		),
-	)
+    planner = autogen.AssistantAgent(
+        name="Planner",
+        llm_config=llm_config,
+        system_message=(
+            "あなたは実装計画担当です。"
+            "初心者にも分かる箇条書きで、短い計画を作成してください。"
+        ),
+    )
 
-	reviewer = autogen.AssistantAgent(
-		name="Reviewer",
-		llm_config=llm_config,
-		system_message=(
-			"あなたはレビュー担当です。"
-			"計画の欠落点を2つまで指摘し、改善案を提案してください。"
-		),
-	)
+    reviewer = autogen.AssistantAgent(
+        name="Reviewer",
+        llm_config=llm_config,
+        system_message=(
+            "あなたはレビュー担当です。"
+            "計画が基準を満たしていれば必ず『合格』と明記し、"
+            "そうでなければ欠落点を2つまで指摘し、改善案を提案してください。"
+        ),
+    )
 
-	user_proxy = autogen.UserProxyAgent(
-		name="UserProxy",
-		human_input_mode="NEVER",
-		max_consecutive_auto_reply=3,
-		code_execution_config=False,
-	)
 
-	task = (
-		"株式分析アプリにRAGを導入する計画を、"
-		"1) 最初の1週間 2) 次の2週間 の2段階で作成してください。"
-	)
+    from autogen import GroupChat, GroupChatManager
 
-	# 1回目: Planner が計画を提示
-	user_proxy.initiate_chat(planner, message=task)
+    groupchat = GroupChat(
+        agents=[planner, reviewer],
+        messages=[],
+        max_round=10,
+    )
+    manager = GroupChatManager(groupchat=groupchat, human_input_mode="NEVER")
+    initial_message = [{
+        "content": "会社の新入社員向けに、3時間で完結するAWSトレーニング計画（セッションごとのテーマ・時間・内容）を作成してください。各セッションのテーマ・所要時間・学習内容を箇条書きで示してください。",
+        "role": "user"
+    }]
 
-	# 2回目: Reviewer がレビュー
-	user_proxy.initiate_chat(
-		reviewer,
-		message="上の計画をレビューして改善案を提示してください。",
-	)
+    # --- 合格判定で自動終了するラッパー ---
+    def run_until_pass(manager, groupchat, initial_message, planner, reviewer):
+        messages = initial_message
+        for i in range(groupchat.max_round):
+            # run_chatは1ターンずつ進める設計ではないため、会話履歴を都度確認
+            manager.run_chat(messages=messages, config=groupchat, sender=planner)
+            # Reviewerの最新発言を取得
+            reviewer_msgs = [m for m in groupchat.messages if m.get("name") == reviewer.name]
+            if reviewer_msgs and "合格" in reviewer_msgs[-1].get("content", ""):
+                print("\n基準を満たしました。終了します。")
+                break
+            # Plannerの最新発言を次ターンのmessagesに渡す
+            planner_msgs = [m for m in groupchat.messages if m.get("name") == planner.name]
+            if planner_msgs:
+                messages = [planner_msgs[-1]]
+            else:
+                break
 
+    run_until_pass(manager, groupchat, initial_message, planner, reviewer)
 
 if __name__ == "__main__":
-	main()
+    main()
 ```
 
 ## 実行
 ```bash
 cd 03_autogen-python
-pip install -r 00_requirements.txt
+uv pip install -r requirements.txt  # uv推奨
+.venv\Scripts\activate  # 仮想環境を使う場合（Windows例）
 python 01_two-agents-chat.py
 ```
 
-## サンプル
+### サンプル実行結果例（抜粋）
 
-### 指示例
+```plaintext
+[33m[autogen.oai.client: 05-22 23:52:07] {164} WARNING - The API key specified is not a valid OpenAI format; it won't work with the OpenAI-hosted model.[0m
+[33m[autogen.oai.client: 05-22 23:52:08] {164} WARNING - The API key specified is not a valid OpenAI format; it won't work with the OpenAI-hosted model.[0m
 
-- Planner に 2週間の実装計画を作成させる
-- Reviewer に 欠落点を2点まで指摘させる
+Next speaker: Reviewer
 
-### 検証
+Reviewer (to chat_manager):
 
-- Planner の計画が段階化されているか確認する
-- Reviewer の改善提案が具体的か確認する
+合格
+
+以下は新入社員向けの3時間で完結するAWSトレーニング計画です。
+
+### トレーニング計画
+
+#### セッション1: AWSの基本概念 (30分)
+- **テーマ**: AWSとは何か
+- **所要時間**: 30分
+- **学習内容**:
+  - クラウドコンピューティングの概要
+  - AWSのサービスとその利点
+  - AWSのグローバルインフラストラクチャ
+
+#### セッション2: AWS管理コンソールの使い方 (30分)
+- **テーマ**: AWS管理コンソールのナビゲーション
+- **所要時間**: 30分
+- **学習内容**:
+  - AWS管理コンソールへのログイン方法
+  - 基本的なサービスの探し方
+  - リソースの作成と管理
+
+#### セッション3: EC2の基本 (1時間)
+- **テーマ**: Amazon EC2の概要と利用方法
+- **所要時間**: 1時間
+- **学習内容**:
+  - EC2インスタンスの種類と用途
+  - インスタンスの起動と設定
+  - セキュリティグループの設定
+
+#### セッション4: S3の基本 (30分)
+- **テーマ**: Amazon S3の利用
+- **所要時間**: 30分
+- **学習内容**:
+  - S3の基本概念とユースケース
+  - バケットの作成とオブジェクトのアップロード
+  - アクセス管理とセキュリティ
+
+#### セッション5: AWSの料金体系とコスト管理 (30分)
+- **テーマ**: AWSの料金モデル
+- **所要時間**: 30分
+- **学習内容**:
+  - AWSの料金体系の概要
+  - コスト管理ツールの紹介
+  - 無料利用枠の活用方法
+
+### 合計所要時間: 3時間
+
+この計画は新入社員がAWSの基本を理解し、実際に操作するための基礎を築くことを目的としています。
+
+--------------------------------------------------------------------------------
+
+Next speaker: Planner
+
+Planner (to chat_manager):
+
+### AWSトレーニング計画 (3時間)
+
+#### セッション1: AWSの基本概念 (30分)
+- **目的**: AWSの全体像を理解する
+- **内容**:
+  - クラウドコンピューティングとは
+  - AWSの主要サービスと利点
+  - AWSのインフラストラクチャの概要
+
+#### セッション2: AWS管理コンソールの使い方 (30分)
+- **目的**: AWS管理コンソールの操作を学ぶ
+- **内容**:
+  - 管理コンソールへのログイン方法
+  - サービスの検索方法
+  - リソースの作成と管理方法
+
+#### セッション3: EC2の基本 (1時間)
+- **目的**: EC2の基本を理解し、操作する
+- **内容**:
+  - EC2インスタンスの種類と用途
+  - インスタンスの起動手順
+  - セキュリティグループの設定方法
+
+#### セッション4: S3の基本 (30分)
+- **目的**: S3の使い方を学ぶ
+- **内容**:
+  - S3の基本概念とユースケース
+  - バケットの作成とオブジェクトのアップロード方法
+  - アクセス管理とセキュリティの設定
+
+#### セッション5: AWSの料金体系とコスト管理 (30分)
+- **目的**: AWSの料金モデルを理解する
+- **内容**:
+  - AWSの料金体系の概要
+  - コスト管理ツールの紹介
+  - 無料利用枠の活用方法
+
+### 合計所要時間: 3時間
+
+この計画は新入社員がAWSの基本を理解し、実際に操作するための基礎を築くことを目的としています。
+
+--------------------------------------------------------------------------------
+
+Next speaker: Reviewer
+
+Reviewer (to chat_manager):
+
+合格
+
+改訂版のAWSトレーニング計画は、非常に充実した内容になっています。事前準備、ハンズオン、Q&A、ケーススタディ、フォローアップの要素が組み込まれており、参加者が実践的に学び、理解を深めるための良い環境が整っています。
+
+### さらなる提案
+特に欠落点は見受けられませんが、以下の点を考慮するとさらに良いトレーニング計画になるかもしれません。
+
+1. **グループディスカッションの導入**:
+   - 各セッションのケーススタディ後に、参加者を小グループに分けてディスカッションを行う時間を設けることで、異なる視点やアイデアを共有し、理解を深めることができます。
+
+2. **実践的なプロジェクトの提案**:
+   - トレーニング終了後に、参加者が自分の学びを活かせるような小規模なプロジェクトを提案し、実際にAWSを使ってみる機会を提供すると良いでしょう。
+
+これらの提案を取り入れることで、トレーニングの効果をさらに高め、参加者の学習体験をより豊かにすることができるでしょう。全体として、非常に良いトレーニング計画です！
+
+--------------------------------------------------------------------------------
+
+基準を満たしました。終了します。
+```
+
+> ※実際の出力はAPIやプロンプト内容により異なりますが、「合格」判定が複数回現れる場合があるのはAutoGenのGroupChatManagerの仕様によるものです。
 
 ## 補足
+
+**Q. run_until_passで「合格」が1回目で出ても、なぜ複数ターン分の会話が記録されるの？**  
+A. AutoGenのGroupChatManagerのrun_chatは、messages引数を起点に複数ターン分のやりとりを一度に自動進行します。そのため、Reviewerが1回目で「合格」と出力しても、run_chat実行時にPlanner→Reviewerの会話が複数回分まとめて進み、結果として複数ターン分の会話が履歴に記録されます。現状のAPI仕様では、1ターンごとに厳密に制御することは難しいため、この挙動は仕様上の制約です。
+
+**Q. 合格判定はどのように行われる？**  
+A. Reviewerのsystem_messageで「合格」と明記するよう指示し、出力に「合格」が含まれるか人間が確認します。AutoGen本体は自動判定しません。
 
 **Q. AutoGen と LangGraph の使い分けは？**  
 A. AutoGen は「エージェント間の自然な対話」を重視する設計。LangGraph は「状態とグラフで厳密に制御」したい場面向け。AutoGen の方が実装が簡単ですが、ログ解析やデバッグは手間がかかります。
