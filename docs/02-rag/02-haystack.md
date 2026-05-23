@@ -5,32 +5,86 @@ prev: 02-rag/01-llamaindex.md
 next: 02-rag/03-txtai.md
 ---
 
+
 # Haystack 入門
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念
 
+---
+
+## OSS概要・公式情報（2026-05-23時点）
+- **バージョン**: 2.28.0 推奨 / Haystack 1.x EOL
+- **公式ドキュメント**: https://docs.haystack.deepset.ai/
+- **GitHub**: https://github.com/deepset-ai/haystack
+- **Migration Guide**: https://docs.haystack.deepset.ai/docs/migration-guide
+- **Components Reference**: https://docs.haystack.deepset.ai/docs/components
+- **公式情報参照日**: 2026-05-23
+
+---
+
 ## この教材で身につくこと
+- Haystackの主な役割・適用場面を説明できる
+- 最小構成で動かす手順を実行できる
+- 導入時のメリット・注意点を整理できる
 
-- 文書投入と前処理
-- 埋め込み検索
+---
+
+## 特徴・できること
+### 主な特徴
+- 検索と生成を組み合わせたRAGパイプライン構築フレームワーク
+- DocumentStore、Retriever、Generator等の部品を組み合わせて柔軟なQAアプリを構築可能
+- 2.x系はPipelineベース設計・@componentデコレータ導入で拡張性が高い
+
+### できること（Features）
+- 文書投入・前処理・埋め込み検索・パイプライン設計
 - 検索結果を使った回答生成
+- 複数ストア・Retriever・Generatorの組み合わせ
+- Pythonでの柔軟なカスタマイズ
 
-## コンセプト
-Haystack は検索と生成を組み合わせた RAG パイプラインを構築するフレームワークです。DocumentStore、Retriever、Generator を組み合わせて、文書QAアプリを段階的に作れます。
+### できないこと・制約事項（Limitations）
+- Haystack 1.xとのAPI互換性なし（2.x移行時は書き直し必須）
+- 公式が推奨するDBやクラウド環境以外では動作保証が弱い
+- 高度なUI機能は非搭載（外部実装が必要）
+- 公式FAQ・Migration Guideで最新制約を要確認
 
-**バージョン**: 2.28.0 推奨 / Haystack 1.x EOL（2026-05時点）  
-**公式ドキュメント**: https://docs.haystack.deepset.ai/
 
-## 仕組み
+### 注意事項・推奨構成
+- Python 3.12（3.12系を推奨）
+- uv（高速パッケージマネージャ）
+- LLM利用時はAPIキーまたはローカルモデル必須
+- Haystack 2.xを推奨（1.xは2025-03でEOL）
+- 公式Migration Guide・FAQを参照し、バージョン互換性・API変更に注意
 
-1. 目的と入力を定義し、対象データや利用モデルを準備します。
-2. コア処理（検索・推論・生成・検証のいずれか）を実行します。
-3. 実行結果を保存または表示し、次工程に渡せる形式へ整えます。
-4. パラメータを調整して挙動差分を比較し、品質を確認します。
-5. 運用を想定して再実行手順と確認ポイントを定着させます。
-## 前提条件
-- Python 3.10+
+---
+
+## 前提条件・インストール
+- Python 3.12（3.12系を推奨）
+- uv（高速パッケージマネージャ）
 - OpenAI API キー（またはローカルモデル）
+
+### セットアップ例
+```bash
+# uv未導入の場合
+pip install uv
+
+# 仮想環境作成
+uv venv .venv
+# Windows: .venv\Scripts\activate
+# macOS/Linux: source .venv/bin/activate
+
+# パッケージインストール
+uv pip install haystack-ai sentence-transformers python-dotenv
+```
+
+---
+
+## 仕組み・実行フロー
+### 仕組み（全体像）
+1. 目的と入力を定義し、対象データや利用モデルを準備
+2. コア処理（検索・推論・生成・検証のいずれか）を実行
+3. 実行結果を保存または表示し、次工程に渡せる形式へ整形
+4. パラメータを調整して挙動差分を比較し、品質を確認
+5. 運用を想定して再実行手順と確認ポイントを定着
 
 ## 位置づけ
 
@@ -76,12 +130,13 @@ flowchart TD
 - 変更した設定に応じて結果差分を説明できる
 
 ## 実ソースコード（言語別に記載）
+
 ### Python: 00_requirements.txt
 
 - 役割: 依存ライブラリを固定
 - 入力: なし
-- 出力: pipインストール対象
-- 実行: `pip install -r 00_requirements.txt`
+- 出力: uvインストール対象
+- 実行: `uv pip install -r 00_requirements.txt`
 
 ```txt
 haystack-ai==2.28.0
@@ -199,6 +254,19 @@ pip install -r 00_requirements.txt
 python 01_basic-pipeline.py
 python 02_query-demo.py
 ```
+
+
+## 比較・選定ポイント
+- LlamaIndex等のRAG特化OSSと比べ、パイプライン設計の柔軟性が高い
+- 1.x→2.xでAPIが大幅変更されているため、既存資産流用時は要注意
+- 再現性・拡張性・運用性に優れるが、UIや大規模運用は追加設計が必要
+
+---
+
+## 公式情報の参照・引用について
+本教材の内容は公式サイト等の一次情報（[公式ドキュメント](https://docs.haystack.deepset.ai/)、[Migration Guide](https://docs.haystack.deepset.ai/docs/migration-guide)等）を参照し、2026年5月時点で整理しています。
+
+---
 
 ## 補足
 
