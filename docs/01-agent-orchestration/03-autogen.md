@@ -21,13 +21,18 @@ AutoGen は複数エージェントが協調してタスクを進めるフレー
 **バージョン**: pyautogen 0.2.34+ / OSS準拠（2026-05時点）  
 **公式ドキュメント**: https://microsoft.github.io/autogen/
 
-## 仕組み
 
-1. 役割ごとにエージェントを定義し、責務を分離します。
-2. UserProxy が会話の起点となり、タスクを順番に渡します。
-3. 各エージェントは受け取った文脈に基づいて応答を生成します。
-4. 次のエージェントが前段の出力をレビューまたは改善します。
-5. 複数ターンの対話ログから改善点を抽出して次回へ反映します。
+## 仕組み・実行フロー（サンプルに準拠）
+
+AutoGenの典型的な実行フローは以下の通りです：
+
+1. **APIキー確認**：OpenAI互換APIキーが設定されているか確認
+2. **LLM設定**：llm_configを生成し、モデルやパラメータを指定
+3. **エージェント生成**：Planner（計画担当）・Reviewer（レビュー担当）など役割ごとにエージェントを作成
+4. **対話開始**：初期メッセージを与え、エージェント間で対話を進行
+5. **判定**：Reviewerが「合格」と判定したら終了
+
+この流れは、サンプルコードや下記のmermaid図とも対応しています。
 
 ## 前提条件
 - Python 3.12+
@@ -47,21 +52,23 @@ flowchart LR
 
 AutoGen は、エージェント間の対話を直接設計したい場面で有効です。実装担当とレビュー担当を分けることで、1回の生成よりも品質を上げやすくなります。
 
-## 実行フロー
+## 実行フロー（サンプルと対応）
+
 
 ```mermaid
 flowchart TD
-	S[開始] --> K[APIキー確認]
-	K --> L[llm_config生成]
-	L --> P[Planner作成]
-	P --> R[Reviewer作成]
-	R --> U[UserProxy作成]
-	U --> C1[Plannerと1回目対話]
-	C1 --> C2[Reviewerと2回目対話]
-	C2 --> E[終了]
+  S[開始] --> K[APIキー確認]
+  K --> L[llm_config生成]
+  L --> P[Planner作成]
+  P --> R[Reviewer作成]
+  R --> G[GroupChat/Manager生成]
+  G --> M[初期メッセージ投入]
+  M --> D[自動対話（Planner→Reviewer）]
+  D -- 合格判定未達 --> D
+  D -- 合格判定で終了 --> J[終了]
 ```
 
-この教材では「計画生成 -> レビュー」の2ターン対話を最小構成で実装します。
+この教材のサンプルは「GroupChat/GroupChatManager」を使い、Planner/Reviewerの2エージェントが自動で対話し、Reviewerが「合格」と判定した時点で終了します。
 
 
 ## 実ソースコード（言語別に記載）
@@ -88,11 +95,18 @@ python-dotenv==1.0.0
 - 出力: 計画案とレビュー結果（全ログ）
 - 実行: `python 01_two-agents-chat.py`
 
+
 ```python
 """
 AutoGen Two Agents Chat (GroupChat版)
 
-Planner（実装担当）とReviewer（レビュー担当）がGroupChatで自動対話する最小例です。
+【実行フロー】
+1. APIキー確認
+2. LLM設定（llm_config生成）
+3. Planner/Reviewerエージェント生成
+4. GroupChat/Manager生成
+5. 対話開始（初期メッセージ投入）
+6. Reviewerが「合格」と判定したら自動終了
 """
 
 import os
