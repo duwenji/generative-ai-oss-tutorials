@@ -66,7 +66,7 @@ next: 02-rag/02-haystack.md
 ### セットアップ例
 ```bash
 # uv未導入の場合
-pip install uv
+pyhton -m pip install uv
 
 # 仮想環境作成
 uv venv .venv

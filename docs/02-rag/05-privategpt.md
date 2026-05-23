@@ -100,7 +100,7 @@ flowchart TD
 git clone https://github.com/zylon-ai/private-gpt.git
 cd private-gpt
 # uv未導入の場合
-pip install uv
+pyhton -m pip install uv
 
 # 仮想環境作成
 uv venv .venv
@@ -150,7 +150,7 @@ python -m private_gpt
 git clone https://github.com/zylon-ai/private-gpt.git
 cd private-gpt
 # uv未導入の場合
-pip install uv
+pyhton -m pip install uv
 
 # 仮想環境作成
 uv venv .venv
