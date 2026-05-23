@@ -39,42 +39,40 @@ next: 02-rag/03-txtai.md
 - 文書投入・前処理・埋め込み検索・パイプライン設計
 - 検索結果を使った回答生成
 - 複数ストア・Retriever・Generatorの組み合わせ
-- Pythonでの柔軟なカスタマイズ
-
-### できないこと・制約事項（Limitations）
-- Haystack 1.xとのAPI互換性なし（2.x移行時は書き直し必須）
-- 公式が推奨するDBやクラウド環境以外では動作保証が弱い
-- 高度なUI機能は非搭載（外部実装が必要）
-- 公式FAQ・Migration Guideで最新制約を要確認
-
-
-### 注意事項・推奨構成
-- Python 3.12（3.12系を推奨）
-- uv（高速パッケージマネージャ）
-- LLM利用時はAPIキーまたはローカルモデル必須
-- Haystack 2.xを推奨（1.xは2025-03でEOL）
-- 公式Migration Guide・FAQを参照し、バージョン互換性・API変更に注意
-
----
-
-## 前提条件・インストール
-- Python 3.12（3.12系を推奨）
-- uv（高速パッケージマネージャ）
-- OpenAI API キー（またはローカルモデル）
-
-### セットアップ例
-```bash
-# uv未導入の場合
-pip install uv
-
-# 仮想環境作成
 uv venv .venv
 # Windows: .venv\Scripts\activate
 # macOS/Linux: source .venv/bin/activate
 
 # パッケージインストール
 uv pip install haystack-ai sentence-transformers python-dotenv
-```
+---
+
+## 最小セットアップ
+
+Haystack 2.xの最小構成を動かすためのセットアップ手順です。
+
+1. **uv（高速パッケージマネージャ）が未導入の場合**
+	```bash
+	pip install uv
+	```
+2. **仮想環境の作成**
+	```bash
+	uv venv .venv
+	# Windows: .venv\Scripts\activate
+	# macOS/Linux: source .venv/bin/activate
+	```
+3. **必要パッケージのインストール**
+	```bash
+	uv pip install haystack-ai sentence-transformers python-dotenv
+	```
+	- 依存ライブラリをrequirements.txtで管理する場合は
+	  ```bash
+	  uv pip install -r requirements.txt
+	  ```
+4. **サンプル実行**
+	```bash
+	python 01_basic-pipeline.py
+	```
 
 ---
 
@@ -101,8 +99,6 @@ flowchart LR
 Haystack は、検索パイプラインを部品（Store/Retriever/Pipeline）として組み立てる設計に強いフレームワークです。
 
 ## 実行フロー
-
-```mermaid
 flowchart TD
 	S[開始] --> D[ドキュメント投入]
 	D --> E[埋め込み更新]
@@ -114,143 +110,94 @@ flowchart TD
 
 この教材はまず最小検索パイプラインを作り、次にクエリバリエーションで挙動を比較します。
 
-## サンプル
-
-### 実行例
-
-```bash
-# この教材の最小構成を順に実行
-# 具体的なコマンドは「最小セットアップ」または「実行フロー」を参照
-```
-
 ### 検証
 
 - コマンドがエラーなく完了する
 - 想定した出力（画面表示・ファイル生成・回答）を確認できる
 - 変更した設定に応じて結果差分を説明できる
 
-## 実ソースコード（言語別に記載）
-
-### Python: 00_requirements.txt
+### Python: requirements.txt（Haystack 2.x対応例）
 
 - 役割: 依存ライブラリを固定
 - 入力: なし
 - 出力: uvインストール対象
-- 実行: `uv pip install -r 00_requirements.txt`
+- 実行: `uv pip install -r requirements.txt`
 
 ```txt
 haystack-ai==2.28.0
-sentence-transformers==2.7.0
+sentence-transformers==2.5.1
 python-dotenv==1.0.0
 ```
 
-### Python: 01_basic-pipeline.py
+### Python: 01_basic-pipeline.py（Haystack 2.x対応）
 
-- 役割: インメモリ文書ストアで検索パイプラインを構築
+- 役割: インメモリ文書ストア＋埋め込み生成＋検索
 - 入力: クエリ文字列
 - 出力: 上位文書
 - 実行: `python 01_basic-pipeline.py`
 
 ```python
-"""Haystack basic indexing + retrieval demo."""
-
 from haystack import Document
-from haystack.document_stores import InMemoryDocumentStore
-from haystack.nodes import EmbeddingRetriever
-from haystack.pipelines import DocumentSearchPipeline
+from sentence_transformers import SentenceTransformer
+from haystack.components.retrievers.in_memory import InMemoryEmbeddingRetriever
+from haystack.document_stores.in_memory import InMemoryDocumentStore
 
+docs = [
+    Document(content="RAGは検索結果を使って回答生成の精度を上げる手法です。"),
+    Document(content="HaystackはRetrieverとReader/Generatorを分けて構築できます。"),
+    Document(content="株式分析では、決算資料やニュースを検索対象にできます。"),
+]
+# Use sentence-transformers directly to avoid haystack/sentence-transformers API mismatches
+st_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+# for d in docs:
+#     d.embedding = st_model.encode(d.content)
+from dataclasses import replace
+docs = [replace(d, embedding=st_model.encode(d.content).tolist()) for d in docs]
 
-def build_documents():
-	return [
-		Document(content="RAGは検索結果を使って回答生成の精度を上げる手法です。"),
-		Document(content="HaystackはRetrieverとReader/Generatorを分けて構築できます。"),
-		Document(content="株式分析では、決算資料やニュースを検索対象にできます。"),
-	]
+docs_with_embeddings = docs
 
+doc_store = InMemoryDocumentStore()
+doc_store.write_documents(docs_with_embeddings)
+retriever = InMemoryEmbeddingRetriever(doc_store)
 
-def main() -> None:
-	store = InMemoryDocumentStore(embedding_dim=384)
-	docs = build_documents()
-	store.write_documents(docs)
+query = "RAGの利点は?"
+query_embedding = st_model.encode(query).tolist()
+if not query_embedding:
+    raise ValueError("query embedding is empty")
+result = retriever.run(query_embedding=query_embedding, top_k=2)
 
-	retriever = EmbeddingRetriever(
-		document_store=store,
-		embedding_model="sentence-transformers/all-MiniLM-L6-v2",
-		use_gpu=False,
-	)
-
-	store.update_embeddings(retriever)
-
-	pipeline = DocumentSearchPipeline(retriever)
-
-	query = "RAGの利点は?"
-	out = pipeline.run(query=query, params={"Retriever": {"top_k": 2}})
-
-	print("Query:", query)
-	print("Top documents:")
-	for i, d in enumerate(out["documents"], start=1):
-		print(f"{i}. {d.content}")
-
-
-if __name__ == "__main__":
-	main()
+print("Query:", query)
+print("Top documents:")
+for i, d in enumerate(result["documents"], start=1):
+    print(f"{i}. {d.content}")
 ```
 
-### Python: 02_query-demo.py
+#### 実行結果例（03_advanced-retrieval.py）
 
-- 役割: 複数クエリで取得結果を比較
-- 入力: クエリ配列
-- 出力: クエリごとの上位文書
-- 実行: `python 02_query-demo.py`
-
-```python
-"""Haystack query variations demo."""
-
-from haystack import Document
-from haystack.document_stores import InMemoryDocumentStore
-from haystack.nodes import EmbeddingRetriever
-
-
-def setup_store() -> tuple[InMemoryDocumentStore, EmbeddingRetriever]:
-	store = InMemoryDocumentStore(embedding_dim=384)
-	store.write_documents(
-		[
-			Document(content="LangChainはLLMアプリ全般に使える。"),
-			Document(content="LlamaIndexはRAGの索引化が得意。"),
-			Document(content="Haystackは検索パイプラインを組みやすい。"),
-		]
-	)
-	retriever = EmbeddingRetriever(
-		document_store=store,
-		embedding_model="sentence-transformers/all-MiniLM-L6-v2",
-		use_gpu=False,
-	)
-	store.update_embeddings(retriever)
-	return store, retriever
-
-
-def main() -> None:
-	store, retriever = setup_store()
-	queries = [
-		"RAGで索引化が得意なのは?",
-		"検索パイプライン構築に向いたOSSは?",
-	]
-
-	for q in queries:
-		docs = retriever.retrieve(q, top_k=2)
-		print("\nQuery:", q)
-		for i, d in enumerate(docs, start=1):
-			print(f"{i}. {d.content}")
-
-
-if __name__ == "__main__":
-	main()
+```text
+(.venv) PS C:\Dev\tutorials\generative-ai-oss-tutorials\sandbox\02-haystack> python .\01_basic-pipeline.py
+Query: RAGの利点は?
+Top documents:
+1. RAGは検索結果を使って回答生成の精度を上げる手法です。
+2. 株式分析では、決算資料やニュースを検索対象にできます。
+(.venv) PS C:\Dev\tutorials\generative-ai-oss-tutorials\sandbox\02-haystack> 
 ```
+
+#### 出力例（実行環境依存・参考値）
+```
+Query: RAGの利点は?
+Top documents:
+1. RAGは検索結果を使って回答生成の精度を上げる手法です。
+2. HaystackはRetrieverとReader/Generatorを分けて構築できます。
+```
+
+> ⚠️ Haystack 2.xではAPI仕様が大きく変わっているため、旧1.x系サンプルは動作しません。依存パッケージのバージョン競合やモデルダウンロード環境によってはエラーが発生する場合があります。
+
 
 ## 実行
 ```bash
 cd 02_haystack-python
-pip install -r 00_requirements.txt
+pip install -r requirements.txt
 python 01_basic-pipeline.py
 python 02_query-demo.py
 ```
