@@ -1,3 +1,0 @@
-NAME      IMAGE                      COMMAND           SERVICE   CREATED              STATUS              PORTS flowise   flowiseai/flowise:latest   "flowise start"   flowise   About a minute ago   Up About a minute   0.0.0.0:3001->3000/tcp, [::]:3001->3000/tcp
-
-CONTAINER ID   IMAGE                      COMMAND           CREATED              STATUS              PORTS                                         NAMES 7c8daea2bb64   flowiseai/flowise:latest   "flowise start"   About a minute ago   Up About a minute   0.0.0.0:3001->3000/tcp, [::]:3001->3000/tcp   flowise

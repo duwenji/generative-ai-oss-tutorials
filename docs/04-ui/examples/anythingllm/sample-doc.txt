@@ -1,3 +1,0 @@
-AnythingLLM test document.
-This file is used for screenshot-based validation of document upload and chat.
-We use this sample to verify summarization behavior in Japanese.

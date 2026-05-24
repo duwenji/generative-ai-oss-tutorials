@@ -1,12 +1,11 @@
 {
   "totalMissing": 0,
-  "totalResolved": 47,
   "entries": [
     {
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\01-open-webui.md",
       "reference": "examples/open-webui/01-docker-compose-ps.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\open-webui\\01-docker-compose-ps.png",
-      "outputRelativePath": "images/examples/open-webui/01-docker-compose-ps.png",
+      "outputRelativePath": "images/04-ui/examples/open-webui/01-docker-compose-ps.png",
       "status": "resolved",
       "reason": ""
     },
@@ -14,7 +13,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\01-open-webui.md",
       "reference": "examples/open-webui/02-open-webui-signup.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\open-webui\\02-open-webui-signup.png",
-      "outputRelativePath": "images/examples/open-webui/02-open-webui-signup.png",
+      "outputRelativePath": "images/04-ui/examples/open-webui/02-open-webui-signup.png",
       "status": "resolved",
       "reason": ""
     },
@@ -22,7 +21,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\01-open-webui.md",
       "reference": "examples/open-webui/03-model-selected.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\open-webui\\03-model-selected.png",
-      "outputRelativePath": "images/examples/open-webui/03-model-selected.png",
+      "outputRelativePath": "images/04-ui/examples/open-webui/03-model-selected.png",
       "status": "resolved",
       "reason": ""
     },
@@ -30,7 +29,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\01-open-webui.md",
       "reference": "examples/open-webui/04-first-chat-input.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\open-webui\\04-first-chat-input.png",
-      "outputRelativePath": "images/examples/open-webui/04-first-chat-input.png",
+      "outputRelativePath": "images/04-ui/examples/open-webui/04-first-chat-input.png",
       "status": "resolved",
       "reason": ""
     },
@@ -38,7 +37,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\01-open-webui.md",
       "reference": "examples/open-webui/05-first-chat-output.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\open-webui\\05-first-chat-output.png",
-      "outputRelativePath": "images/examples/open-webui/05-first-chat-output.png",
+      "outputRelativePath": "images/04-ui/examples/open-webui/05-first-chat-output.png",
       "status": "resolved",
       "reason": ""
     },
@@ -46,7 +45,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\01-open-webui.md",
       "reference": "examples/open-webui/06-history-sidebar.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\open-webui\\06-history-sidebar.png",
-      "outputRelativePath": "images/examples/open-webui/06-history-sidebar.png",
+      "outputRelativePath": "images/04-ui/examples/open-webui/06-history-sidebar.png",
       "status": "resolved",
       "reason": ""
     },
@@ -54,7 +53,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\02-dify.md",
       "reference": "examples/dify/01-docker-compose-ps.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\dify\\01-docker-compose-ps.png",
-      "outputRelativePath": "images/examples/dify/01-docker-compose-ps.png",
+      "outputRelativePath": "images/04-ui/examples/dify/01-docker-compose-ps.png",
       "status": "resolved",
       "reason": ""
     },
@@ -62,7 +61,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\02-dify.md",
       "reference": "examples/dify/02-dify-setup.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\dify\\02-dify-setup.png",
-      "outputRelativePath": "images/examples/dify/02-dify-setup.png",
+      "outputRelativePath": "images/04-ui/examples/dify/02-dify-setup.png",
       "status": "resolved",
       "reason": ""
     },
@@ -70,7 +69,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\02-dify.md",
       "reference": "examples/dify/03-llm-provider.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\dify\\03-llm-provider.png",
-      "outputRelativePath": "images/examples/dify/03-llm-provider.png",
+      "outputRelativePath": "images/04-ui/examples/dify/03-llm-provider.png",
       "status": "resolved",
       "reason": ""
     },
@@ -78,7 +77,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\02-dify.md",
       "reference": "examples/dify/04-app-created.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\dify\\04-app-created.png",
-      "outputRelativePath": "images/examples/dify/04-app-created.png",
+      "outputRelativePath": "images/04-ui/examples/dify/04-app-created.png",
       "status": "resolved",
       "reason": ""
     },
@@ -86,7 +85,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\02-dify.md",
       "reference": "examples/dify/05-chat-input.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\dify\\05-chat-input.png",
-      "outputRelativePath": "images/examples/dify/05-chat-input.png",
+      "outputRelativePath": "images/04-ui/examples/dify/05-chat-input.png",
       "status": "resolved",
       "reason": ""
     },
@@ -94,7 +93,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\02-dify.md",
       "reference": "examples/dify/06-chat-output.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\dify\\06-chat-output.png",
-      "outputRelativePath": "images/examples/dify/06-chat-output.png",
+      "outputRelativePath": "images/04-ui/examples/dify/06-chat-output.png",
       "status": "resolved",
       "reason": ""
     },
@@ -102,7 +101,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\02-dify.md",
       "reference": "examples/dify/07-workflow-builder.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\dify\\07-workflow-builder.png",
-      "outputRelativePath": "images/examples/dify/07-workflow-builder.png",
+      "outputRelativePath": "images/04-ui/examples/dify/07-workflow-builder.png",
       "status": "resolved",
       "reason": ""
     },
@@ -110,7 +109,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\03-flowise.md",
       "reference": "examples/flowise/01-docker-compose-ps.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\flowise\\01-docker-compose-ps.png",
-      "outputRelativePath": "images/examples/flowise/01-docker-compose-ps.png",
+      "outputRelativePath": "images/04-ui/examples/flowise/01-docker-compose-ps.png",
       "status": "resolved",
       "reason": ""
     },
@@ -118,7 +117,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\03-flowise.md",
       "reference": "examples/flowise/02-flowise-login.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\flowise\\02-flowise-login.png",
-      "outputRelativePath": "images/examples/flowise/02-flowise-login.png",
+      "outputRelativePath": "images/04-ui/examples/flowise/02-flowise-login.png",
       "status": "resolved",
       "reason": ""
     },
@@ -126,7 +125,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\03-flowise.md",
       "reference": "examples/flowise/03-chatflow-created.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\flowise\\03-chatflow-created.png",
-      "outputRelativePath": "images/examples/flowise/03-chatflow-created.png",
+      "outputRelativePath": "images/04-ui/examples/flowise/03-chatflow-created.png",
       "status": "resolved",
       "reason": ""
     },
@@ -134,7 +133,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\03-flowise.md",
       "reference": "examples/flowise/04-provider-settings.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\flowise\\04-provider-settings.png",
-      "outputRelativePath": "images/examples/flowise/04-provider-settings.png",
+      "outputRelativePath": "images/04-ui/examples/flowise/04-provider-settings.png",
       "status": "resolved",
       "reason": ""
     },
@@ -142,7 +141,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\03-flowise.md",
       "reference": "examples/flowise/05-test-input.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\flowise\\05-test-input.png",
-      "outputRelativePath": "images/examples/flowise/05-test-input.png",
+      "outputRelativePath": "images/04-ui/examples/flowise/05-test-input.png",
       "status": "resolved",
       "reason": ""
     },
@@ -150,7 +149,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\03-flowise.md",
       "reference": "examples/flowise/06-test-output.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\flowise\\06-test-output.png",
-      "outputRelativePath": "images/examples/flowise/06-test-output.png",
+      "outputRelativePath": "images/04-ui/examples/flowise/06-test-output.png",
       "status": "resolved",
       "reason": ""
     },
@@ -158,7 +157,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\04-librechat.md",
       "reference": "examples/librechat/01-env-prepared.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\librechat\\01-env-prepared.png",
-      "outputRelativePath": "images/examples/librechat/01-env-prepared.png",
+      "outputRelativePath": "images/04-ui/examples/librechat/01-env-prepared.png",
       "status": "resolved",
       "reason": ""
     },
@@ -166,7 +165,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\04-librechat.md",
       "reference": "examples/librechat/02-env-edited.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\librechat\\02-env-edited.png",
-      "outputRelativePath": "images/examples/librechat/02-env-edited.png",
+      "outputRelativePath": "images/04-ui/examples/librechat/02-env-edited.png",
       "status": "resolved",
       "reason": ""
     },
@@ -174,7 +173,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\04-librechat.md",
       "reference": "examples/librechat/03-docker-compose-ps.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\librechat\\03-docker-compose-ps.png",
-      "outputRelativePath": "images/examples/librechat/03-docker-compose-ps.png",
+      "outputRelativePath": "images/04-ui/examples/librechat/03-docker-compose-ps.png",
       "status": "resolved",
       "reason": ""
     },
@@ -182,7 +181,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\04-librechat.md",
       "reference": "examples/librechat/04-signup-login.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\librechat\\04-signup-login.png",
-      "outputRelativePath": "images/examples/librechat/04-signup-login.png",
+      "outputRelativePath": "images/04-ui/examples/librechat/04-signup-login.png",
       "status": "resolved",
       "reason": ""
     },
@@ -190,7 +189,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\04-librechat.md",
       "reference": "examples/librechat/05-chat-input.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\librechat\\05-chat-input.png",
-      "outputRelativePath": "images/examples/librechat/05-chat-input.png",
+      "outputRelativePath": "images/04-ui/examples/librechat/05-chat-input.png",
       "status": "resolved",
       "reason": ""
     },
@@ -198,7 +197,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\04-librechat.md",
       "reference": "examples/librechat/06-chat-output.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\librechat\\06-chat-output.png",
-      "outputRelativePath": "images/examples/librechat/06-chat-output.png",
+      "outputRelativePath": "images/04-ui/examples/librechat/06-chat-output.png",
       "status": "resolved",
       "reason": ""
     },
@@ -206,7 +205,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\04-librechat.md",
       "reference": "examples/librechat/07-toolcall-mcp.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\librechat\\07-toolcall-mcp.png",
-      "outputRelativePath": "images/examples/librechat/07-toolcall-mcp.png",
+      "outputRelativePath": "images/04-ui/examples/librechat/07-toolcall-mcp.png",
       "status": "resolved",
       "reason": ""
     },
@@ -214,7 +213,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\04-librechat.md",
       "reference": "examples/librechat/08-mcp-connected.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\librechat\\08-mcp-connected.png",
-      "outputRelativePath": "images/examples/librechat/08-mcp-connected.png",
+      "outputRelativePath": "images/04-ui/examples/librechat/08-mcp-connected.png",
       "status": "resolved",
       "reason": ""
     },
@@ -222,7 +221,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\04-librechat.md",
       "reference": "examples/librechat/09-toolcall-output.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\librechat\\09-toolcall-output.png",
-      "outputRelativePath": "images/examples/librechat/09-toolcall-output.png",
+      "outputRelativePath": "images/04-ui/examples/librechat/09-toolcall-output.png",
       "status": "resolved",
       "reason": ""
     },
@@ -230,7 +229,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\05-chatbot-ui.md",
       "reference": "examples/chatbot-ui/01-npm-install.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\chatbot-ui\\01-npm-install.png",
-      "outputRelativePath": "images/examples/chatbot-ui/01-npm-install.png",
+      "outputRelativePath": "images/04-ui/examples/chatbot-ui/01-npm-install.png",
       "status": "resolved",
       "reason": ""
     },
@@ -238,7 +237,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\05-chatbot-ui.md",
       "reference": "examples/chatbot-ui/02-env-local.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\chatbot-ui\\02-env-local.png",
-      "outputRelativePath": "images/examples/chatbot-ui/02-env-local.png",
+      "outputRelativePath": "images/04-ui/examples/chatbot-ui/02-env-local.png",
       "status": "resolved",
       "reason": ""
     },
@@ -246,7 +245,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\05-chatbot-ui.md",
       "reference": "examples/chatbot-ui/03-dev-server-started.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\chatbot-ui\\03-dev-server-started.png",
-      "outputRelativePath": "images/examples/chatbot-ui/03-dev-server-started.png",
+      "outputRelativePath": "images/04-ui/examples/chatbot-ui/03-dev-server-started.png",
       "status": "resolved",
       "reason": ""
     },
@@ -254,7 +253,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\05-chatbot-ui.md",
       "reference": "examples/chatbot-ui/04-home.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\chatbot-ui\\04-home.png",
-      "outputRelativePath": "images/examples/chatbot-ui/04-home.png",
+      "outputRelativePath": "images/04-ui/examples/chatbot-ui/04-home.png",
       "status": "resolved",
       "reason": ""
     },
@@ -262,7 +261,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\05-chatbot-ui.md",
       "reference": "examples/chatbot-ui/05-chat-input.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\chatbot-ui\\05-chat-input.png",
-      "outputRelativePath": "images/examples/chatbot-ui/05-chat-input.png",
+      "outputRelativePath": "images/04-ui/examples/chatbot-ui/05-chat-input.png",
       "status": "resolved",
       "reason": ""
     },
@@ -270,7 +269,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\05-chatbot-ui.md",
       "reference": "examples/chatbot-ui/06-chat-output.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\chatbot-ui\\06-chat-output.png",
-      "outputRelativePath": "images/examples/chatbot-ui/06-chat-output.png",
+      "outputRelativePath": "images/04-ui/examples/chatbot-ui/06-chat-output.png",
       "status": "resolved",
       "reason": ""
     },
@@ -278,7 +277,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\06-lobechat.md",
       "reference": "examples/lobechat/03-home.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\lobechat\\03-home.png",
-      "outputRelativePath": "images/examples/lobechat/03-home.png",
+      "outputRelativePath": "images/04-ui/examples/lobechat/03-home.png",
       "status": "resolved",
       "reason": ""
     },
@@ -286,7 +285,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\06-lobechat.md",
       "reference": "examples/lobechat/04-chat-input.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\lobechat\\04-chat-input.png",
-      "outputRelativePath": "images/examples/lobechat/04-chat-input.png",
+      "outputRelativePath": "images/04-ui/examples/lobechat/04-chat-input.png",
       "status": "resolved",
       "reason": ""
     },
@@ -294,7 +293,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\06-lobechat.md",
       "reference": "examples/lobechat/05-chat-output.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\lobechat\\05-chat-output.png",
-      "outputRelativePath": "images/examples/lobechat/05-chat-output.png",
+      "outputRelativePath": "images/04-ui/examples/lobechat/05-chat-output.png",
       "status": "resolved",
       "reason": ""
     },
@@ -302,7 +301,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\06-lobechat.md",
       "reference": "examples/lobechat/06-agent-menu.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\lobechat\\06-agent-menu.png",
-      "outputRelativePath": "images/examples/lobechat/06-agent-menu.png",
+      "outputRelativePath": "images/04-ui/examples/lobechat/06-agent-menu.png",
       "status": "resolved",
       "reason": ""
     },
@@ -310,7 +309,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\06-lobechat.md",
       "reference": "examples/lobechat/07-skills-mcp.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\lobechat\\07-skills-mcp.png",
-      "outputRelativePath": "images/examples/lobechat/07-skills-mcp.png",
+      "outputRelativePath": "images/04-ui/examples/lobechat/07-skills-mcp.png",
       "status": "resolved",
       "reason": ""
     },
@@ -318,7 +317,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\07-anythingllm.md",
       "reference": "examples/anythingllm/01-docker-compose-ps.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\anythingllm\\01-docker-compose-ps.png",
-      "outputRelativePath": "images/examples/anythingllm/01-docker-compose-ps.png",
+      "outputRelativePath": "images/04-ui/examples/anythingllm/01-docker-compose-ps.png",
       "status": "resolved",
       "reason": ""
     },
@@ -326,7 +325,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\07-anythingllm.md",
       "reference": "examples/anythingllm/02-setup.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\anythingllm\\02-setup.png",
-      "outputRelativePath": "images/examples/anythingllm/02-setup.png",
+      "outputRelativePath": "images/04-ui/examples/anythingllm/02-setup.png",
       "status": "resolved",
       "reason": ""
     },
@@ -334,7 +333,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\07-anythingllm.md",
       "reference": "examples/anythingllm/03-provider-settings.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\anythingllm\\03-provider-settings.png",
-      "outputRelativePath": "images/examples/anythingllm/03-provider-settings.png",
+      "outputRelativePath": "images/04-ui/examples/anythingllm/03-provider-settings.png",
       "status": "resolved",
       "reason": ""
     },
@@ -342,7 +341,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\07-anythingllm.md",
       "reference": "examples/anythingllm/04-workspace-created.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\anythingllm\\04-workspace-created.png",
-      "outputRelativePath": "images/examples/anythingllm/04-workspace-created.png",
+      "outputRelativePath": "images/04-ui/examples/anythingllm/04-workspace-created.png",
       "status": "resolved",
       "reason": ""
     },
@@ -350,7 +349,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\07-anythingllm.md",
       "reference": "examples/anythingllm/05-chat-input.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\anythingllm\\05-chat-input.png",
-      "outputRelativePath": "images/examples/anythingllm/05-chat-input.png",
+      "outputRelativePath": "images/04-ui/examples/anythingllm/05-chat-input.png",
       "status": "resolved",
       "reason": ""
     },
@@ -358,7 +357,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\07-anythingllm.md",
       "reference": "examples/anythingllm/06-chat-output.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\04-ui\\examples\\anythingllm\\06-chat-output.png",
-      "outputRelativePath": "images/examples/anythingllm/06-chat-output.png",
+      "outputRelativePath": "images/04-ui/examples/anythingllm/06-chat-output.png",
       "status": "resolved",
       "reason": ""
     },
@@ -366,7 +365,7 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\07-visualization\\01-vega-lite.md",
       "reference": "examples/vega-lite/01-three-charts.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\07-visualization\\examples\\vega-lite\\01-three-charts.png",
-      "outputRelativePath": "images/examples/vega-lite/01-three-charts.png",
+      "outputRelativePath": "images/07-visualization/examples/vega-lite/01-three-charts.png",
       "status": "resolved",
       "reason": ""
     },
@@ -374,11 +373,12 @@
       "sourceFile": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\07-visualization\\02-echarts.md",
       "reference": "examples/echarts/01-echarts-line-series.png",
       "sourcePath": "C:\\Dev\\tutorials\\generative-ai-oss-tutorials\\docs\\07-visualization\\examples\\echarts\\01-echarts-line-series.png",
-      "outputRelativePath": "images/examples/echarts/01-echarts-line-series.png",
+      "outputRelativePath": "images/07-visualization/examples/echarts/01-echarts-line-series.png",
       "status": "resolved",
       "reason": ""
     }
   ],
+  "generatedAt": "2026-05-24T23:01:05",
   "projectName": "generative-ai-oss-tutorials",
-  "generatedAt": "2026-05-24T22:04:42"
+  "totalResolved": 47
 }

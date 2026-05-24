@@ -1,6 +1,6 @@
 # KDP Registration Package: 生成AI活用OSS 実践ガイド
 
-- Generated: 2026-05-24 22:05:39
+- Generated: 2026-05-24 23:01:57
 - Project: generative-ai-oss-tutorials
 - Metadata: C:\Dev\tutorials\generative-ai-oss-tutorials\.\.github\skills-config\ebook-build\generative-ai-oss-tutorials.metadata.yaml
 - KDP Metadata: C:\Dev\tutorials\generative-ai-oss-tutorials\.\.github\skills-config\ebook-build\generative-ai-oss-tutorials.kdp.yaml

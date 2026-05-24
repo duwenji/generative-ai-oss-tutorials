@@ -1,7 +1,9 @@
+---
 level: 📖 中級（概念・実践）
 prereq: Python基礎 / LLMアプリの基本概念
 prev: 02-rag/03-txtai.md
 next: 02-rag/05-privategpt.md
+---
 
 
 
