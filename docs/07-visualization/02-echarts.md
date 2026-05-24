@@ -257,9 +257,3 @@ EChartsのJSONは「画面機能（ズーム・凡例・ツールチップ）」
 ---
 
 [← 前へ](07-visualization/01-vega-lite.md) | [次へ →](08-protocols/00-README.md)
-
-
-
-
-
-

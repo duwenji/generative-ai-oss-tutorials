@@ -46,9 +46,7 @@ flowchart TD
 ## 教材リンク
 
 - [01-vega-lite.md](./01-vega-lite.md)
-- [examples/vega-lite](./examples/vega-lite/)
 - [02-echarts.md](./02-echarts.md)
-- [examples/echarts](./examples/echarts/)
 
 ## 完了条件
 

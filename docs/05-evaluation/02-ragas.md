@@ -7,8 +7,6 @@ next: 05-evaluation/03-langfuse.md
 
 # Ragas 入門
 
-# Ragas 入門
-
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念
 
 ---
