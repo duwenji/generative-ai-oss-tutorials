@@ -51,6 +51,7 @@ flowchart TD
 - [02-ollama.md](./02-ollama.md)
 - [03-tgi.md](./03-tgi.md)
 - [04-llama-cpp.md](./04-llama-cpp.md)
+- [05-streaming.md](./05-streaming.md)
 
 ## 完了条件
 
