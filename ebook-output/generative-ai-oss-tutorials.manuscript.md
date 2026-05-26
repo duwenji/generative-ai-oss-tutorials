@@ -5999,7 +5999,7 @@ docker compose logs open-webui --tail 50
 
 実行イメージ:
 
-![docker compose ps](examples/open-webui/01-docker-compose-ps.png)
+![docker compose ps](images/04-ui/examples/open-webui/01-docker-compose-ps\.png)
 
 #### 4.2.10.1.4 3. 使うモデルを Ollama に取得
 
@@ -6026,11 +6026,11 @@ Start-Process "http://localhost:8080"
 
 実行イメージ（サインアップ）:
 
-![signup](examples/open-webui/02-open-webui-signup.png)
+![signup](images/04-ui/examples/open-webui/02-open-webui-signup\.png)
 
 実行イメージ（モデル選択完了）:
 
-![model selected](examples/open-webui/03-model-selected.png)
+![model selected](images/04-ui/examples/open-webui/03-model-selected\.png)
 
 #### 4.2.10.1.6 5. チャット確認
 
@@ -6041,11 +6041,11 @@ Start-Process "http://localhost:8080"
 
 実行イメージ（初回入力）:
 
-![first chat input](examples/open-webui/04-first-chat-input.png)
+![first chat input](images/04-ui/examples/open-webui/04-first-chat-input\.png)
 
 実行イメージ（初回回答）:
 
-![first chat output](examples/open-webui/05-first-chat-output.png)
+![first chat output](images/04-ui/examples/open-webui/05-first-chat-output\.png)
 
 #### 4.2.10.1.7 5.1 会話履歴と拡張余地の確認
 
@@ -6056,7 +6056,7 @@ Start-Process "http://localhost:8080"
 
 実行イメージ（履歴サイドバー）:
 
-![history sidebar](examples/open-webui/06-history-sidebar.png)
+![history sidebar](images/04-ui/examples/open-webui/06-history-sidebar\.png)
 
 #### 4.2.10.1.8 6. 基本機能の完了判定（最低ライン）
 
@@ -6273,7 +6273,7 @@ docker compose logs dify-api --tail 50
 
 実行イメージ:
 
-![docker compose ps](examples/dify/01-docker-compose-ps.png)
+![docker compose ps](images/04-ui/examples/dify/01-docker-compose-ps\.png)
 
 #### 4.3.10.1.4 3. 管理者アカウント作成
 
@@ -6288,7 +6288,7 @@ Start-Process "http://localhost:3000"
 
 実行イメージ（セットアップ画面）:
 
-![dify setup](examples/dify/02-dify-setup.png)
+![dify setup](images/04-ui/examples/dify/02-dify-setup\.png)
 
 #### 4.3.10.1.5 4. LLM Provider 設定
 
@@ -6301,7 +6301,7 @@ Start-Process "http://localhost:3000"
 
 実行イメージ（LLM Provider 設定）:
 
-![llm provider](examples/dify/03-llm-provider.png)
+![llm provider](images/04-ui/examples/dify/03-llm-provider\.png)
 
 #### 4.3.10.1.6 5. アプリ作成・チャット確認
 
@@ -6314,15 +6314,15 @@ Start-Process "http://localhost:3000"
 
 実行イメージ（アプリ作成）:
 
-![app created](examples/dify/04-app-created.png)
+![app created](images/04-ui/examples/dify/04-app-created\.png)
 
 実行イメージ（チャット入力）:
 
-![chat input](examples/dify/05-chat-input.png)
+![chat input](images/04-ui/examples/dify/05-chat-input\.png)
 
 実行イメージ（チャット回答）:
 
-![chat output](examples/dify/06-chat-output.png)
+![chat output](images/04-ui/examples/dify/06-chat-output\.png)
 
 #### 4.3.10.1.7 5.1 Workflow Builder（ドラッグ&ドロップ）
 
@@ -6334,7 +6334,7 @@ Start-Process "http://localhost:3000"
 
 実行イメージ（Workflow 作成）:
 
-![workflow builder](examples/dify/07-workflow-builder.png)
+![workflow builder](images/04-ui/examples/dify/07-workflow-builder\.png)
 
 #### 4.3.10.1.8 6. 基本機能の完了判定（最低ライン）
 
@@ -6516,7 +6516,7 @@ docker compose logs flowise --tail 50
 
 実行イメージ:
 
-![docker compose ps](examples/flowise/01-docker-compose-ps.png)
+![docker compose ps](images/04-ui/examples/flowise/01-docker-compose-ps\.png)
 
 #### 4.4.10.1.4 3. 初期アクセス
 
@@ -6531,7 +6531,7 @@ Start-Process "http://localhost:3001"
 
 実行イメージ（ログイン画面）:
 
-![flowise login](examples/flowise/02-flowise-login.png)
+![flowise login](images/04-ui/examples/flowise/02-flowise-login\.png)
 
 #### 4.4.10.1.5 4. Chatflow 作成
 
@@ -6544,7 +6544,7 @@ Start-Process "http://localhost:3001"
 
 実行イメージ（Chatflow 作成）:
 
-![chatflow created](examples/flowise/03-chatflow-created.png)
+![chatflow created](images/04-ui/examples/flowise/03-chatflow-created\.png)
 
 #### 4.4.10.1.6 5. Provider 設定とテスト実行
 
@@ -6560,15 +6560,15 @@ Start-Process "http://localhost:3001"
 
 実行イメージ（プロバイダ設定）:
 
-![provider settings](examples/flowise/04-provider-settings.png)
+![provider settings](images/04-ui/examples/flowise/04-provider-settings\.png)
 
 実行イメージ（テスト入力）:
 
-![test input](examples/flowise/05-test-input.png)
+![test input](images/04-ui/examples/flowise/05-test-input\.png)
 
 実行イメージ（テスト出力）:
 
-![test output](examples/flowise/06-test-output.png)
+![test output](images/04-ui/examples/flowise/06-test-output\.png)
 
 #### 4.4.10.1.7 5.1 Builder モード選択の確認
 
@@ -6880,7 +6880,7 @@ Copy-Item .env.example .env
 
 実行イメージ（.env 作成）:
 
-![env prepared](examples/librechat/01-env-prepared.png)
+![env prepared](images/04-ui/examples/librechat/01-env-prepared\.png)
 
 #### 4.5.13.1.3 2. 必須環境変数を最小設定
 
@@ -6899,7 +6899,7 @@ Copy-Item .env.example .env
 
 実行イメージ（env edited）:
 
-![env edited](examples/librechat/02-env-edited.png)
+![env edited](images/04-ui/examples/librechat/02-env-edited\.png)
 
 #### 4.5.13.1.4 3. コンテナ起動と状態確認
 
@@ -6916,7 +6916,7 @@ docker compose logs --tail 80
 
 実行イメージ（docker compose ps）:
 
-![docker compose ps](examples/librechat/03-docker-compose-ps.png)
+![docker compose ps](images/04-ui/examples/librechat/03-docker-compose-ps\.png)
 
 #### 4.5.13.1.5 4. 初期アクセス
 
@@ -6932,7 +6932,7 @@ Start-Process "http://localhost:3080"
 
 実行イメージ（signup/login）:
 
-![signup login](examples/librechat/04-signup-login.png)
+![signup login](images/04-ui/examples/librechat/04-signup-login\.png)
 
 #### 4.5.13.1.6 5. チャット確認
 
@@ -6952,11 +6952,11 @@ Start-Process "http://localhost:3080"
 
 実行イメージ（chat input）:
 
-![chat input](examples/librechat/05-chat-input.png)
+![chat input](images/04-ui/examples/librechat/05-chat-input\.png)
 
 実行イメージ（chat output）:
 
-![chat output](examples/librechat/06-chat-output.png)
+![chat output](images/04-ui/examples/librechat/06-chat-output\.png)
 
 #### 4.5.13.1.7 5.1 Tool Call / MCP 価値確認
 
@@ -6981,15 +6981,15 @@ Set-Content .\uploads\mcp-test-2.txt "Test content 2"
 
 実行イメージ（toolcall / mcp settings）:
 
-![toolcall mcp settings](examples/librechat/07-toolcall-mcp.png)
+![toolcall mcp settings](images/04-ui/examples/librechat/07-toolcall-mcp\.png)
 
 実行イメージ（mcp connected）:
 
-![mcp connected](examples/librechat/08-mcp-connected.png)
+![mcp connected](images/04-ui/examples/librechat/08-mcp-connected\.png)
 
 実行イメージ（toolcall output）:
 
-![toolcall output](examples/librechat/09-toolcall-output.png)
+![toolcall output](images/04-ui/examples/librechat/09-toolcall-output\.png)
 
 確認ポイント:
 
@@ -7210,7 +7210,7 @@ npm install
 
 実行イメージ（npm install）:
 
-![npm install](examples/chatbot-ui/01-npm-install.png)
+![npm install](images/04-ui/examples/chatbot-ui/01-npm-install\.png)
 
 #### 4.6.11.1.3 2. 環境変数を設定
 
@@ -7224,7 +7224,7 @@ Copy-Item .env.example .env.local
 
 実行イメージ（env local）:
 
-![env local](examples/chatbot-ui/02-env-local.png)
+![env local](images/04-ui/examples/chatbot-ui/02-env-local\.png)
 
 #### 4.6.11.1.4 3. 開発サーバ起動
 
@@ -7238,7 +7238,7 @@ npm run dev
 
 実行イメージ（dev server started）:
 
-![dev server started](examples/chatbot-ui/03-dev-server-started.png)
+![dev server started](images/04-ui/examples/chatbot-ui/03-dev-server-started\.png)
 
 #### 4.6.11.1.5 4. 初期アクセス
 
@@ -7246,7 +7246,7 @@ npm run dev
 
 実行イメージ（home）:
 
-![home](examples/chatbot-ui/04-home.png)
+![home](images/04-ui/examples/chatbot-ui/04-home\.png)
 
 #### 4.6.11.1.6 5. チャット確認
 
@@ -7258,11 +7258,11 @@ npm run dev
 
 実行イメージ（chat input）:
 
-![chat input](examples/chatbot-ui/05-chat-input.png)
+![chat input](images/04-ui/examples/chatbot-ui/05-chat-input\.png)
 
 実行イメージ（chat output）:
 
-![chat output](examples/chatbot-ui/06-chat-output.png)
+![chat output](images/04-ui/examples/chatbot-ui/06-chat-output\.png)
 
 #### 4.6.11.1.7 5.1 構成前提の確認（運用時の注意）
 
@@ -7438,23 +7438,23 @@ flowchart TD
 
 1. 初期画面（または `/signin` 到達）
 
-![home](examples/lobechat/03-home.png)
+![home](images/04-ui/examples/lobechat/03-home\.png)
 
 2. チャット入力前（未送信）
 
-![chat input](examples/lobechat/04-chat-input.png)
+![chat input](images/04-ui/examples/lobechat/04-chat-input\.png)
 
 3. 同一スレッドの送信後応答
 
-![chat output](examples/lobechat/05-chat-output.png)
+![chat output](images/04-ui/examples/lobechat/05-chat-output\.png)
 
 4. Agent / 拡張メニューの可視状態
 
-![agent menu](examples/lobechat/06-agent-menu.png)
+![agent menu](images/04-ui/examples/lobechat/06-agent-menu\.png)
 
 5. Skills または MCP の可視状態
 
-![skills mcp](examples/lobechat/07-skills-mcp.png)
+![skills mcp](images/04-ui/examples/lobechat/07-skills-mcp\.png)
 
 ## 4.7.8 完了判定（最低ライン）
 
@@ -7633,7 +7633,7 @@ docker compose logs anythingllm --tail 80
 
 実行イメージ:
 
-![docker compose ps](examples/anythingllm/01-docker-compose-ps.png)
+![docker compose ps](images/04-ui/examples/anythingllm/01-docker-compose-ps\.png)
 
 #### 4.8.10.1.4 3. 初期アクセス
 
@@ -7648,7 +7648,7 @@ Start-Process "http://localhost:3003"
 
 実行イメージ（setup）:
 
-![setup](examples/anythingllm/02-setup.png)
+![setup](images/04-ui/examples/anythingllm/02-setup\.png)
 
 #### 4.8.10.1.5 4. LLM Provider 設定
 
@@ -7660,7 +7660,7 @@ Start-Process "http://localhost:3003"
 
 実行イメージ（provider settings）:
 
-![provider settings](examples/anythingllm/03-provider-settings.png)
+![provider settings](images/04-ui/examples/anythingllm/03-provider-settings\.png)
 
 #### 4.8.10.1.6 5. ドキュメント登録とチャット確認
 
@@ -7672,15 +7672,15 @@ Start-Process "http://localhost:3003"
 
 実行イメージ（workspace created）:
 
-![workspace created](examples/anythingllm/04-workspace-created.png)
+![workspace created](images/04-ui/examples/anythingllm/04-workspace-created\.png)
 
 実行イメージ（chat input）:
 
-![chat input](examples/anythingllm/05-chat-input.png)
+![chat input](images/04-ui/examples/anythingllm/05-chat-input\.png)
 
 実行イメージ（chat output）:
 
-![chat output](examples/anythingllm/06-chat-output.png)
+![chat output](images/04-ui/examples/anythingllm/06-chat-output\.png)
 
 #### 4.8.10.1.7 5.1 インデックス完了と再送確認
 
@@ -9917,7 +9917,7 @@ python -m http.server 8017
 
 ### 7.2.8.3 描画結果（3種類）
 
-![vega-lite 3 charts](examples/vega-lite/01-three-charts.png)
+![vega-lite 3 charts](images/07-visualization/examples/vega-lite/01-three-charts\.png)
 
 ## 7.2.9 実ソースコード（言語別に記載）
 ### 7.2.9.1 JavaScript: examples/vega-lite/01_generate-spec.js
@@ -10197,7 +10197,7 @@ python -m http.server 8019
 
 ### 7.3.8.3 描画結果（複数系列）
 
-![echarts line series](examples/echarts/01-echarts-line-series.png)
+![echarts line series](images/07-visualization/examples/echarts/01-echarts-line-series\.png)
 
 ## 7.3.9 実ソースコード（言語別に記載）
 ### 7.3.9.1 JSON: examples/echarts/package.json

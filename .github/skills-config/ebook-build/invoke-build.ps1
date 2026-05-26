@@ -46,6 +46,12 @@ if (-not (Test-Path $dispatcherScript)) {
     throw "Shared dispatcher not found: $dispatcherScript"
 }
 
+Write-Host "Dispatcher script: $dispatcherScript"
+Write-Host "Invoking dispatcher with arguments:"
+Write-Host "  -RepoRoot   $repoRoot"
+Write-Host "  -ConfigFile $configFileResolved"
+Write-Host "  -BuildStep  $BuildStep"
+
 & pwsh -NoProfile -ExecutionPolicy Bypass -File $dispatcherScript `
     -RepoRoot   $repoRoot `
     -ConfigFile $configFileResolved `
