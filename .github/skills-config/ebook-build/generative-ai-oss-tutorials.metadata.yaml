@@ -20,3 +20,14 @@ keywords:
 subject:
   - software engineering
   - artificial intelligence
+chapters:
+  dir-titles:
+    01-agent-orchestration: エージェント・オーケストレーション
+    02-rag: RAG・ナレッジ検索
+    03-inference: 推論実行基盤
+    04-ui: UI・チャットアプリ基盤
+    05-evaluation: 評価・ガードレール・監視
+    06-multimodal: マルチモーダル
+    07-visualization: 可視化
+    08-protocols: プロトコル・標準
+    09-code-generation: コード生成支援
