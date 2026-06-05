@@ -29,7 +29,7 @@ next: 02-rag/02-haystack.md
 
 ## 特徴・できること
 ### 主な特徴
-- RAG（Retrieval-Augmented Generation）特化のPython OSSライブラリ
+- RAG を含む Context-Augmented LLM アプリ構築向けの Python OSS フレームワーク
 - 多様なデータソース（ファイル、DB、API等）に対応
 - LLM（OpenAI, Anthropic, Ollama等）と連携可能
 
@@ -66,7 +66,7 @@ next: 02-rag/02-haystack.md
 ### セットアップ例
 ```bash
 # uv未導入の場合
-pyhton -m pip install uv
+python -m pip install uv
 
 # 仮想環境作成
 uv venv .venv
@@ -86,24 +86,6 @@ uv pip install llama-index langchain-openai python-dotenv
 3. 実行結果を保存または表示し、次工程に渡せる形式へ整形
 4. パラメータを調整して挙動差分を比較し、品質を確認
 5. 運用を想定して再実行手順と確認ポイントを定着
-## 前提条件
-
-### 必須スキル
-
-- Python 基本
-- ベクトル検索の概念理解
-
-### 環境
-
-- Python 3.10+
-- pip
-- OpenAI API キー（LLMが必要な場合）
-
-### インストール
-
-```bash
-pip install llama-index langchain-openai python-dotenv
-```
 
 ## 位置づけ
 
@@ -117,7 +99,7 @@ flowchart LR
   F --> G[LLM回答生成]
 ```
 
-LlamaIndex は、ドキュメント取り込みから索引化、検索、回答生成までを RAG の流れとしてまとめるための中心ライブラリです。
+LlamaIndex は、ドキュメント取り込みから索引化、検索、回答生成に加えて、ワークフロー/エージェント連携まで含む LLM アプリ開発基盤として使えます。
 
 ## 実行フロー
 

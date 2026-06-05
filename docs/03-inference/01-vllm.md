@@ -17,7 +17,7 @@ next: 03-inference/02-ollama.md
 - Llama、Mistral、Qwen等を直接サポート
 - 既存のOpenAI APIコードがそのまま動作
 
-**バージョン**: 0.6.0+ / OSS準拠（2026-05時点）  
+**バージョン**: 最新版（公式 docs を参照）  
 **公式ドキュメント**: https://docs.vllm.ai/
 
 ## コンセプト
@@ -46,7 +46,7 @@ next: 03-inference/02-ollama.md
 
 ### メリット
 
-✅ 推論速度が非常に高速（OpenAI互換より10-40倍）  
+✅ 高スループット・低レイテンシを狙える  
 ✅ メモリ使用量が少ない  
 ✅ スケーラブル（複数GPUに対応）  
 ✅ オープンソース完全コントロール  
@@ -116,7 +116,7 @@ services:
 
     command: >
       python -m vllm.entrypoints.openai.api_server
-      --model meta-llama/Llama-2-7b-hf
+      --model Qwen/Qwen2.5-7B-Instruct
       --host 0.0.0.0
       --port 8000
       --gpu-memory-utilization 0.9
@@ -160,16 +160,33 @@ bash 02_cli-examples.sh
 
 - 役割: APIテスト用スクリプト
 - 入力: なし
-- 出力: （現状は空ファイル）
+- 出力: モデル一覧と生成レスポンス
 
 ```bash
+#!/usr/bin/env bash
+set -euo pipefail
 
+echo "== models =="
+curl -sS http://localhost:8000/v1/models
+echo
+
+echo "== chat =="
+curl -sS http://localhost:8000/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "messages": [
+      {"role": "user", "content": "こんにちは。3行で自己紹介して。"}
+    ],
+    "max_tokens": 120,
+    "temperature": 0.7
+  }'
 ```
 
 ## 補足
 
 **Q. どのモデルが推奨ですか？**  
-A. Llama-2-7b / Mistral-7b が定番。7B がメモリ効率と性能のバランス最適。
+A. 公式の Supported Models に掲載されたモデルから、用途・GPUメモリ・ライセンス条件で選んでください。
 
 **Q. GPU なしで動きますか？**  
 A. 動きますが、極めて遅いです。本番用途はGPU推奨。

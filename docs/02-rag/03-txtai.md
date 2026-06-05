@@ -90,7 +90,7 @@ txtaiは用途に応じて埋め込みモデルや生成モデルを切り替え
 ## まず試す
 ```bash
 # uv未導入の場合
-pyhton -m pip install uv
+python -m pip install uv
 
 # 仮想環境作成
 uv venv .venv

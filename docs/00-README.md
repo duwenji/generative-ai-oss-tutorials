@@ -12,7 +12,7 @@ next: docs/01-agent-orchestration/00-README.md
 
 > 💡 ブラウザで https://duwenji.github.io/spa-quiz-app/ を開くと、関連トピックをクイズ形式で復習できます。
 
-**📢 更新状況**: ✅ 全 42 ファイル 2026-05 API 準拠レビュー完了  
+**📢 更新状況**: 🔄 公式ドキュメントとの差分確認を継続中  
 **最終更新**: 2026年5月 | LangChain `init_chat_model()`、Haystack 2.x、MCP 1.0 対応
 
 ## この教材の使い方（3ステップ）

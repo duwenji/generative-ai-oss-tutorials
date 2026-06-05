@@ -1,8 +1,8 @@
 ---
 level: 中級（実装）
 prereq: 01-vllm.md
-prev: 01-vllm.md
-next: 02-ollama.md
+prev: 03-inference/04-llama-cpp.md
+next: 04-ui/00-README.md
 ---
 
 # ストリーミング推論（SSE / chunked / フレーミング）

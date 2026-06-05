@@ -17,7 +17,7 @@ next: 04-ui/03-flowise.md
 - 作成したアプリを REST API として公開
 - バージョン管理と A/B テスト
 
-**バージョン**: 0.7.0+ / OSS準拠（2026-05時点）  
+**バージョン**: 最新版（公式 docs を参照）  
 **公式ドキュメント**: https://docs.dify.ai/
 **公式サイト**: https://dify.ai/
 
@@ -55,26 +55,28 @@ next: 04-ui/03-flowise.md
 
 ## 仕組み
 
-1. 目的と入力を定義し、対象データや利用モデルを準備します。
-2. コア処理（検索・推論・生成・検証のいずれか）を実行します。
-3. 実行結果を保存または表示し、次工程に渡せる形式へ整えます。
-4. パラメータを調整して挙動差分を比較し、品質を確認します。
-5. 運用を想定して再実行手順と確認ポイントを定着させます。
+1. Studio で Chatbot/Workflow アプリを作成します。
+2. Model Provider を登録し、実行モデルを選択します。
+3. ノードやプロンプトを編集して実行経路を定義します。
+4. Preview で挙動を確認し、必要なら API として公開します。
+5. バージョン管理と運用設定で継続改善します。
 
 ## 前提条件
 
-### 前提条件
-
-- Docker インストール済み
-- PostgreSQL（Docker Compose に含む）
+- Docker Desktop（Compose v2）
+- Git
 - メモリ 8GB 以上推奨
 
 ### クイックスタート
 
 ```bash
+git clone https://github.com/langgenius/dify.git
+cd dify/docker
+cp .env.example .env
 docker compose up -d
 ```
-初期セットアップが自動実行されます。
+※ `docker-compose.yml` は手動作成せず、公式リポジトリに同梱された Compose 設定を利用します。
+初回は `http://localhost/install` で管理者設定を行い、その後 `http://localhost` にアクセスします。
 
 ## 位置づけ
 
@@ -106,63 +108,16 @@ flowchart TD
 #### 0. 作業ディレクトリ準備（PowerShell）
 
 ```powershell
-New-Item -ItemType Directory -Path .\sandbox\dify -Force | Out-Null
-Set-Location .\sandbox\dify
+New-Item -ItemType Directory -Path .\sandbox -Force | Out-Null
+Set-Location .\sandbox
 ```
 
-#### 1. docker-compose.yml を作成
+#### 1. 公式リポジトリを取得（同梱 Compose を利用）
 
-```yaml
-version: "3.8"
-
-services:
-  dify:
-    image: langgenius/dify-api:latest
-    container_name: dify-api
-    ports:
-      - "8081:5001"
-    environment:
-      - MODE=api
-      - SECRET_KEY=change-me
-      - CONSOLE_WEB_URL=http://localhost:3000
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_USERNAME=postgres
-      - DB_PASSWORD=postgres
-      - DB_DATABASE=dify
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-    depends_on:
-      - postgres
-      - redis
-
-  dify-web:
-    image: langgenius/dify-web:latest
-    container_name: dify-web
-    ports:
-      - "3000:3000"
-    environment:
-      - CONSOLE_API_URL=http://localhost:8081
-
-  postgres:
-    image: postgres:15
-    container_name: dify-postgres
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=dify
-    volumes:
-      - dify_postgres:/var/lib/postgresql/data
-
-  redis:
-    image: redis:7-alpine
-    container_name: dify-redis
-    volumes:
-      - dify_redis:/data
-
-volumes:
-  dify_postgres:
-  dify_redis:
+```powershell
+git clone https://github.com/langgenius/dify.git
+Set-Location .\dify\docker
+Copy-Item .env.example .env
 ```
 
 #### 2. コンテナ起動と状態確認
@@ -170,13 +125,13 @@ volumes:
 ```powershell
 docker compose up -d
 docker compose ps
-docker compose logs dify-api --tail 50
+docker compose logs --tail 80
 ```
 
 期待状態:
 
-- `dify-api`、`dify-web`、`dify-postgres`、`dify-redis` が `Up` になっている
-- `dify-api` のログに致命的エラーが出ていない
+- 複数の Dify 関連サービスが `Up` になっている
+- ログに致命的エラーが出ていない
 
 実行イメージ:
 
@@ -185,13 +140,14 @@ docker compose logs dify-api --tail 50
 #### 3. 管理者アカウント作成
 
 ```powershell
-Start-Process "http://localhost:3000"
+Start-Process "http://localhost/install"
 ```
 
 ブラウザ操作:
 
 1. 初回アクセスで管理者アカウントを作成
 2. メールアドレスとパスワードを設定して登録
+3. セットアップ後に `http://localhost` へ遷移してログイン
 
 実行イメージ（セットアップ画面）:
 
@@ -245,7 +201,7 @@ Start-Process "http://localhost:3000"
 
 #### 6. 基本機能の完了判定（最低ライン）
 
-- 管理画面 (http://localhost:3000) にログインできる
+- 管理画面 (http://localhost) にログインできる
 - LLM Provider が正常に登録されている
 - チャットボットアプリから応答が返る
 
