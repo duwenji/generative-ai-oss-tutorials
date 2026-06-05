@@ -1,9 +1,3 @@
----
-level: 📚 全体ガイド
-prereq: "-"
-next: docs/01-agent-orchestration/00-README.md
----
-
 # 生成AI活用OSS 実践ガイド
 
 ## オープンソースで学ぶ生成AIスタックの全体像
@@ -45,31 +39,6 @@ next: docs/01-agent-orchestration/00-README.md
 - 実運用を意識する: 3 → 8 → 5
 - 開発効率を上げる: 9（並行学習可）
 
-## 最小クイックスタート
-
-### LangChain
-
-```bash
-cd 01-agent-orchestration/01_langchain-python
-pip install -r 00_requirements.txt
-python 01_basic-chain.py
-```
-
-### promptfoo
-
-```bash
-cd 05-evaluation/01_promptfoo-samples
-npm install
-npx promptfoo eval -c 00_promptfooconfig.yaml
-```
-
-### MCP
-
-```bash
-cd 08-protocols/01_mcp-python
-python 01_mcp-client-skeleton.py
-```
-
 ## 本書で学べること
 
 - OSSベースで生成AIアプリの構成要素を説明できる
@@ -82,13 +51,5 @@ python 01_mcp-client-skeleton.py
 - 生成AIアプリ開発の全体像を短期間で掴みたい開発者
 - 技術選定やPoCを担当するエンジニア
 - OSSベースで検証環境を構築したいチーム
-
-## レビュー観点（体系化・簡潔・読みやすさ）
-
-- 体系化: 「何を学ぶか」「どこまでできれば完了か」が明記されているか
-- 簡潔: 同じ説明の重複がないか、不要な全文転載がないか
-- 読みやすさ: 見出しの順序と命名が統一されているか
-
-詳細ルールは [00_STYLE_GUIDE.md](./00_STYLE_GUIDE.md) を参照してください。
 
 ---

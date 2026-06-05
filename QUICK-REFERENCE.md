@@ -10,7 +10,6 @@
 
 詳細入口:
 - [docs/00-COVER.md](docs/00-COVER.md)
-- [00-README.md](00-README.md)
 
 ## カテゴリ早見表
 
