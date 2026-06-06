@@ -1,10 +1,3 @@
----
-level: 📖 中級（概念・実践）
-prereq: Python基礎 / LLMアプリの基本概念
-prev: 04-ui/04-librechat.md
-next: 04-ui/06-lobechat.md
----
-
 # Chatbot UI 入門
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念

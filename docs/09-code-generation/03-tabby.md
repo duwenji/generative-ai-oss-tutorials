@@ -1,10 +1,3 @@
----
-level: 📖 中級（概念・実践）
-prereq: Python基礎 / LLMアプリの基本概念
-prev: 09-code-generation/02-continue.md
-next: 09-code-generation/04-openhands.md
----
-
 # Tabby 入門
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念

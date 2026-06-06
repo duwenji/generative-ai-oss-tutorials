@@ -1,10 +1,3 @@
----
-level: 中級（実装）
-prereq: 01-vllm.md
-prev: 03-inference/04-llama-cpp.md
-next: 04-ui/00-README.md
----
-
 # ストリーミング推論（SSE / chunked / フレーミング）
 
 ---
@@ -88,7 +81,9 @@ flowchart LR
 
 ## 図中ノードとリポジトリ内サンプルの対応
 
-- `NGINX / Proxy`: サンプル NGINX 設定は sandbox/streaming-examples/nginx/nginx_streaming.conf。`proxy_buffering off` 等の設定で透過ストリーミングを実現します。
+- `NGINX / Proxy`: サンプル NGINX 設定は
+    sandbox/streaming-examples/nginx/nginx_streaming.conf。
+    `proxy_buffering off` 等の設定で透過ストリーミングを実現します。
 - `Router / FastAPI`: 透過プロキシのサンプルは sandbox/streaming-examples/fastapi_proxy/proxy.py。バックエンドへのストリーム転送とクライアント切断検知を行います。
 - `vLLM`: ストリーミングバックエンド。サンプルでは `BACKEND_URL = http://vllm-host:8000/generate` を想定しています。
 - `TGI`: バッチや複数モデル配信向けのバックエンド（オプション）。
@@ -232,7 +227,9 @@ docker compose up
 簡易確認 (ndjson を逐次受け取る確認):
 
 ```bash
-curl -N -X POST "http://localhost:8080/proxy" -H "Content-Type: application/json" -d '{"prompt":"hello world from test"}'
+curl -N -X POST "http://localhost:8080/proxy" \
+    -H "Content-Type: application/json" \
+    -d '{"prompt":"hello world from test"}'
 ```
 
 期待される挙動: ndjson や SSE によるチャンクが逐次出力されること。

@@ -1,10 +1,3 @@
----
-level: 📖 中級（概念・実践）
-prereq: Python基礎 / LLMアプリの基本概念
-prev: 01-agent-orchestration/01-langchain.md
-next: 01-agent-orchestration/03-autogen.md
----
-
 # LangGraph 入門
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念

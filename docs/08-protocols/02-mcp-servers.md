@@ -1,10 +1,3 @@
----
-level: 📖 中級（概念・実践）
-prereq: Python基礎 / LLMアプリの基本概念
-prev: 08-protocols/01-mcp.md
-next: 08-protocols/03-backend-integration.md
----
-
 # MCP Servers 入門
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念

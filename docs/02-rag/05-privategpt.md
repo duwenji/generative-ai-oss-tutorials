@@ -1,11 +1,3 @@
----
-level: 📖 中級（概念・実践）
-prereq: Python基礎 / LLMアプリの基本概念
-prev: 02-rag/04-ragflow.md
-next: 02-rag/06-quivr.md
----
-
-
 # privateGPT 入門
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念
@@ -111,6 +103,10 @@ uv venv .venv
 # パッケージインストール
 uv pip install -r requirements.txt
 
+# アプリ起動
+python -m private_gpt
+```
+
 ### Python: requirements.txt（最小構成例）
 
 - 役割: privateGPTの依存関係定義
@@ -131,10 +127,6 @@ docx2txt>=0.8
 markdown>=3.4.0
 fastapi>=0.110.0
 uvicorn>=0.29.0
-```
-
-# アプリ起動
-python -m private_gpt
 ```
 
 ローカル文書を ingest してから質問します。
@@ -189,13 +181,13 @@ python -m private_gpt
 
 ## よくある質問・補足
 **Q. privateGPT でクラウドLLM利用は可能？**  
-A. 設定で OpenAI API 等も使用可能。ただしデータ流出のリスクがあるため、本来の目的には合致しません。
+A. はい。設定により OpenAI API なども利用できます。ただし、データ流出のリスクがあるため、本来の目的には合致しません。
 
 **Q. Ollama や Llama2 ローカルとの連携は？**  
-A. はい。Ollama など local LLM と連携で、完全プライベート構成可能。
+A. はい。Ollama などのローカル LLM と連携することで、完全プライベート構成にできます。
 
 **Q. 対応ドキュメント形式は？**  
-A. PDF、Word、Text、Markdown 等。ただし言語サポートに制限あり。
+A. PDF、Word、Text、Markdown などに対応しています。ただし、言語サポートには制限があります。
 
 ---
 
@@ -231,7 +223,7 @@ A. PDF、Word、Text、Markdown 等。ただし言語サポートに制限あり
 
 ---
 
-[← 前へ](02-rag/04-ragflow.md) | [次へ →](02-rag/06-quivr.md)
+[← 前へ](04-ragflow.md) | [次へ →](06-quivr.md)
 
 
 

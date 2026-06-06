@@ -1,10 +1,3 @@
----
-level: 🔰 初級（カテゴリ導入）
-prereq: "-"
-prev: 05-evaluation/04-guardrails.md
-next: 06-multimodal/01-whisper.md
----
-
 # マルチモーダル（音声・画像）
 
 > 🔰 初級（カテゴリ導入） | 前提: -

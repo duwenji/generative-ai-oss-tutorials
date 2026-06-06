@@ -1,10 +1,3 @@
----
-level: 📖 中級（概念・実践）
-prereq: Python基礎 / LLMアプリの基本概念
-prev: 04-ui/01-open-webui.md
-next: 04-ui/03-flowise.md
----
-
 # Dify - ノーコード LLM アプリ開発プラットフォーム
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念

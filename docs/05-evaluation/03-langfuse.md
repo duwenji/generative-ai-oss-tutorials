@@ -1,11 +1,3 @@
----
-level: 📖 中級（概念・実践）
-prereq: Python基礎 / LLMアプリの基本概念
-prev: 05-evaluation/02-ragas.md
-next: 05-evaluation/04-guardrails.md
----
-
-
 # Langfuse 入門
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念

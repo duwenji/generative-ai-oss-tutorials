@@ -1,10 +1,3 @@
----
-level: 📖 中級（概念・実践）
-prereq: Python基礎 / LLMアプリの基本概念
-prev: 01-agent-orchestration/00-README.md
-next: 01-agent-orchestration/02-langgraph.md
----
-
 # LangChain - LLMアプリ開発の標準ライブラリ
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念

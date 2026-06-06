@@ -1,10 +1,3 @@
----
-level: 📖 中級（概念・実践）
-prereq: Python基礎 / LLMアプリの基本概念
-prev: 04-ui/02-dify.md
-next: 04-ui/04-librechat.md
----
-
 # Flowise 入門
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念
@@ -18,7 +11,10 @@ next: 04-ui/04-librechat.md
 - 実行証跡（ハードコピー）運用
 
 ## 公式ポジショニング
-Flowise は、AI Agents と LLM workflows を構築するためのオープンソース開発基盤です。Assistant、Chatflow、Agentflow という複数の作り方を持ち、ノードベースで構成を試しながら設計できます。
+Flowise は、AI Agents と LLM workflows を構築する
+オープンソース開発基盤です。
+Assistant、Chatflow、Agentflow という複数の作り方を持ち、
+ノードベースで構成を試しながら設計できます。
 
 **バージョン**: 1.5.0+ / OSS準拠（2026-05時点）  
 **公式ドキュメント**: https://docs.flowiseai.com/
@@ -241,7 +237,10 @@ docker compose down
 ## よくある質問
 
 **Q. `host.docker.internal` で Ollama に接続できません。**  
-A. Docker Desktop のバージョンが古いと名前解決に失敗する場合があります。`docker run --rm alpine nslookup host.docker.internal` で確認し、失敗する場合は Docker Desktop を更新してください。
+A. Docker Desktop のバージョンが古いと、
+名前解決に失敗する場合があります。
+`docker run --rm alpine nslookup host.docker.internal` で確認し、
+失敗する場合は Docker Desktop を更新してください。
 
 **Q. 初回起動で画面が白くなります。**  
 A. `docker compose logs flowise --tail 100` を確認し、ポート重複や初回セットアップの完了待ちを確認してください。

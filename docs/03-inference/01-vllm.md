@@ -1,10 +1,3 @@
----
-level: 📖 中級（概念・実践）
-prereq: Python基礎 / LLMアプリの基本概念
-prev: 03-inference/00-README.md
-next: 03-inference/02-ollama.md
----
-
 # vLLM - 高速LLM推論サーバ
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念

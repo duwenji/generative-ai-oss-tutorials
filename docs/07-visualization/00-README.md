@@ -1,10 +1,3 @@
----
-level: 🔰 初級（カテゴリ導入）
-prereq: "-"
-prev: 06-multimodal/07-coqui-tts.md
-next: 07-visualization/01-vega-lite.md
----
-
 # データ可視化
 
 > 🔰 初級（カテゴリ導入） | 前提: -

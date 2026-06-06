@@ -1,10 +1,3 @@
----
-level: 📖 中級（概念・実践）
-prereq: Python基礎 / LLMアプリの基本概念
-prev: 06-multimodal/03-comfyui.md
-next: 06-multimodal/05-invokeai.md
----
-
 # AUTOMATIC1111 入門
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念

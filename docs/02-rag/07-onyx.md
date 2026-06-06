@@ -1,11 +1,3 @@
----
-level: 📖 中級（概念・実践）
-prereq: Python基礎 / LLMアプリの基本概念
-prev: 02-rag/06-quivr.md
-next: 03-inference/00-README.md
----
-
-
 # Onyx 入門
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念
@@ -140,13 +132,13 @@ docker compose up -d
 
 ## よくある質問・補足
 **Q. Onyx と Quivr の使い分けは？**  
-A. Onyx はエンタープライズ向け（Slack/Confluence 等との深い統合）。Quivr はシンプルで導入が速い。大規模企業は Onyx、中小・スタートアップは Quivr 向き。
+A. Onyx はエンタープライズ向けで、Slack/Confluence などとの深い統合に強みがあります。Quivr はシンプルで導入が速いため、大規模企業は Onyx、中小・スタートアップは Quivr が候補になります。
 
 **Q. Danswer から Onyx へのリネームは何が変わった？**  
-A. ブランド名と公式サイトが Onyx に移行しました。実運用のための中核機能は継続されています。
+A. ブランド名と公式サイトが Onyx に移行しました。実運用向けの中核機能は継続されています。
 
 **Q. コスト比較: SaaS vs オンプレミスは？**  
-A. Onyx Cloud（SaaS）vs self-hosted 自由選択。オンプレ時はリソース（DB、メモリ）コスト要検討。
+A. Onyx Cloud（SaaS）と self-hosted を要件に応じて選択できます。オンプレミス運用時は、DB やメモリなどのリソースコストを事前に見積もることが重要です。
 
 ---
 
@@ -182,7 +174,7 @@ A. Onyx Cloud（SaaS）vs self-hosted 自由選択。オンプレ時はリソー
 
 ---
 
-[← 前へ](02-rag/06-quivr.md) | [次へ →](03-inference/00-README.md)
+[← 前へ](06-quivr.md) | [次へ →](../03-inference/00-README.md)
 
 
 

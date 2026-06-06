@@ -1,10 +1,3 @@
----
-level: 🔰 初級（カテゴリ導入）
-prereq: "-"
-prev: 07-visualization/02-echarts.md
-next: 08-protocols/01-mcp.md
----
-
 # プロトコル・標準・統合
 
 > 🔰 初級（カテゴリ導入） | 前提: -

@@ -1,10 +1,3 @@
----
-level: 📖 中級（概念・実践）
-prereq: Python基礎 / LLMアプリの基本概念
-prev: 08-protocols/02-mcp-servers.md
-next: 09-code-generation/00-README.md
----
-
 # MCP 実践編: stock-analyzer バックエンド連携
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念

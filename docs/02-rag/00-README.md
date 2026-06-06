@@ -1,15 +1,8 @@
----
-level: 🔰 初級（カテゴリ導入）
-prereq: "-"
-prev: 01-agent-orchestration/05-semantic-kernel.md
-next: 02-rag/01-llamaindex.md
----
-
 # RAG・ナレッジ検索
 
 > 🔰 初級（カテゴリ導入） | 前提: -
 
-ベクトル検索とLLMを組み合わせて、社内文書やナレッジからの質問応答を実現。
+ベクトル検索とLLMを組み合わせて、社内文書やナレッジからの質問応答を実現します。
 
 ## 位置づけ
 
@@ -28,7 +21,7 @@ flowchart TD
   S[開始] --> L[LlamaIndex]
   L --> H[Haystack]
   H --> T[txtai]
-  T --> O[RAGFlow/privateGPT/Quivr/Danswer]
+  T --> O[RAGFlow/privateGPT/Quivr/Onyx]
   O --> X[比較メモ作成]
 ```
 
@@ -56,7 +49,6 @@ flowchart TD
 
 - [01-llamaindex.md](./01-llamaindex.md)
 - [02-haystack.md](./02-haystack.md)
-- [02_haystack-python](./02_haystack-python/)
 - [03-txtai.md](./03-txtai.md)
 - [04-ragflow.md](./04-ragflow.md)
 - [05-privategpt.md](./05-privategpt.md)
@@ -199,7 +191,7 @@ pip install --upgrade onyx  # または Docker イメージを使用
 
 ---
 
-[← 前へ](01-agent-orchestration/05-semantic-kernel.md) | [次へ →](02-rag/01-llamaindex.md)
+[← 前へ](../01-agent-orchestration/05-semantic-kernel.md) | [次へ →](01-llamaindex.md)
 
 
 

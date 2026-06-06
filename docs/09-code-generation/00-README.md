@@ -1,10 +1,3 @@
----
-level: 🔰 初級（カテゴリ導入）
-prereq: "-"
-prev: 08-protocols/03-backend-integration.md
-next: 09-code-generation/01-aider.md
----
-
 # コード生成・開発支援
 
 > 🔰 初級（カテゴリ導入） | 前提: -

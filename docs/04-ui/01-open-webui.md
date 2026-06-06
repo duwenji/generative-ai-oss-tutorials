@@ -1,10 +1,3 @@
----
-level: 📖 中級（概念・実践）
-prereq: Python基礎 / LLMアプリの基本概念
-prev: 04-ui/00-README.md
-next: 04-ui/02-dify.md
----
-
 # Open WebUI - ローカル/セルフホスト型チャットUI
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念

@@ -1,10 +1,3 @@
----
-level: 🔰 初級（カテゴリ導入）
-prereq: "-"
-prev: 03-inference/04-llama-cpp.md
-next: 04-ui/01-open-webui.md
----
-
 # UI・チャットアプリ基盤
 
 > 🔰 初級（カテゴリ導入） | 前提: -
@@ -58,7 +51,7 @@ flowchart TD
 | Open WebUI | self-hosted AI interface | ローカル/セルフホストの統合チャット UI | モデル接続、ツール、RAG | まず自前環境で AI UI を持ちたい |
 | Dify | agentic workflow platform | AI アプリ構築と公開 | Workflow、データソース、API | 業務向け AI アプリを組みたい |
 | Flowise | AI agent / LLM workflow platform | ノードベースの設計と試行錯誤 | Assistant、Chatflow、Agentflow | フロー設計を可視化して検証したい |
-| LibreChat | open-source AI platform | 複数 Provider と外部連携を持つ統合会話基盤 | Agents、Tools、MCP、Artifacts | Tool Call や外部環境連携を重視したい |
+| LibreChat | open-source AI platform | 複数Provider対応の統合会話基盤 | Agents、Tools、MCP、Artifacts | Tool Call と外部連携を重視 |
 | Chatbot UI | open-source AI chat app | ChatGPT 風 UI の構築 | モデル接続中心 | シンプルな会話 UI を自分で育てたい |
 | LobeChat | agent operator / collaborative agent platform | Agent 利用とモダンな操作体験 | Skills、MCP、Memory | Agent 活用を前面に使いたい |
 | AnythingLLM | all-in-one private AI app | 文書中心の AI 利用基盤 | 文書取り込み、Agent、API | private-first で文書活用したい |

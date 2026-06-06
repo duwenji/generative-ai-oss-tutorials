@@ -23,7 +23,7 @@
 
 | # | カテゴリ | 難易度 | 学習入口 |
 |---|---|---|---|
-| 1 | エージェント・オーケストレーション | 🔰 初〜中 | [docs/01-agent-orchestration/00-README.md](./docs/01-agent-orchestration/00-README.md) |
+| 1 | エージェント・オーケストレーション | 🔰 初〜中 | [01-agent-orchestration](./docs/01-agent-orchestration/00-README.md) |
 | 2 | RAG・ナレッジ検索 | 🔰 初〜中 | [docs/02-rag/00-README.md](./docs/02-rag/00-README.md) |
 | 3 | 推論実行基盤 | 🔧 中 | [docs/03-inference/00-README.md](./docs/03-inference/00-README.md) |
 | 4 | UI・チャットアプリ基盤 | 🔰 初 | [docs/04-ui/00-README.md](./docs/04-ui/00-README.md) |

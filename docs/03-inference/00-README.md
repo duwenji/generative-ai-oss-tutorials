@@ -1,10 +1,3 @@
----
-level: 🔰 初級（カテゴリ導入）
-prereq: "-"
-prev: 02-rag/07-onyx.md
-next: 03-inference/01-vllm.md
----
-
 # 推論実行基盤（LLMサービング）
 
 > 🔰 初級（カテゴリ導入） | 前提: -

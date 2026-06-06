@@ -1,10 +1,3 @@
----
-level: 🔰 初級（カテゴリ導入）
-prereq: "-"
-prev: 00-README.md
-next: 01-agent-orchestration/01-langchain.md
----
-
 # エージェント・オーケストレーション
 
 > 🔰 初級（カテゴリ導入） | 前提: -

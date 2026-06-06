@@ -1,10 +1,3 @@
----
-level: 📖 中級（概念・実践）
-prereq: C# または Python 基礎 / LLMアプリの基本概念
-prev: 01-agent-orchestration/04-crewai.md
-next: 02-rag/00-README.md
----
-
 # Semantic Kernel 入門
 
 > 📖 中級（概念・実践） | 前提: C# または Python 基礎 / LLMアプリの基本概念
@@ -207,7 +200,8 @@ if __name__ == "__main__":
 
 #### 実行例
 ``` console
-(.venv) PS C:\Dev\tutorials\generative-ai-oss-tutorials\sandbox\semantic-kernel> python .\01_semantic-kernel-auto-tool-choice.py
+(.venv) PS C:\Dev\tutorials\generative-ai-oss-tutorials\sandbox\semantic-kernel>
+python .\01_semantic-kernel-auto-tool-choice.py
 === Auto Tool Choice Demo ===
 18と24を足すと42になります。これは、18と24の合計を示しており、例えば、18人と24人のグループを合わせたときの総人数を表しています。
 ```
@@ -266,8 +260,10 @@ if __name__ == "__main__":
 
 - [Semantic Kernel Overview](https://learn.microsoft.com/semantic-kernel/overview/)
 - [Semantic Kernel GitHub](https://github.com/microsoft/semantic-kernel)
-- [Python SDK Getting Started](https://learn.microsoft.com/semantic-kernel/get-started/quick-start-guide?pivots=programming-language-python)
-- [C# SDK Getting Started](https://learn.microsoft.com/semantic-kernel/get-started/quick-start-guide?pivots=programming-language-csharp)
+- [Python SDK Getting Started](https://learn.microsoft.com/semantic-kernel/get-started/quick-start-guide?pivots=
+    programming-language-python)
+- [C# SDK Getting Started](https://learn.microsoft.com/semantic-kernel/get-started/quick-start-guide?pivots=
+    programming-language-csharp)
 
 ---
 

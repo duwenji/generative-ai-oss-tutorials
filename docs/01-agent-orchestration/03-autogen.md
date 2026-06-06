@@ -1,10 +1,3 @@
----
-level: 📖 中級（概念・実践）
-prereq: Python基礎 / LLMアプリの基本概念
-prev: 01-agent-orchestration/02-langgraph.md
-next: 01-agent-orchestration/04-crewai.md
----
-
 # AutoGen 入門
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念
@@ -198,8 +191,12 @@ python 01_two-agents-chat.py
 ### サンプル実行結果例（抜粋）
 
 ```plaintext
-[33m[autogen.oai.client: 05-22 23:52:07] {164} WARNING - The API key specified is not a valid OpenAI format; it won't work with the OpenAI-hosted model.[0m
-[33m[autogen.oai.client: 05-22 23:52:08] {164} WARNING - The API key specified is not a valid OpenAI format; it won't work with the OpenAI-hosted model.[0m
+[autogen.oai.client: 05-22 23:52:07] {164} WARNING -
+The API key specified is not a valid OpenAI format;
+it won't work with the OpenAI-hosted model.
+[autogen.oai.client: 05-22 23:52:08] {164} WARNING -
+The API key specified is not a valid OpenAI format;
+it won't work with the OpenAI-hosted model.
 
 Next speaker: Reviewer
 
@@ -333,7 +330,13 @@ Reviewer (to chat_manager):
 ## 補足
 
 **Q. run_until_passで「合格」が1回目で出ても、なぜ複数ターン分の会話が記録されるの？**  
-A. AutoGenのGroupChatManagerのrun_chatは、messages引数を起点に複数ターン分のやりとりを一度に自動進行します。そのため、Reviewerが1回目で「合格」と出力しても、run_chat実行時にPlanner→Reviewerの会話が複数回分まとめて進み、結果として複数ターン分の会話が履歴に記録されます。現状のAPI仕様では、1ターンごとに厳密に制御することは難しいため、この挙動は仕様上の制約です。
+A. AutoGenのGroupChatManagerのrun_chatは、messages引数を起点に
+複数ターン分のやりとりを一度に自動進行します。
+そのため、Reviewerが1回目で「合格」と出力しても、
+run_chat実行時にPlanner→Reviewerの会話が複数回分まとめて進み、
+結果として複数ターン分の会話が履歴に記録されます。
+現状のAPI仕様では、1ターンごとに厳密に制御することは難しいため、
+この挙動は仕様上の制約です。
 
 **Q. 合格判定はどのように行われる？**  
 A. Reviewerのsystem_messageで「合格」と明記するよう指示し、出力に「合格」が含まれるか人間が確認します。AutoGen本体は自動判定しません。

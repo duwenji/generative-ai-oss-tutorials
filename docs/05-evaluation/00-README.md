@@ -1,10 +1,3 @@
----
-level: 🔰 初級（カテゴリ導入）
-prereq: "-"
-prev: 04-ui/07-anythingllm.md
-next: 05-evaluation/01-promptfoo.md
----
-
 # 評価・ガードレール・監視
 
 > 🔰 初級（カテゴリ導入） | 前提: -
