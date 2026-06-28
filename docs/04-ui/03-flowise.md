@@ -268,7 +268,7 @@ docker compose down
 2. メリットは再現性・拡張性・運用性の観点で整理し、注意点は導入コストや複雑性として示します。
 3. 使い分けは要件、実装コスト、運用体制の3観点で判断します。
 
-## よくある質問
+## 補足
 
 **Q. `host.docker.internal` で Ollama に接続できません。**  
 A. Docker Desktop のバージョンが古いと、名前解決に失敗する場合があります。`docker run --rm alpine nslookup host.docker.internal` で確認し、失敗する場合は Docker Desktop を更新してください。

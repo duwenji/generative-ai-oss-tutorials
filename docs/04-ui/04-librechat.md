@@ -51,7 +51,6 @@ flowchart LR
     A[セルフホストChat UI] --> B[LibreChat]
     B --> C[複数LLM接続]
     B --> D[会話UI運用]
-    B --> E[Tool Call/MCP拡張]
 ```
 
 LibreChat は、複数 Provider を 1 つの UI 基盤で統合し、Agents や MCP まで段階的に拡張できるセルフホスト AI プラットフォームです。まずは通常チャット疎通、次に Provider 切替、最後に Tool Call / MCP 価値確認へ進むと理解しやすくなります。
@@ -387,7 +386,7 @@ docker compose down
 2. メリットは再現性・拡張性・運用性の観点で整理し、注意点は導入コストや複雑性として示します。
 3. 使い分けは要件、実装コスト、運用体制の3観点で判断します。
 
-## よくある質問
+## 補足
 
 **Q. 起動後に 502/503 が出ます。**  
 A. 初回は依存コンテナの起動に時間がかかります。`docker compose logs --tail 120` を確認し、数分待って再読込してください。
