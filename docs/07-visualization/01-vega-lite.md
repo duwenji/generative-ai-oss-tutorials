@@ -85,6 +85,8 @@ python -m http.server 8017
 
 ## 実ソースコード
 
+Vega-Lite は、可視化の内容を「データ」「描画方法」「データと見た目の対応関係」という形で宣言的に記述するライブラリです。公式サイトでもその特徴として、JSON の構造を定義するだけでチャートを作成し、必要に応じて複数ビューやインタラクティブ要素を組み合わせられる点が強調されています。ここでは、月次データをもとに折れ線・棒・面積チャートを 1 つの仕様としてまとめる例を示します。
+
 ### JavaScript: examples/vega-lite/01_generate-spec.js
 
 - 役割: Vega-Lite 仕様JSONを生成してファイル出力
@@ -165,6 +167,7 @@ console.log("Generated 02_chart-spec.json");
 ### JSON: examples/vega-lite/02_chart-spec.json
 
 - 役割: 可視化フロントに渡す最終仕様
+- 意図: `mark` でチャートの形を決め、`encoding` でデータを軸・ツールチップへ割り当てる
 - 入力: なし（`examples/vega-lite/01_generate-spec.js` で生成される）
 - 出力: Vega-Lite描画用JSON
 
