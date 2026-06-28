@@ -25,6 +25,8 @@ AutoGenの典型的な実行の流れ:
 
 ## 位置づけ
 
+この例では、AutoGen 入門 の基本的な利用手順を示します。サンプルコードの意図と、実行時に何が起こるのかを確認しながら読み進めると理解しやすくなります。
+
 ```mermaid
 flowchart LR
 	A[マルチエージェント設計] --> B[AutoGen]
@@ -136,7 +138,10 @@ load_dotenv()
 def main() -> None:
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
-        raise RuntimeError("OPENAI_API_KEY が未設定です。.env を確認してください。")
+        raise RuntimeError(
+            "OPENAI_API_KEY が未設定です。"
+            ".env を確認してください。"
+        )
 
     llm_config = {
         "config_list": [

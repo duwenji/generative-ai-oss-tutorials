@@ -25,6 +25,8 @@ Continue は VS Code/JetBrains 上で補完と対話編集を一体化する OSS
 
 ## 位置づけ
 
+この例では、Continue - IDEに統合された補完・対話編集アシスタント の基本的な利用手順を示します。サンプルコードの意図と、実行時に何が起こるのかを確認しながら読み進めると理解しやすくなります。
+
 ```mermaid
 flowchart LR
 		A[IDE内開発体験] --> B[Continue]

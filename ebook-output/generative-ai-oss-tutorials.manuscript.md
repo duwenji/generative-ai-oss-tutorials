@@ -228,8 +228,8 @@ load_dotenv()
 # 1. LLMモデルの初期化
 # init_chat_model: プロバイダを抽象化した初期化
 llm = init_chat_model(
-  "openai:gpt-4o-mini",
-  temperature=0.7,
+    "openai:gpt-4o-mini",
+    temperature=0.7,
 )
 
 # 2. プロンプトテンプレートの作成
@@ -298,7 +298,10 @@ tools = [get_stock_price, calculate_portfolio_return]
 agent = create_agent(
     model="openai:gpt-4o-mini",
     tools=tools,
-    system_prompt="あなたは金融アシスタントです。必要ならツールを使ってください。",
+    system_prompt=(
+        "あなたは金融アシスタントです。"
+        "必要ならツールを使ってください。"
+    ),
 )
 
 # ========== 実行 ==========
@@ -346,7 +349,10 @@ memory = InMemorySaver()
 agent = create_agent(
     model="openai:gpt-4o-mini",
     tools=[],
-    system_prompt="あなたは親切なAIアシスタントです。会話履歴を参照して回答してください。",
+    system_prompt=(
+        "あなたは親切なAIアシスタントです。"
+        "会話履歴を参照して回答してください。"
+    ),
     checkpointer=memory,
 )
 
@@ -511,9 +517,10 @@ async function main() {
   const agent = createAgent({
     model: "gpt-4o-mini",
     tools,
-    systemPrompt:
-      "You are a helpful financial assistant. " +
+    systemPrompt: [
+      "You are a helpful financial assistant.",
       "Use tools when needed.",
+    ].join(" "),
   });
 
   // ========== 実行 ==========
@@ -568,7 +575,10 @@ async function main() {
   const agent = createAgent({
     model: "gpt-4o-mini",
     tools: [],
-    systemPrompt: "あなたは丁寧な日本語アシスタントです。会話履歴を参照して答えてください。",
+    systemPrompt: [
+      "あなたは丁寧な日本語アシスタントです。",
+      "会話履歴を参照して答えてください。",
+    ].join(""),
     checkpointer,
   });
 
@@ -4031,6 +4041,8 @@ curl http://localhost:11434/api/generate \
 - この教材の実装例は、本文中の実行手順に対応しています。
 - 必要に応じて、主要コードの抜粋をこのセクションへ追記してください。
 
+このサンプルでは、Ollama が提供するローカル HTTP API に対して、モデル名とプロンプトを JSON で送る構成を示します。公式サイトでも Ollama は「ローカルでモデルを動かし、HTTP API から生成結果を取得する」方式として案内されており、ここでは `/api/generate` と `/api/chat` の違いを最小構成で体験できるようにしています。
+
 #### 3.2.6.2 PowerShell リクエスト例
 
 ```powershell
@@ -4072,11 +4084,16 @@ Invoke-RestMethod @request2
 
 #### 3.2.6.3 実行例と検証
 
+この手順は、起動した Ollama サーバに対して実際にモデルを取得し、推論リクエストを送る一連の流れを確認するためのものです。`/api/generate` へ送るプロンプトは、モデルが回答を生成するための入力であり、ここでレスポンス内容を確認することで、ローカル推論環境が正しく動作しているかを検証できます。
+
 ```bash
 docker-compose up -d
 docker exec -it ollama ollama pull qwen2.5:3b
 curl http://localhost:11434/api/generate \
-  -d '{"model":"qwen2.5:3b","prompt":"生成AIを2行で説明して"}'
+  -d '{
+    "model": "qwen2.5:3b",
+    "prompt": "生成AIを2行で説明して"
+  }'
 ```
 
 - `/api/tags` でモデル一覧が表示されるか確認する
@@ -4416,6 +4433,12 @@ flowchart TD
 - [llama.cpp リリース（バイナリ）](https://github.com/ggerganov/llama.cpp/releases)
 - [Qwen2.5 GGUF モデル](https://huggingface.co/Qwen/Qwen2.5-3B-Instruct-GGUF)
 
+---
+
+
+## 3.5 ストリーミング推論（SSE / chunked / フレーミング）
+
+---
 このドキュメントは、対話型アプリケーションでトークンを逐次返却する「ストリーミング推論」について、設計上の判断や実装上の注意点、サンプル実装（NGINX + FastAPI）をまとめたものです。
 ---
 
@@ -8520,6 +8543,8 @@ python -m http.server 8017
 
 ### 7.1.6 実ソースコード
 
+Vega-Lite は、可視化の内容を「データ」「描画方法」「データと見た目の対応関係」という形で宣言的に記述するライブラリです。公式サイトでもその特徴として、JSON の構造を定義するだけでチャートを作成し、必要に応じて複数ビューやインタラクティブ要素を組み合わせられる点が強調されています。ここでは、月次データをもとに折れ線・棒・面積チャートを 1 つの仕様としてまとめる例を示します。
+
 #### 7.1.6.1 JavaScript: examples/vega-lite/01_generate-spec.js
 
 - 役割: Vega-Lite 仕様JSONを生成してファイル出力
@@ -8593,13 +8618,18 @@ const spec = {
   spacing: 20,
 };
 
-fs.writeFileSync("02_chart-spec.json", JSON.stringify(spec, null, 2), "utf-8");
+fs.writeFileSync(
+  "02_chart-spec.json",
+  JSON.stringify(spec, null, 2),
+  "utf-8"
+);
 console.log("Generated 02_chart-spec.json");
 ```
 
 #### 7.1.6.2 JSON: examples/vega-lite/02_chart-spec.json
 
 - 役割: 可視化フロントに渡す最終仕様
+- 意図: `mark` でチャートの形を決め、`encoding` でデータを軸・ツールチップへ割り当てる
 - 入力: なし（`examples/vega-lite/01_generate-spec.js` で生成される）
 - 出力: Vega-Lite描画用JSON
 
@@ -9030,6 +9060,8 @@ pip install -r 01_mcp-python/00_requirements.txt
 
 ### 8.1.6 実ソースコード
 
+このセクションでは、MCP の「プロトコルとしての手順」を最小限のコードで確認します。公式ドキュメントでも MCP は AI アプリと外部ツールを標準化した方法で接続する仕組みとして説明されており、実際にはクライアントがまず接続情報を交換し、その後に利用可能ツールを確認してから実行する流れになります。ここではその前段のメッセージ構造を、実装の土台として抽出しています。
+
 #### 8.1.6.1 01_mcp-python/00_requirements.txt
 
 ```txt
@@ -9088,6 +9120,8 @@ if __name__ == "__main__":
 
 #### 8.1.6.3 01_mcp-python/02_mcp-tool-call-skeleton.py
 
+このサンプルは、ツール一覧の確認後に実際に 1 つのツールを呼び出す際のリクエスト雛形です。`tools/call` では、ツール名と引数を JSON-RPC の `params` に入れて送るため、サーバ側で何を実行できるかを明示的に指定できる構造になっています。
+
 ```python
 """MCP tool call request skeleton."""
 
@@ -9108,10 +9142,13 @@ def build_tool_call_request(name: str, arguments: dict) -> dict:
 
 
 def main() -> None:
-	req = build_tool_call_request(
-		"query_stock_price",
-		{"symbol": "7203", "date": "2026-05-09"},
-	)
+	tool_name = "query_stock_price"
+	arguments = {
+		"symbol": "7203",
+		"date": "2026-05-09",
+	}
+
+	req = build_tool_call_request(tool_name, arguments)
 	print(json.dumps(req, ensure_ascii=False, indent=2))
 
 

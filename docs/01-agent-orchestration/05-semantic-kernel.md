@@ -19,6 +19,8 @@ Semantic Kernel は、LLM 機能を既存アプリへ組み込むためのOSS SD
 
 ## 位置づけ
 
+この例では、Semantic Kernel 入門 の基本的な利用手順を示します。サンプルコードの意図と、実行時に何が起こるのかを確認しながら読み進めると理解しやすくなります。
+
 ```mermaid
 flowchart LR
   A[アプリケーション層] --> B[Semantic Kernel]
@@ -149,7 +151,9 @@ class MathPlugin:
 def require_env(name: str) -> str:
     value = os.getenv(name)
     if not value:
-        raise RuntimeError(f"{name} が設定されていません")
+        raise RuntimeError(
+            f"{name} が設定されていません"
+        )
     return value
 
 

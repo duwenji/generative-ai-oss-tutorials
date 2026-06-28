@@ -31,6 +31,8 @@
 
 ## 位置づけ
 
+この例では、MCP 実践編: stock-analyzer バックエンド連携 - 設定読込とJSON-RPCリクエスト組み立て の基本的な利用手順を示します。サンプルコードの意図と、実行時に何が起こるのかを確認しながら読み進めると理解しやすくなります。
+
 ```mermaid
 flowchart LR
 	A[stock-analyzer backend] --> B[MCP設定読込]

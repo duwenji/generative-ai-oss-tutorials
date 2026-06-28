@@ -19,6 +19,8 @@
 
 ## 位置づけ
 
+この例では、AUTOMATIC1111 - Stable Diffusion Web UIの定番実装 の基本的な利用手順を示します。サンプルコードの意図と、実行時に何が起こるのかを確認しながら読み進めると理解しやすくなります。
+
 ```mermaid
 flowchart LR
     A[Stable Diffusion運用] --> B[AUTOMATIC1111]
@@ -121,7 +123,9 @@ def main() -> None:
 	data = res.json()
 	images = data.get("images", [])
 	if not images:
-		raise RuntimeError("No images returned")
+		raise RuntimeError(
+			"No images returned"
+		)
 
 	img_bytes = base64.b64decode(images[0])
 	out = Path("output.png")

@@ -31,6 +31,8 @@
 
 ## 位置づけ
 
+この例では、LangChain - LLMアプリ開発の標準ライブラリ の基本的な利用手順を示します。サンプルコードの意図と、実行時に何が起こるのかを確認しながら読み進めると理解しやすくなります。
+
 ```mermaid
 flowchart LR
     A[LLMアプリ開発] --> B[LangChain]
@@ -110,10 +112,13 @@ OPENAI_API_KEY=sk-your-key-here
 
 ```powershell
 # Python サンプル一括実行
-./examples/run-python-samples.ps1 -ApiKey "<YOUR_KEY>"
+./examples/run-python-samples.ps1 `
+  -ApiKey "<YOUR_KEY>"
 
 # JavaScript サンプル一括実行
-./examples/run-js-samples.ps1 -ApiKey "<YOUR_KEY>" -CleanupNodeModules
+./examples/run-js-samples.ps1 `
+  -ApiKey "<YOUR_KEY>" `
+  -CleanupNodeModules
 ```
 
 ## 実ソースコード（言語別に記載）
@@ -226,7 +231,10 @@ def get_stock_price(symbol: str) -> str:
     price = prices.get(symbol, "Not found")
     return f"株価情報: {symbol} = {price}"
 
-def calculate_portfolio_return(initial: float, final: float) -> str:
+def calculate_portfolio_return(
+    initial: float,
+    final: float,
+) -> str:
     """収益率を計算する。"""
     if initial <= 0:
         return "初期投資額が不正です"
