@@ -1,20 +1,22 @@
-# MCP Servers 入門
+# MCP Servers - ファイル・DB・APIをMCP経由で公開するサーバ実装
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念
 
 ## この教材で身につくこと
 
-- ファイル操作ツール
-- SQL クエリ実行ツール
-- HTTP API 連携ツール
+- MCP サーバをローカルで起動し、ツール一覧を取得できる
+- filesystem / SQL / HTTP API 向けサーバの違いを説明できる
+- `tools/list` と `tools/call` でサーバの機能を呼び出せる
+- セキュリティ上のパス制限の仕組みを理解できる
 
-## コンセプト
-MCP Servers はファイル、DB、APIなどの機能を MCP 経由で提供する実装群です。
+## 概要
+
+**MCP Servers** はファイル、DB、APIなどの機能を MCP 経由で提供する実装群です。
 
 **仕様**: MCP 1.0 対応 / OSS実装群（2026-05時点）  
 **公式ドキュメント**: https://modelcontextprotocol.io/
 
-## 仕組み
+### 仕組み
 
 1. MCPサーバをプロセスとして起動し、ツール群を公開します。
 2. クライアントは `tools/list` で利用可能な機能を取得します。
@@ -66,9 +68,13 @@ npx @modelcontextprotocol/server-filesystem C:/Dev/stock
 
 MCP対応クライアントから tools/list を実行し、ファイル系ツールが列挙されることを確認します。
 
-## サンプル
+## 実ソースコード
 
-### 実行例
+### 主要サンプル
+
+この教材の実装例は、本文中の実行手順に対応しています。
+
+### 実行例と検証
 
 ```bash
 npx @modelcontextprotocol/server-filesystem C:/Dev/stock
@@ -79,23 +85,16 @@ npx @modelcontextprotocol/server-filesystem C:/Dev/stock
 - MCP対応クライアントで `tools/list` を実行する
 - `read_file` や `write_file` などのツール表示を確認する
 
-### 検証
+検証ポイント:
 
 - 許可したパス配下のみアクセスできるか確認する
 - 不正パス指定時にエラーが返ることを確認する
 
-
-## 実ソースコード（言語別に記載）
-
-### 主要サンプル
-- この教材の実装例は、本文中の実行手順に対応しています。
-- 必要に応じて、主要コードの抜粋をこのセクションへ追記してください。
-
 ## 演習課題
 
-1. ``MCP Servers 入門`` を使う想定ユースケースを1つ定義し、入力・出力の例を記録してください。
+1. `MCP Servers` を使う想定ユースケースを1つ定義し、入力・出力の例を記録してください。
 2. 最小構成で動かし、デフォルトから設定を1つ変えて挙動の差分を確認してください。
-3. ``MCP Servers 入門`` を使わない場合の代替手段と比較し、選ぶ基準をまとめてください。
+3. `MCP Servers` を使わない場合の代替手段と比較し、選ぶ基準をまとめてください。
 
 
 ### 解答の目安
@@ -109,9 +108,9 @@ npx @modelcontextprotocol/server-filesystem C:/Dev/stock
 
 ## 理解度チェック
 
-1. ``MCP Servers 入門`` の主な役割を1文で説明してください。
-2. ``MCP Servers 入門`` を導入する際の最大のメリットと注意点は何ですか？
-3. ``MCP Servers 入門`` が向かないユースケースとして、どのようなケースが考えられますか？
+1. MCP Servers の主な役割を1文で説明してください。
+2. MCP Servers を導入する際の最大のメリットと注意点は何ですか？
+3. MCP Servers が向かないユースケースとして、どのようなケースが考えられますか？
 
 
 ### 解説の要点
@@ -119,10 +118,13 @@ npx @modelcontextprotocol/server-filesystem C:/Dev/stock
 1. 主な役割は、その技術がどの工程を担い、何を改善するかで説明します。
 2. メリットは再現性・拡張性・運用性の観点で整理し、注意点は導入コストや複雑性として示します。
 3. 使い分けは要件、実装コスト、運用体制の3観点で判断します。
+
+## 参考リンク
+
+- [MCP 公式ドキュメント](https://modelcontextprotocol.io/)
+- [server-filesystem（GitHub）](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem)
+- [MCP Servers 一覧](https://github.com/modelcontextprotocol/servers)
+
 ---
 
-[← 前へ](08-protocols/01-mcp.md) | [次へ →](08-protocols/03-backend-integration.md)
-
-
-
-
+[← 前へ](01-mcp.md) | [次へ →](03-backend-integration.md)

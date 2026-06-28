@@ -1,24 +1,27 @@
-# MCP 実践編: stock-analyzer バックエンド連携
+# MCP 実践編: stock-analyzer バックエンド連携 - 設定読込とJSON-RPCリクエスト組み立て
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念
 
 ## この教材で身につくこと
 
-- 設定ファイルから server 名とコマンドを抽出
-- tools/call リクエストをJSON-RPC形式で作成
-- yfinance / fetch を想定した呼び出し設計
+- YAML 設定ファイルから MCP サーバ名とコマンドを抽出できる
+- `tools/call` リクエストをJSON-RPC形式で組み立てられる
+- yfinance / fetch を想定したツール呼び出し設計を説明できる
+- stock-analyzer の MCP 設定を読んでエージェント連携の全体像を把握できる
 
-## コンセプト
+## 概要
+
 この教材は、既存の stock-analyzer の MCP 設定を読み取り、MCP サーバ構成とツール呼び出し要求を組み立てる実践例です。
 
 **仕様**: MCP 1.0 / 実装例（2026-05時点）  
 **公式ドキュメント**: https://modelcontextprotocol.io/
 
-## 対象ファイル
-- stock-analyzer/backend/mcp_agent.config.yaml
-- stock-analyzer/backend/aiagent/mcp_agent.py
+対象ファイル:
 
-## 仕組み
+- `stock-analyzer/backend/mcp_agent.config.yaml`
+- `stock-analyzer/backend/aiagent/mcp_agent.py`
+
+### 仕組み
 
 1. 設定ファイルを読み込み、利用するMCPサーバ定義を抽出します。
 2. サーバごとの command と args をマップ化します。
@@ -47,7 +50,28 @@ flowchart TD
 	R --> X[JSON-RPC要求確認]
 ```
 
-## 実ソースコード（言語別に記載）
+## 最小セットアップ
+
+### 前提条件
+
+- Python 3.10+
+- pip
+- stock-analyzer リポジトリ（`mcp_agent.config.yaml` が存在すること）
+
+### インストール
+
+```bash
+pip install -r 03_backend-integration-python/00_requirements.txt
+```
+
+### 環境変数
+
+```bash
+# stock-analyzer のパスが ../../../stock-analyzer/ に存在することを確認してください
+```
+
+## 実ソースコード
+
 ### 03_backend-integration-python/00_requirements.txt
 
 ```txt
@@ -142,25 +166,23 @@ if __name__ == "__main__":
 	main()
 ```
 
-## サンプル
-
-### 実行例
+### 実行例と検証
 
 ```bash
 python 01_load-config.py
 python 02_agent-request-example.py
 ```
 
-### 検証
+検証ポイント:
 
 - サーバ名、command、args が config と一致するか確認する
 - `tools/call` の name と arguments が対象ツール仕様に沿うか確認する
 
 ## 演習課題
 
-1. ``MCP 実践編: stock`` を使う想定ユースケースを1つ定義し、入力・出力の例を記録してください。
+1. `MCP 実践編: stock-analyzer` を使う想定ユースケースを1つ定義し、入力・出力の例を記録してください。
 2. 最小構成で動かし、デフォルトから設定を1つ変えて挙動の差分を確認してください。
-3. ``MCP 実践編: stock`` を使わない場合の代替手段と比較し、選ぶ基準をまとめてください。
+3. `MCP 実践編: stock-analyzer` を使わない場合の代替手段と比較し、選ぶ基準をまとめてください。
 
 
 ### 解答の目安
@@ -174,9 +196,9 @@ python 02_agent-request-example.py
 
 ## 理解度チェック
 
-1. ``MCP 実践編: stock`` の主な役割を1文で説明してください。
-2. ``MCP 実践編: stock`` を導入する際の最大のメリットと注意点は何ですか？
-3. ``MCP 実践編: stock`` が向かないユースケースとして、どのようなケースが考えられますか？
+1. この教材における MCP 実践編の主な役割を1文で説明してください。
+2. stock-analyzer のMCP設定を読み込む際の最大のメリットと注意点は何ですか？
+3. この手法が向かないユースケースとして、どのようなケースが考えられますか？
 
 
 ### 解説の要点
@@ -184,10 +206,13 @@ python 02_agent-request-example.py
 1. 主な役割は、その技術がどの工程を担い、何を改善するかで説明します。
 2. メリットは再現性・拡張性・運用性の観点で整理し、注意点は導入コストや複雑性として示します。
 3. 使い分けは要件、実装コスト、運用体制の3観点で判断します。
+
+## 参考リンク
+
+- [MCP 公式ドキュメント](https://modelcontextprotocol.io/)
+- [MCP 仕様リポジトリ（GitHub）](https://github.com/modelcontextprotocol/specification)
+- [PyYAML ドキュメント](https://pyyaml.org/wiki/PyYAMLDocumentation)
+
 ---
 
-[← 前へ](08-protocols/02-mcp-servers.md) | [次へ →](09-code-generation/00-README.md)
-
-
-
-
+[← 前へ](02-mcp-servers.md) | [次へ →](../09-code-generation/01-aider.md)

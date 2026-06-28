@@ -1,20 +1,22 @@
-# MCP 入門
+# MCP - LLMと外部ツールを標準化接続するプロトコル
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念
 
 ## この教材で身につくこと
 
-- ツール呼び出しの標準化
-- コンテキスト供給の統一
-- クライアント/サーバ分離
+- MCP の JSON-RPC メッセージ構造を説明できる
+- `initialize` / `tools/list` / `tools/call` の各リクエストを自分で組み立てられる
+- クライアント/サーバ分離の設計意図を理解し、説明できる
+- MCP を使う場面と使わない場面を判断できる
 
-## コンセプト
-MCP（Model Context Protocol）は、LLM と外部ツールを標準化された方法で接続するためのプロトコルです。
+## 概要
+
+**MCP（Model Context Protocol）** は、LLM と外部ツールを標準化された方法で接続するためのプロトコルです。
 
 **仕様**: MCP 1.0 / OSS仕様（2026-05時点）  
 **公式ドキュメント**: https://modelcontextprotocol.io/
 
-## 仕組み
+### 仕組み
 
 1. クライアントが `initialize` で能力情報を交換します。
 2. `tools/list` で利用可能ツールの一覧を取得します。
@@ -43,7 +45,25 @@ flowchart TD
 	T --> X[JSON-RPC雛形確認]
 ```
 
-## 実ソースコード（言語別に記載）
+## 最小セットアップ
+
+### 前提条件
+
+- Python 3.10+
+- pip
+
+### インストール
+
+```bash
+pip install -r 01_mcp-python/00_requirements.txt
+```
+
+### 環境変数
+
+特別な API キーは不要です。このサンプルは JSON-RPC リクエストの構造確認を目的としています。
+
+## 実ソースコード
+
 ### 01_mcp-python/00_requirements.txt
 
 ```txt
@@ -133,25 +153,23 @@ if __name__ == "__main__":
 	main()
 ```
 
-## サンプル
-
-### 実行例
+### 実行例と検証
 
 ```bash
 python 01_mcp-client-skeleton.py
 python 02_mcp-tool-call-skeleton.py
 ```
 
-### 検証
+検証ポイント:
 
 - `initialize` と `tools/list` の JSON-RPC フィールドが揃っているか確認する
 - `tools/call` の name と arguments が対象ツール仕様と一致するか確認する
 
 ## 演習課題
 
-1. ``MCP 入門`` を使う想定ユースケースを1つ定義し、入力・出力の例を記録してください。
+1. `MCP` を使う想定ユースケースを1つ定義し、入力・出力の例を記録してください。
 2. 最小構成で動かし、デフォルトから設定を1つ変えて挙動の差分を確認してください。
-3. ``MCP 入門`` を使わない場合の代替手段と比較し、選ぶ基準をまとめてください。
+3. `MCP` を使わない場合の代替手段と比較し、選ぶ基準をまとめてください。
 
 
 ### 解答の目安
@@ -165,9 +183,9 @@ python 02_mcp-tool-call-skeleton.py
 
 ## 理解度チェック
 
-1. ``MCP 入門`` の主な役割を1文で説明してください。
-2. ``MCP 入門`` を導入する際の最大のメリットと注意点は何ですか？
-3. ``MCP 入門`` が向かないユースケースとして、どのようなケースが考えられますか？
+1. MCP の主な役割を1文で説明してください。
+2. MCP を導入する際の最大のメリットと注意点は何ですか？
+3. MCP が向かないユースケースとして、どのようなケースが考えられますか？
 
 
 ### 解説の要点
@@ -175,10 +193,12 @@ python 02_mcp-tool-call-skeleton.py
 1. 主な役割は、その技術がどの工程を担い、何を改善するかで説明します。
 2. メリットは再現性・拡張性・運用性の観点で整理し、注意点は導入コストや複雑性として示します。
 3. 使い分けは要件、実装コスト、運用体制の3観点で判断します。
+
+## 参考リンク
+
+- [MCP 公式ドキュメント](https://modelcontextprotocol.io/)
+- [MCP 仕様リポジトリ（GitHub）](https://github.com/modelcontextprotocol/specification)
+
 ---
 
-[← 前へ](08-protocols/00-README.md) | [次へ →](08-protocols/02-mcp-servers.md)
-
-
-
-
+[← 前へ](00-README.md) | [次へ →](02-mcp-servers.md)
