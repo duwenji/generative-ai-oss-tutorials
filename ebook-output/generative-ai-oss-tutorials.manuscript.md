@@ -4416,12 +4416,6 @@ flowchart TD
 - [llama.cpp リリース（バイナリ）](https://github.com/ggerganov/llama.cpp/releases)
 - [Qwen2.5 GGUF モデル](https://huggingface.co/Qwen/Qwen2.5-3B-Instruct-GGUF)
 
----
-
-
-## 3.5 ストリーミング推論（SSE / chunked / フレーミング）
-
----
 このドキュメントは、対話型アプリケーションでトークンを逐次返却する「ストリーミング推論」について、設計上の判断や実装上の注意点、サンプル実装（NGINX + FastAPI）をまとめたものです。
 ---
 
