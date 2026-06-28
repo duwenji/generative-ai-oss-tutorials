@@ -147,7 +147,10 @@ Invoke-RestMethod @request2
 docker-compose up -d
 docker exec -it ollama ollama pull qwen2.5:3b
 curl http://localhost:11434/api/generate \
-  -d '{"model":"qwen2.5:3b","prompt":"生成AIを2行で説明して"}'
+  -d '{
+    "model": "qwen2.5:3b",
+    "prompt": "生成AIを2行で説明して"
+  }'
 ```
 
 - `/api/tags` でモデル一覧が表示されるか確認する

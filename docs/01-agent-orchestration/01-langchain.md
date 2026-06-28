@@ -170,8 +170,8 @@ load_dotenv()
 # 1. LLMモデルの初期化
 # init_chat_model: プロバイダを抽象化した初期化
 llm = init_chat_model(
-  "openai:gpt-4o-mini",
-  temperature=0.7,
+    "openai:gpt-4o-mini",
+    temperature=0.7,
 )
 
 # 2. プロンプトテンプレートの作成
@@ -240,7 +240,10 @@ tools = [get_stock_price, calculate_portfolio_return]
 agent = create_agent(
     model="openai:gpt-4o-mini",
     tools=tools,
-    system_prompt="あなたは金融アシスタントです。必要ならツールを使ってください。",
+    system_prompt=(
+        "あなたは金融アシスタントです。"
+        "必要ならツールを使ってください。"
+    ),
 )
 
 # ========== 実行 ==========
@@ -288,7 +291,10 @@ memory = InMemorySaver()
 agent = create_agent(
     model="openai:gpt-4o-mini",
     tools=[],
-    system_prompt="あなたは親切なAIアシスタントです。会話履歴を参照して回答してください。",
+    system_prompt=(
+        "あなたは親切なAIアシスタントです。"
+        "会話履歴を参照して回答してください。"
+    ),
     checkpointer=memory,
 )
 
@@ -453,9 +459,10 @@ async function main() {
   const agent = createAgent({
     model: "gpt-4o-mini",
     tools,
-    systemPrompt:
-      "You are a helpful financial assistant. " +
+    systemPrompt: [
+      "You are a helpful financial assistant.",
       "Use tools when needed.",
+    ].join(" "),
   });
 
   // ========== 実行 ==========
@@ -510,7 +517,10 @@ async function main() {
   const agent = createAgent({
     model: "gpt-4o-mini",
     tools: [],
-    systemPrompt: "あなたは丁寧な日本語アシスタントです。会話履歴を参照して答えてください。",
+    systemPrompt: [
+      "あなたは丁寧な日本語アシスタントです。",
+      "会話履歴を参照して答えてください。",
+    ].join(""),
     checkpointer,
   });
 

@@ -146,10 +146,13 @@ def build_tool_call_request(name: str, arguments: dict) -> dict:
 
 
 def main() -> None:
-	req = build_tool_call_request(
-		"query_stock_price",
-		{"symbol": "7203", "date": "2026-05-09"},
-	)
+	tool_name = "query_stock_price"
+	arguments = {
+		"symbol": "7203",
+		"date": "2026-05-09",
+	}
+
+	req = build_tool_call_request(tool_name, arguments)
 	print(json.dumps(req, ensure_ascii=False, indent=2))
 
 

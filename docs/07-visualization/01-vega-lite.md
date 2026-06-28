@@ -160,7 +160,11 @@ const spec = {
   spacing: 20,
 };
 
-fs.writeFileSync("02_chart-spec.json", JSON.stringify(spec, null, 2), "utf-8");
+fs.writeFileSync(
+  "02_chart-spec.json",
+  JSON.stringify(spec, null, 2),
+  "utf-8"
+);
 console.log("Generated 02_chart-spec.json");
 ```
 
