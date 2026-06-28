@@ -1,78 +1,88 @@
-# AUTOMATIC1111 入門
+# AUTOMATIC1111 - Stable Diffusion Web UIの定番実装
 
 > 📖 中級（概念・実践） | 前提: Python基礎 / LLMアプリの基本概念
 
 ## この教材で身につくこと
 
-- txt2img / img2img
-- 拡張機能導入
-- REST API 呼び出し
+- txt2img / img2img で画像生成を実行できる
+- 拡張機能を導入してWeb UIをカスタマイズできる
+- REST API 経由で画像生成を自動化できる
+- プロンプトとパラメータを調整して出力品質を改善できる
+- AUTOMATIC1111 と他の画像生成UIの使い分け基準を説明できる
 
-## コンセプト
-AUTOMATIC1111 は Stable Diffusion Web UI の定番実装です。UIでの試行錯誤と API 自動化の両方に向いています。
+## 概要
+
+**AUTOMATIC1111** は Stable Diffusion Web UI の定番実装です。UIでの試行錯誤と API 自動化の両方に向いています。
+
 **バージョン**: 最新版 / OSS準拠（2026-05時点）  
 **公式ドキュメント**: https://github.com/AUTOMATIC1111/stable-diffusion-webui
-## 仕組み
 
-1. 目的と入力を定義し、対象データや利用モデルを準備します。
-2. コア処理（検索・推論・生成・検証のいずれか）を実行します。
-3. 実行結果を保存または表示し、次工程に渡せる形式へ整えます。
-4. パラメータを調整して挙動差分を比較し、品質を確認します。
-5. 運用を想定して再実行手順と確認ポイントを定着させます。
 ## 位置づけ
 
 ```mermaid
 flowchart LR
-	A[Stable Diffusion運用] --> B[AUTOMATIC1111]
-	B --> C[WebUI試行]
-	B --> D[txt2img API]
-	B --> E[拡張導入]
+    A[Stable Diffusion運用] --> B[AUTOMATIC1111]
+    B --> C[WebUI試行]
+    B --> D[txt2img API]
+    B --> E[拡張導入]
 ```
+
+AUTOMATIC1111 は Stable Diffusion のフロントエンドとして、Web UI による手動操作と REST API による自動化の両方を提供します。豊富な拡張機能エコシステムを持ち、試行錯誤から本番自動化まで対応できます。
 
 ## 実行フロー
 
 ```mermaid
 flowchart TD
-	S[開始] --> G[リポジトリ取得]
-	G --> U[WebUI起動]
-	U --> A[apiオプション有効化]
-	A --> T[txt2img呼び出し]
-	T --> X[output.png保存]
+    S[開始] --> G[リポジトリ取得]
+    G --> U[WebUI起動]
+    U --> A[apiオプション有効化]
+    A --> T[txt2img呼び出し]
+    T --> X[output.png保存]
 ```
 
-## サンプル
+この教材では、AUTOMATIC1111 を `--api` オプションで起動し、Python スクリプトから txt2img API を呼び出して画像を保存します。
 
-### 実行例
+## 最小セットアップ
+
+### 必須スキル
+
+- Python 基本（3.10以上推奨）
+- Git の基本操作
+
+### 環境
+
+- Python 3.10+
+- Git
+- GPU推奨（VRAM 4GB以上）
+
+### インストール
 
 ```bash
-# この教材の最小構成を順に実行
-# 具体的なコマンドは「最小セットアップ」または「実行フロー」を参照
-```
-
-### 検証
-
-- コマンドがエラーなく完了する
-- 想定した出力（画面表示・ファイル生成・回答）を確認できる
-- 変更した設定に応じて結果差分を説明できる
-
-## 実ソースコード（言語別に記載）
-### セットアップ手順（最小）
-
-```text
-# AUTOMATIC1111 セットアップガイド
-
-## 概要
 git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
 cd stable-diffusion-webui
-
-## 詳細
-./webui.sh
-
-Windows は webui-user.bat を使用します。
-
-## 前提条件
-起動オプションに --api を追加します。
 ```
+
+### 起動
+
+```bash
+# Linux / macOS
+./webui.sh --api
+
+# Windows
+webui-user.bat
+```
+
+Windows の場合は `webui-user.bat` 内の `COMMANDLINE_ARGS` に `--api` を追加します。
+
+ブラウザで http://127.0.0.1:7860 にアクセスします。
+
+### Python クライアント用依存
+
+```bash
+pip install requests
+```
+
+## 実ソースコード
 
 ### 04_automatic1111-python/00_requirements.txt
 
@@ -125,10 +135,9 @@ if __name__ == "__main__":
 
 ## 演習課題
 
-1. ``AUTOMATIC1111 入門`` を使う想定ユースケースを1つ定義し、入力・出力の例を記録してください。
-2. 最小構成で動かし、デフォルトから設定を1つ変えて挙動の差分を確認してください。
-3. ``AUTOMATIC1111 入門`` を使わない場合の代替手段と比較し、選ぶ基準をまとめてください。
-
+1. AUTOMATIC1111 を使う想定ユースケースを1つ定義し、プロンプトと出力画像の仕様を記録してください。
+2. 最小構成で動かし、`steps` または `negative_prompt` を変えて画像品質の差分を確認してください。
+3. AUTOMATIC1111 を使わない場合の代替手段（ComfyUIなど）と比較し、選ぶ基準をまとめてください。
 
 ### 解答の目安
 
@@ -141,23 +150,21 @@ if __name__ == "__main__":
 
 ## 理解度チェック
 
-1. ``AUTOMATIC1111 入門`` の主な役割を1文で説明してください。
-2. ``AUTOMATIC1111 入門`` を導入する際の最大のメリットと注意点は何ですか？
-3. ``AUTOMATIC1111 入門`` が向かないユースケースとして、どのようなケースが考えられますか？
-
+1. AUTOMATIC1111 の主な役割を1文で説明してください。
+2. AUTOMATIC1111 を導入する際の最大のメリットと注意点は何ですか？
+3. AUTOMATIC1111 が向かないユースケースとして、どのようなケースが考えられますか？
 
 ### 解説の要点
 
 1. 主な役割は、その技術がどの工程を担い、何を改善するかで説明します。
 2. メリットは再現性・拡張性・運用性の観点で整理し、注意点は導入コストや複雑性として示します。
 3. 使い分けは要件、実装コスト、運用体制の3観点で判断します。
+
+## 参考リンク
+
+- [AUTOMATIC1111 GitHub リポジトリ](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
+- [AUTOMATIC1111 API ドキュメント](https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/API)
+
 ---
 
-[← 前へ](06-multimodal/03-comfyui.md) | [次へ →](06-multimodal/05-invokeai.md)
-
-
-
-
-
-
-
+[← 前へ](03-comfyui.md) | [次へ →](05-invokeai.md)
