@@ -115,6 +115,11 @@ pytest -q
 2. メリットは再現性・拡張性・運用性の観点で整理し、注意点は導入コストや複雑性として示します。
 3. 使い分けは要件、実装コスト、運用体制の3観点で判断します。
 
+## 参考リンク
+
+- [OpenHands 公式ドキュメント](https://docs.all-hands.dev/)
+- [GitHub Repository](https://github.com/All-Hands-AI/OpenHands)
+
 ---
 
 [← 前へ](03-tabby.md)

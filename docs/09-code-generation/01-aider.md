@@ -104,6 +104,11 @@ git diff
 2. メリットは再現性・拡張性・運用性の観点で整理し、注意点は導入コストや複雑性として示します。
 3. 使い分けは要件、実装コスト、運用体制の3観点で判断します。
 
+## 参考リンク
+
+- [Aider 公式ドキュメント](https://aider.chat/)
+- [GitHub Repository](https://github.com/paul-gauthier/aider)
+
 ---
 
 [← 前へ](00-README.md) | [次へ →](02-continue.md)
