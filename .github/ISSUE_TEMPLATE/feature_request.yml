@@ -1,0 +1,35 @@
+name: Feature request
+description: 教材に追加したいカテゴリやOSS、改善案を提案します
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 背景・課題
+      description: どんな学習上の課題を解決したいですか？
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 提案内容
+      description: 追加したいOSS、比較観点、実行手順など
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: 関連カテゴリ
+      options:
+        - エージェント・オーケストレーション
+        - RAG・ナレッジ検索
+        - 推論実行基盤
+        - UI・チャットアプリ基盤
+        - 評価・ガードレール・監視
+        - マルチモーダル
+        - 可視化
+        - プロトコル・標準
+        - コード生成支援

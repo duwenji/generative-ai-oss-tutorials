@@ -1,0 +1,34 @@
+name: Bug report
+description: 教材内容やOSS動作確認手順の不具合を報告します
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: 概要
+      description: 何が起きたかを簡潔に書いてください
+      placeholder: 例) `01-langchain.md` のコマンド例が最新バージョンで動かない
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 再現手順
+      description: どのページで、どの操作をすると起きたか
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期待する結果
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 環境
+      description: OS、Node.js / Python バージョン、対象OSSのバージョンなど
